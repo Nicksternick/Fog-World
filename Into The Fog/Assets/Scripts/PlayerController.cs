@@ -12,12 +12,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 5;
     //Speed Player Rotates
     [SerializeField] private float turnSpeed = 720;
+    //Cooldown value of dash
+    [SerializeField] private float dashCooldown = 5;
+    //Countdown until dash is usable again
+    [SerializeField] private float dashCountdown = 0;
+    //Countdown until dash speed stop
+    [SerializeField] private float dashUptime = 0;
+    //Speed during dash
+    [SerializeField] private float dashSpeed = 10;
     private Vector3 input;
 
     void Update()
     {
         GatherInput();
         Look();
+        Dash();
     }
 
     void FixedUpdate()
@@ -57,23 +66,52 @@ public class PlayerController : MonoBehaviour
 
     /// <summary>
     /// Ruby 9/18/2024
+    /// Manages all things dash related
+    /// </summary>
+    void Dash()
+    {
+        if (dashCountdown > 0)
+        {
+            dashCountdown -= Time.deltaTime;
+        }
+        if (dashUptime > 0)
+        {
+            dashUptime -= Time.deltaTime;
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && dashCountdown<=0)
+        {
+            dashCountdown = dashCooldown;
+            dashUptime = 0.25f;
+        }
+    }
+
+    /// <summary>
+    /// Ruby 9/18/2024
     /// This Moves the player
     /// </summary>
     void Move()
     {
-        //Makes the player stop when not moving
-        //Also prevents speed increasing from diagonals (issue with multiplying transform.forward by input.magnitude)
-        //If you have a better way to do this feel free to change
-        float toMove;
-        if (input.magnitude != 0)
+        
+        //Speed is dependant on dash
+        if (dashUptime > 0)
         {
-            toMove = 1;
-        }
+            rb.MovePosition(transform.position + transform.forward * dashSpeed * Time.deltaTime);
+        } 
         else
         {
-            toMove = 0;
+            //Makes the player stop when not moving
+            //Also prevents speed increasing from diagonals (issue with multiplying transform.forward by input.magnitude)
+            //If you have a better way to do this feel free to change
+            float toMove;
+            if (input.magnitude != 0)
+            {
+                toMove = 1;
+            }
+            else
+            {
+                toMove = 0;
+            }
+            rb.MovePosition(transform.position + (transform.forward * toMove) * speed * Time.deltaTime);
         }
-
-        rb.MovePosition(transform.position + (transform.forward * toMove) * speed * Time.deltaTime);
     }
 }
