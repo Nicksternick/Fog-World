@@ -5,21 +5,24 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     //Variables
-
     [SerializeField] private Rigidbody rb;
-    //Speed player Moves
-    [SerializeField] private float speed = 5;
-    //Speed Player Rotates
-    [SerializeField] private float turnSpeed = 720;
+    [SerializeField] private Transform target;
+    [SerializeField] private float speed = 4f;
+   
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Ruby 9/20/2024
+    /// Makes enemy follow the player
+    /// </summary>
+    void FixedUpdate()
     {
-        
+        Vector3 pos = Vector3.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime);
+        rb.MovePosition(pos);
+        transform.LookAt(target);
     }
 }
