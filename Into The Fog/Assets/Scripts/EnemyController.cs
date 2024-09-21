@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     //Variables
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private Transform target;
+    [SerializeField] public Transform target;
     [SerializeField] private float speed = 4f;
    
     // Start is called before the first frame update
