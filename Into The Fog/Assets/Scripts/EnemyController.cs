@@ -1,25 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
     //Variables
-
-    [SerializeField] private Rigidbody rb;
-    //Speed player Moves
-    [SerializeField] private float speed = 5;
-    //Speed Player Rotates
-    [SerializeField] private float turnSpeed = 720;
+    [SerializeField] public Transform target;
+    [SerializeField] private float speed = 4f;
+    [SerializeField] private NavMeshAgent agent;
+   
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Ruby 9/20/2024
+    /// Makes enemy follow the player
+    /// </summary>
     void Update()
     {
+        if (target != null)
+        {
+            agent.SetDestination(target.position);
+            //Vector3 pos = Vector3.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime);
+            //rb.MovePosition(pos);
+            //transform.LookAt(target);
+        }
         
     }
 }
