@@ -12,7 +12,7 @@ public class CameraRotationLock : MonoBehaviour
     {
         myRotation = this.transform.rotation;
     }
-
+    
     // Update is called once per frame
     void LateUpdate()
     {
