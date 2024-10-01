@@ -30,7 +30,8 @@ public class EnemyManager : MonoBehaviour
     void spawn()
     {
         //These are just going to have to be hard coded every time
-        Vector3[] enemySpawn = new[] { new Vector3(10f, 0.5f, 10f), new Vector3(-10f,0.5f,-10f) };
+        //Vector3[] enemySpawn = new[] { new Vector3(10f, 0.5f, 10f), new Vector3(-10f,0.5f,-10f) };
+        Vector3[] enemySpawn = new[] { new Vector3(10f, 0.5f, 10f) };
         enemyList = new GameObject[5];
 
         //Spawns all of the enemies
