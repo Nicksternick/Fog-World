@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -60,7 +58,7 @@ public class EnemyAttack : MonoBehaviour
             Rigidbody rb = player.GetComponent<Rigidbody>();
 
             rb.velocity = Vector3.zero;
-            rb.AddForce(CalculatePushForce(20, player.transform.position - transform.parent.transform.position), ForceMode.Impulse);
+            rb.AddForce(CalculatePushForce(15, player.transform.position - transform.position), ForceMode.Impulse);
 
             // WIP ADD DAMAGING METHOD FOR PLAYER HERE WHEN IMPLEMENTED
         }
