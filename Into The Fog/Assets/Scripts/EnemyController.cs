@@ -7,7 +7,6 @@ public class EnemyController : MonoBehaviour
 {
     //Variables
     [SerializeField] public Transform target;
-    [SerializeField] private float speed = 4f;
     [SerializeField] private NavMeshAgent agent;
    
     // Start is called before the first frame update
