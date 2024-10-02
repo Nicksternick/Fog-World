@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
+using static Projectile;
+using static UnityEditor.Rendering.FilterWindow;
 
 public class ProjectileManager : MonoBehaviour
 {
@@ -8,6 +10,15 @@ public class ProjectileManager : MonoBehaviour
     private GameObject ballPrefab;  // Prefab for the ball
 
     private ObjectPool<Ball> ballPool;  // Pool for Ball objects
+
+    /// <summary>
+    /// Enum to represent various elemental types.
+    /// </summary>
+    public enum Elements
+    {
+        Fire,
+        Ice,
+    }
 
     void Start()
     {
@@ -51,12 +62,22 @@ public class ProjectileManager : MonoBehaviour
         Destroy(ball.gameObject);
     }
 
-    public Ball GetBallFromPool(Vector3 position, Quaternion rotation, GameObject caller)
+    public Ball GetBallFromPool(Vector3 position, Quaternion rotation, GameObject caller, Elements element)
     {
         Ball ball = ballPool.Get();
         ball.transform.position = position;
         ball.transform.rotation = rotation;
         ball.Caller = caller;
+
+        switch (element)
+        {
+            case Elements.Fire:
+                ball.ChangeColor(Color.red);
+                break;
+            case Elements.Ice:
+                ball.ChangeColor(Color.cyan);
+                break;
+        }
 
         ball.Initialize(5.0f, new ProjectileData(1.0f, 1.0f, 1.0f, 3.0f, false));
 

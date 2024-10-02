@@ -126,7 +126,17 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            projectileManager.GetBallFromPool(transform.position + transform.forward * 2, transform.rotation, this.gameObject);
+            projectileManager.GetBallFromPool
+                (transform.position + transform.forward * 2,
+                transform.rotation, this.gameObject,
+                ProjectileManager.Elements.Fire);
+        }
+        if(Input.GetMouseButtonDown(1))
+        {
+            projectileManager.GetBallFromPool
+                (transform.position + transform.forward * 2,
+                transform.rotation, this.gameObject,
+                ProjectileManager.Elements.Ice);
         }
     }
 }

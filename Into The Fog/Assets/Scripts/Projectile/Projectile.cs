@@ -14,6 +14,7 @@ public abstract class Projectile : MonoBehaviour
     protected quaternion rotation;           // Current rotation of the projectile
     protected Rigidbody rb;                  // Rigidbody
 
+
     public abstract void Initialize(float timeUntilDestroy, ProjectileData data);
 
 
@@ -38,6 +39,15 @@ public abstract class Projectile : MonoBehaviour
         {
             Vector3 direction = caller.transform.forward; 
             rb.velocity = direction * data.Speed;        
+        }
+    }
+
+    public void ChangeColor(UnityEngine.Color color)
+    {
+        Renderer renderer = this.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.material.color = color;
         }
     }
 

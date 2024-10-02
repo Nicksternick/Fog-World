@@ -11,6 +11,7 @@ public class Ball : Projectile
     {
         this.timeUntilDestroy = timeUntilDestroy;
         this.data = data;
+
         despawnAfterTimeCoroutine = StartCoroutine(DespawnBallAfterTime());
         SetVelocity();
     }
