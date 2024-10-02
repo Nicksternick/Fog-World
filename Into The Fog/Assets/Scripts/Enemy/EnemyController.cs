@@ -9,6 +9,13 @@ public class EnemyController : MonoBehaviour
     [SerializeField] public Transform target;
     [SerializeField] private float speed = 4f;
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private float health;
+
+    // ===== | Properties | =====
+    public float Health
+    {
+        get { return health; }
+    }
    
     // Start is called before the first frame update
     void Start()
