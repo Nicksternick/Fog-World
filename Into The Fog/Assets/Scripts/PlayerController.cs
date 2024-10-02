@@ -22,11 +22,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashSpeed = 10;
     private Vector3 input;
 
+    [SerializeField] private ProjectileManager projectileManager;
+
     void Update()
     {
         GatherInput();
         Look();
         Dash();
+        CastSpell();
     }
 
     void FixedUpdate()
@@ -112,6 +115,18 @@ public class PlayerController : MonoBehaviour
                 toMove = 0;
             }
             rb.MovePosition(transform.position + (transform.forward * toMove) * speed * Time.deltaTime);
+        }
+    }
+
+    /// <summary>
+    /// Jay 10/1/2024
+    /// This makes the player cast a spell
+    /// </summary>
+    void CastSpell()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            projectileManager.GetBallFromPool(transform.position + transform.forward * 2, transform.rotation, this.gameObject);
         }
     }
 }

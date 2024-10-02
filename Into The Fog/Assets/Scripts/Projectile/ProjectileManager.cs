@@ -1,48 +1,49 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class ProjectileManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Player;
+    private GameObject ballPrefab;  // Prefab for the ball
 
-    public static ObjectPool<Ball> BallPool; 
+    private ObjectPool<Ball> ballPool;  // Pool for Ball objects
 
-    // Start is called before the first frame update
     void Start()
     {
-        BallPool = new ObjectPool<Ball>(CreateBall, OnTakeBallFromPool, OnReturnBallToPool, OnDestroyBall, true, 500, 1000);
+        // Initialize the object pool
+        ballPool = new ObjectPool<Ball>(
+            CreateBall,
+            OnTakeBallFromPool,
+            OnReturnBallToPool,
+            OnDestroyBall,
+            collectionCheck: true,
+            defaultCapacity: 200,
+            maxSize: 1000
+        );
     }
 
+    // Create new Ball object from the prefab
     private Ball CreateBall()
     {
-        ProjectileData ballData = new ProjectileData(1, 1, 3, false);
-        Ball ball = new Ball(this.gameObject, 5, ballData);
+        // Instantiate the ball from a prefab
+        GameObject ballObject = Instantiate(ballPrefab, Vector3.zero, Quaternion.identity);
+        Ball ball = ballObject.GetComponent<Ball>();
 
-        // Spawn Ball instince
-        ball = Instantiate(ball, this.gameObject.transform.position, this.gameObject.transform.rotation);
-
-        // Set up object pool
-        ball.SetPool(BallPool);
+        // Set up object pool reference in the ball
+        ball.SetPool(ballPool);
 
         return ball;
     }
 
     private void OnTakeBallFromPool(Ball ball)
     {
-        // Set transform and rotation
-        ball.transform.position = this.gameObject.transform.position;
-        ball.transform.rotation = this.gameObject.transform.rotation;
-
         ball.gameObject.SetActive(true);
     }
 
-    private void OnReturnBallToPool(Ball Ball)
+    private void OnReturnBallToPool(Ball ball)
     {
-        Ball.gameObject.SetActive(false);
+        ball.gameObject.SetActive(false);
     }
 
     private void OnDestroyBall(Ball ball)
@@ -50,9 +51,20 @@ public class ProjectileManager : MonoBehaviour
         Destroy(ball.gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    public Ball GetBallFromPool(Vector3 position, Quaternion rotation, GameObject caller)
     {
-        
+        Ball ball = ballPool.Get();
+        ball.transform.position = position;
+        ball.transform.rotation = rotation;
+        ball.Caller = caller;
+
+        ball.Initialize(5.0f, new ProjectileData(1.0f, 1.0f, 1.0f, 3.0f, false));
+
+        return ball;
+    }
+
+    public void ReturnBallToPool(Ball ball)
+    {
+        ballPool.Release(ball);
     }
 }
