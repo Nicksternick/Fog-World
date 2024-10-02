@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     //Variables
 
+    private float hp;
+
     [SerializeField] private Rigidbody rb;
     //Speed player Moves
     [SerializeField] private float speed = 5;
@@ -23,6 +25,11 @@ public class PlayerController : MonoBehaviour
     private Vector3 input;
 
     [SerializeField] private ProjectileManager projectileManager;
+
+    public float PlayerHp 
+    { 
+        get { return hp; } 
+    }
 
     void Update()
     {
@@ -138,5 +145,15 @@ public class PlayerController : MonoBehaviour
                 transform.rotation, this.gameObject,
                 ProjectileManager.Elements.Ice);
         }
+    }
+
+    /// <summary>
+    /// Jay 10/2/2024
+    /// This makes the player take damage
+    /// </summary>
+    /// <param name="amount"> Amount of damage </param>
+    void takeDamage(float amount)
+    {
+        hp -= amount;
     }
 }
