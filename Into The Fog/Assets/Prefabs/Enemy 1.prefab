@@ -125,8 +125,8 @@ MonoBehaviour:
   target: {fileID: 0}
   agent: {fileID: 8624020490602003632}
   health: 100
-  renderer: {fileID: 3133123401080718769}
   healthBar: {fileID: 373000099041273866}
+  renderer: {fileID: 3133123401080718769}
 --- !u!195 &8624020490602003632
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -244,22 +244,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0ab78643c9df4fc46a0a5ec0405b1711,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ab78643c9df4fc46a0a5ec0405b1711,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ab78643c9df4fc46a0a5ec0405b1711,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ab78643c9df4fc46a0a5ec0405b1711,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ab78643c9df4fc46a0a5ec0405b1711,
         type: 3}
@@ -269,7 +269,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0ab78643c9df4fc46a0a5ec0405b1711,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ab78643c9df4fc46a0a5ec0405b1711,
         type: 3}
