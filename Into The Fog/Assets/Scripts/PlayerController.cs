@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,6 +23,12 @@ public class PlayerController : MonoBehaviour
     //Speed during dash
     [SerializeField] private float dashSpeed = 10;
     private Vector3 input;
+    public HealthBar healthBar;
+
+    void Start()
+    {
+        healthBar.SetMaxHealth(100);
+    }
 
     void Update()
     {
