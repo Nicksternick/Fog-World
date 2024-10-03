@@ -108,6 +108,7 @@ public class EnemyController : MonoBehaviour
         NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
 
         return navHit.position;
+    }
 
     /// <summary>
     /// Nicholas 10/3/2024
