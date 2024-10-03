@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     //Variables
 
-    private float hp;
+    private float hp = 100;
 
     [SerializeField] private Rigidbody rb;
     //Speed player Moves
@@ -20,6 +22,16 @@ public class PlayerController : MonoBehaviour
     //Speed during dash
     [SerializeField] private float dashSpeed = 10;
     private Vector3 input;
+    public HealthBar healthBar;
+
+    /// <summary>
+    /// AJ Wagner - 10/2/2024
+    /// Added basic support for the health bar
+    /// </summary>
+    void Start()
+    {
+        healthBar.SetMaxHealth(hp);
+    }
 
     [SerializeField] private ProjectileManager projectileManager;
 
@@ -34,6 +46,7 @@ public class PlayerController : MonoBehaviour
         Look();
         Dash();
         CastSpell();
+        healthBar.SetHealth(hp);
     }
 
     void FixedUpdate()
