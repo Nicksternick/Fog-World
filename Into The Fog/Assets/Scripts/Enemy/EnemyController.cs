@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -9,17 +10,22 @@ public class EnemyController : MonoBehaviour
     [SerializeField] public Transform target;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private float health;
+    [SerializeField] public HealthBar healthBar;
 
     // ===== | Properties | =====
     public float Health
     {
         get { return health; }
     }
-   
+
+    /// <summary>
+    /// AJ Wagner - 10/2/2024
+    /// Added basic support for the health bar
+    /// </summary>
     // Start is called before the first frame update
     void Start()
     {
-        healthBar.SetMaxHealth(100);
+        healthBar.SetMaxHealth(health);
     }
 
     /// <summary>

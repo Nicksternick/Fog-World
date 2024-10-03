@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     //Variables
 
-    private float hp;
+    private float hp = 100;
 
     [SerializeField] private Rigidbody rb;
     //Speed player Moves
@@ -24,9 +24,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 input;
     public HealthBar healthBar;
 
+    /// <summary>
+    /// AJ Wagner - 10/2/2024
+    /// Added basic support for the health bar
+    /// </summary>
     void Start()
     {
-        healthBar.SetMaxHealth(100);
+        healthBar.SetMaxHealth(hp);
     }
 
     [SerializeField] private ProjectileManager projectileManager;
@@ -42,6 +46,7 @@ public class PlayerController : MonoBehaviour
         Look();
         Dash();
         CastSpell();
+        healthBar.SetHealth(hp);
     }
 
     void FixedUpdate()
