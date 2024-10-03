@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -24,6 +26,11 @@ public class PlayerController : MonoBehaviour
     private Vector3 input;
     public HealthBar healthBar;
 
+    private const float SpellCooldown = 1;
+    private float spellTimer = 0;
+    private bool canCast = true;
+    private MeshRenderer render;
+
     /// <summary>
     /// AJ Wagner - 10/2/2024
     /// Added basic support for the health bar
@@ -31,6 +38,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         healthBar.SetMaxHealth(hp);
+        render = GetComponent<MeshRenderer>();
     }
 
     [SerializeField] private ProjectileManager projectileManager;
@@ -45,8 +53,21 @@ public class PlayerController : MonoBehaviour
         GatherInput();
         Look();
         Dash();
-        CastSpell();
-        healthBar.SetHealth(hp);
+        if (canCast)
+        {
+            CastSpell();
+        }
+        else
+        {
+            spellTimer += Time.deltaTime;
+
+            if (spellTimer >= SpellCooldown)
+            {
+                render.material.color = Color.white;
+                canCast = true;
+            }
+                
+        }
     }
 
     void FixedUpdate()
@@ -147,6 +168,9 @@ public class PlayerController : MonoBehaviour
                 (transform.position + transform.forward * 2,
                 transform.rotation, this.gameObject,
                 ProjectileManager.Elements.Fire);
+            canCast = false;
+            spellTimer = 0;
+            render.material.color = Color.red;
         }
         if(Input.GetMouseButtonDown(1))
         {
@@ -154,6 +178,9 @@ public class PlayerController : MonoBehaviour
                 (transform.position + transform.forward * 2,
                 transform.rotation, this.gameObject,
                 ProjectileManager.Elements.Ice);
+            canCast = false;
+            spellTimer = 0;
+            render.material.color = Color.red;
         }
     }
 
@@ -162,8 +189,14 @@ public class PlayerController : MonoBehaviour
     /// This makes the player take damage
     /// </summary>
     /// <param name="amount"> Amount of damage </param>
-    void takeDamage(float amount)
+    public void takeDamage(float amount)
     {
         hp -= amount;
+        healthBar.SetHealth(hp);
+        if (hp <= 0)
+        {
+            gameObject.SetActive(false);
+            SceneManager.LoadScene("GameOver");
+        }
     }
 }

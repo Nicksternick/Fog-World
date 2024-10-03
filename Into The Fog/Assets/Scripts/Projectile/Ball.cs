@@ -26,6 +26,24 @@ public class Ball : Projectile
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Hit Enemy!");
+            EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
+            enemyController.takeDamage(25);
+
+            // Return to object pool
+            if (ballPool != null)
+            {
+                ballPool.Release(this);
+            }
+        }
+
+        
+    }
+
     /// <summary>
     /// Jay 10/1/2024
     /// Despawn ball after set amount of time

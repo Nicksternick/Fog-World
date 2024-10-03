@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
-using static Projectile;
-using static UnityEditor.Rendering.FilterWindow;
 
 public class ProjectileManager : MonoBehaviour
 {

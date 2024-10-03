@@ -12,12 +12,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] public HealthBar healthBar;
 
-    // ===== | Properties | =====
-    public float Health
-    {
-        get { return health; }
-    }
-
     /// <summary>
     /// AJ Wagner - 10/2/2024
     /// Added basic support for the health bar
@@ -41,6 +35,20 @@ public class EnemyController : MonoBehaviour
             //rb.MovePosition(pos);
             //transform.LookAt(target);
         }
-        
+    }
+
+    /// <summary>
+    /// Nicholas 10/3/2024
+    /// Reduces the enemy health value
+    /// </summary>
+    /// <param name="amount"></param>
+    public void takeDamage(float amount)
+    {
+        health -= amount;
+        healthBar.SetHealth(health);
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
