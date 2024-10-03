@@ -124,6 +124,7 @@ MonoBehaviour:
   target: {fileID: 0}
   agent: {fileID: 8624020490602003632}
   health: 0
+  renderer: {fileID: 3133123401080718769}
 --- !u!195 &8624020490602003632
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -283,6 +284,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ab78643c9df4fc46a0a5ec0405b1711, type: 3}
+--- !u!23 &3133123401080718769 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 0ab78643c9df4fc46a0a5ec0405b1711,
+    type: 3}
+  m_PrefabInstance: {fileID: 4375953490523183413}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4264974812230631134 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0ab78643c9df4fc46a0a5ec0405b1711,
