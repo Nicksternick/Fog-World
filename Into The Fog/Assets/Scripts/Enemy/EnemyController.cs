@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] public Transform target;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private float health;
+    [SerializeField] public HealthBar healthBar;
 
     private const float Timer = 2;
     private const float ChaseDistance = 10;
@@ -22,10 +24,14 @@ public class EnemyController : MonoBehaviour
         get { return health; }
     }
    
+    /// <summary>
+    /// AJ Wagner - 10/2/2024
+    /// Added basic support for the health bar
+    /// </summary>
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthBar.SetMaxHealth(health);
     }
 
     private void OnDrawGizmos()
@@ -76,7 +82,7 @@ public class EnemyController : MonoBehaviour
             //transform.LookAt(target);
         }
     }
-
+    
     public void Wander()
     {
         if (wanderTime >= Timer)
@@ -97,11 +103,24 @@ public class EnemyController : MonoBehaviour
         Vector3 randDirection = Random.insideUnitSphere * dist;
 
         randDirection += origin;
-
         NavMeshHit navHit;
 
         NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
 
         return navHit.position;
+
+    /// <summary>
+    /// Nicholas 10/3/2024
+    /// Reduces the enemy health value
+    /// </summary>
+    /// <param name="amount"></param>
+    public void takeDamage(float amount)
+    {
+        health -= amount;
+        healthBar.SetHealth(health);
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -28,7 +28,6 @@ public class EnemyAttack : MonoBehaviour
         if (!canAttack)
         {
             damageCooldown -= Time.deltaTime;
-            Debug.Log($"{gameObject.name}: {damageCooldown}");
 
             if (damageCooldown < 0)
             {
@@ -52,7 +51,7 @@ public class EnemyAttack : MonoBehaviour
         // Check to see if the enemy collided with the enemy.
         if (other.gameObject.CompareTag("Player") && canAttack)
         {
-            Debug.Log($"{gameObject.name}: Attack Hit!");
+            
             canAttack = false;
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             Rigidbody rb = player.GetComponent<Rigidbody>();
@@ -60,7 +59,9 @@ public class EnemyAttack : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.AddForce(CalculatePushForce(15, player.transform.position - transform.position), ForceMode.Impulse);
 
-            // WIP ADD DAMAGING METHOD FOR PLAYER HERE WHEN IMPLEMENTED
+            float damage = Random.Range(5, 10);
+            Debug.Log($"Player took {damage} damage");
+            player.takeDamage(damage);
         }
     }
 
