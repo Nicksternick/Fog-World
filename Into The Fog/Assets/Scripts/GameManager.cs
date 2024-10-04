@@ -40,9 +40,6 @@ public class GameManager : MonoBehaviour
     /// <param name="sceneName"></param>
     public void ChangeScene(string sceneName)
     {
-        if (SceneManager.GetSceneByName(sceneName).IsValid())
-        {
-            SceneManager.LoadScene(sceneName);
-        }
+        SceneManager.LoadScene(sceneName);
     }
 }
