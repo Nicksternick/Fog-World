@@ -12,7 +12,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private float damageCooldown;
     [SerializeField] private bool canAttack;
 
-    private const float MaxTimer = 5;
+    private const float MaxTimer = 2;
 
     // ===== | Methods | =====
     // Start is called before the first frame update
@@ -59,7 +59,7 @@ public class EnemyAttack : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.AddForce(CalculatePushForce(15, player.transform.position - transform.position), ForceMode.Impulse);
 
-            float damage = Random.Range(5, 10);
+            float damage = Random.Range(10, 15);
             Debug.Log($"Player took {damage} damage");
             player.takeDamage(damage);
         }

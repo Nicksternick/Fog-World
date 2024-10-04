@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] public HealthBar healthBar;
 
     private const float Timer = 2;
-    private const float ChaseDistance = 10;
+    private const float ChaseDistance = 50;
     private float wanderTime = Timer;
     [SerializeField] private Renderer renderer;
 
@@ -32,12 +32,13 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         healthBar.SetMaxHealth(health);
+        agent.speed += 1;
     }
 
     private void OnDrawGizmos()
     {
-        //Gizmos.color = new Color (1, 1, 1, 0.5f);
-        //Gizmos.DrawSphere(transform.position, ChaseDistance);
+        Gizmos.color = new Color (1, 1, 1, 0.1f);
+        Gizmos.DrawSphere(transform.position, ChaseDistance);
     }
 
     /// <summary>
@@ -64,7 +65,7 @@ public class EnemyController : MonoBehaviour
                 {
                     Debug.DrawLine(transform.position, hit.point);
 
-                    if (hit.collider.gameObject.CompareTag("Player"))
+                    if (hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.CompareTag("Ball"))
                     {
                         wanderTime = Timer;
                         renderer.material.color = Color.red;

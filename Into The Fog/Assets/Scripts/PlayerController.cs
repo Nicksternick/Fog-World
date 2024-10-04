@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     private bool canCast = true;
     private MeshRenderer render;
 
+    [SerializeField] Camera cam;
+
     /// <summary>
     /// AJ Wagner - 10/2/2024
     /// Added basic support for the health bar
@@ -68,6 +70,11 @@ public class PlayerController : MonoBehaviour
             }
                 
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            cam.gameObject.SetActive(cam.gameObject.activeSelf ? false : true);
+        }
     }
 
     void FixedUpdate()
@@ -90,7 +97,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Look()
     {
-
         if (input != Vector3.zero)
         {
             var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
