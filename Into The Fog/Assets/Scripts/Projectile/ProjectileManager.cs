@@ -77,7 +77,7 @@ public class ProjectileManager : MonoBehaviour
                 break;
         }
 
-        ball.Initialize(5.0f, new ProjectileData(1.0f, 1.0f, 1.0f, 3.0f, false));
+        ball.Initialize(5.0f, new ProjectileData(1.0f, 1.0f, 5.0f, 3.0f, false));
 
         return ball;
     }
