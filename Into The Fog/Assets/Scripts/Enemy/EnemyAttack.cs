@@ -61,7 +61,7 @@ public class EnemyAttack : MonoBehaviour
 
             float damage = Random.Range(10, 15);
             Debug.Log($"Player took {damage} damage");
-            player.takeDamage(damage);
+            player.TakeDamage(damage);
         }
     }
 

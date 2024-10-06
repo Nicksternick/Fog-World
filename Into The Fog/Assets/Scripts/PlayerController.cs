@@ -1,37 +1,31 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    //Variables
+    // ===== | Variables | =====
 
-    private float hp = 100;
-
+    /// <summary>The health of the player</summary>
+    private float health = 100;
+    /// <summary>The rigid body of the player</summary>
     [SerializeField] private Rigidbody rb;
-    //Speed player Moves
+    /// <summary>Speed player Moves</summary>
     [SerializeField] private float speed = 5;
-    //Speed Player Rotates
+    /// <summary>Speed Player Rotates</summary>
     [SerializeField] private float turnSpeed = 720;
-    //Cooldown value of dash
+    /// <summary>Cooldown value of dash</summary>
     [SerializeField] private float dashCooldown = 5;
-    //Countdown until dash is usable again
-    [SerializeField] private float dashCountdown = 0;
-    //Countdown until dash speed stop
-    [SerializeField] private float dashUptime = 0;
-    //Speed during dash
+    /// <summary>The speed of the dash</summary>
     [SerializeField] private float dashSpeed = 10;
+    /// <summary>A reference to the players healthbar</summary>
+    [SerializeField] HealthBar healthBar;
+
+    /// <summary>Countdown until dash is usable again</summary>
+    private float dashCountdown = 0;
+    /// <summary>Countdown until dash speed stop</summary>
+    private float dashUptime = 0;
+    /// <summary>Speed during dash</summary>
     private Vector3 input;
-    public HealthBar healthBar;
-
-    private const float SpellCooldown = 1;
-    private float spellTimer = 0;
-    private bool canCast = true;
-    private MeshRenderer render;
-
-    [SerializeField] Camera cam;
 
     /// <summary>
     /// AJ Wagner - 10/2/2024
@@ -39,15 +33,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        healthBar.SetMaxHealth(hp);
-        render = GetComponent<MeshRenderer>();
-    }
-
-    [SerializeField] private ProjectileManager projectileManager;
-
-    public float PlayerHp 
-    { 
-        get { return hp; } 
+        healthBar.SetMaxHealth(health);
     }
 
     void Update()
@@ -55,26 +41,7 @@ public class PlayerController : MonoBehaviour
         GatherInput();
         Look();
         Dash();
-        if (canCast)
-        {
-            CastSpell();
-        }
-        else
-        {
-            spellTimer += Time.deltaTime;
-
-            if (spellTimer >= SpellCooldown)
-            {
-                render.material.color = Color.white;
-                canCast = true;
-            }
-                
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            cam.gameObject.SetActive(cam.gameObject.activeSelf ? false : true);
-        }
+        CastSpell();
     }
 
     void FixedUpdate()
@@ -88,7 +55,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void GatherInput()
     {
-        input = new Vector3(Input.GetAxisRaw("Horizontal"), 0,Input.GetAxisRaw("Vertical"));
+        input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
     }
     
     /// <summary>
@@ -170,23 +137,17 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            projectileManager.GetBallFromPool
+            ProjectileManager.Instance.GetBallFromPool
                 (transform.position + transform.forward * 2,
                 transform.rotation, this.gameObject,
-                ProjectileManager.Elements.Fire);
-            canCast = false;
-            spellTimer = 0;
-            render.material.color = Color.red;
+                Elements.Fire);
         }
         if(Input.GetMouseButtonDown(1))
         {
-            projectileManager.GetBallFromPool
+            ProjectileManager.Instance.GetBallFromPool
                 (transform.position + transform.forward * 2,
                 transform.rotation, this.gameObject,
-                ProjectileManager.Elements.Ice);
-            canCast = false;
-            spellTimer = 0;
-            render.material.color = Color.red;
+                Elements.Ice);
         }
     }
 
@@ -195,11 +156,11 @@ public class PlayerController : MonoBehaviour
     /// This makes the player take damage
     /// </summary>
     /// <param name="amount"> Amount of damage </param>
-    public void takeDamage(float amount)
+    public void TakeDamage(float amount)
     {
-        hp -= amount;
-        healthBar.SetHealth(hp);
-        if (hp <= 0)
+        health -= amount;
+        healthBar.SetHealth(health);
+        if (health <= 0)
         {
             gameObject.SetActive(false);
             SceneManager.LoadScene("GameOver");
