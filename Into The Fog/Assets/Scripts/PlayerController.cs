@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     // ===== | Variables | =====
+
+    [SerializeField] private InputActionMap playerActions;
 
     /// <summary>The health of the player</summary>
     private float health = 100;
