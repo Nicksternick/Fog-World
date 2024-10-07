@@ -31,17 +31,19 @@ public class HealthBar : MonoBehaviour
         health.value = currentHealth;
     }
 
+    // This method is redundant, commenting it out for now
+
     // Decrements the bar in response to damage
-    public void TakeDamage(float damageValue)
-    {
-        // Prevent negative values for the bar, just in case
-        if (damageValue < health.value)
-        {
-            health.value -= damageValue;
-        }
-        else
-        {
-            health.value = 0;
-        }
-    }
+    //public void TakeDamage(float damageValue)
+    //{
+    //    // Prevent negative values for the bar, just in case
+    //    if (damageValue < health.value)
+    //    {
+    //        health.value -= damageValue;
+    //    }
+    //    else
+    //    {
+    //        health.value = 0;
+    //    }
+    //}
 }

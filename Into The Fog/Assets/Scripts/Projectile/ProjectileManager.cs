@@ -2,24 +2,35 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
+/// <summary>
+/// Enum to represent various elemental types.
+/// </summary>
+public enum Elements
+{
+    Fire,
+    Ice,
+}
+
 public class ProjectileManager : MonoBehaviour
 {
+    // ===== | Variables | =====
+    public static ProjectileManager Instance;
+
     [SerializeField]
     private GameObject ballPrefab;  // Prefab for the ball
-
     private ObjectPool<Ball> ballPool;  // Pool for Ball objects
-
-    /// <summary>
-    /// Enum to represent various elemental types.
-    /// </summary>
-    public enum Elements
-    {
-        Fire,
-        Ice,
-    }
 
     void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         // Initialize the object pool
         ballPool = new ObjectPool<Ball>(
             CreateBall,
