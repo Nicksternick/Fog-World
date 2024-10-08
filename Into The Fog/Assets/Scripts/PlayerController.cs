@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -9,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionMap playerActions;
 
     /// <summary>The health of the player</summary>
-    private float health = 100;
+    [SerializeField] public float health = 100;
     /// <summary>The rigid body of the player</summary>
     [SerializeField] private Rigidbody rb;
     /// <summary>Speed player Moves</summary>
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashSpeed = 10;
     /// <summary>A reference to the players healthbar</summary>
     [SerializeField] HealthBar healthBar;
+
+    public static event Action<PlayerController> playerDamageEvent;
 
     /// <summary>Countdown until dash is usable again</summary>
     private float dashCountdown = 0;
@@ -163,10 +166,16 @@ public class PlayerController : MonoBehaviour
     {
         health -= amount;
         healthBar.SetHealth(health);
+        if (playerDamageEvent!=null)
+        {
+            playerDamageEvent(this);
+        }
+        /*
         if (health <= 0)
         {
             gameObject.SetActive(false);
             SceneManager.LoadScene("GameOver");
         }
+        */
     }
 }

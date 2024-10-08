@@ -136,7 +136,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &2298373652944531630
 MonoBehaviour:
@@ -156,6 +156,7 @@ MonoBehaviour:
     m_Asset: {fileID: 0}
     m_Actions: []
     m_Bindings: []
+  health: 100
   rb: {fileID: 8052031205664826921}
   speed: 5
   turnSpeed: 720
