@@ -16,7 +16,6 @@ public class EnemyController : MonoBehaviour
     private const float Timer = 2;
     private const float ChaseDistance = 50;
     private float wanderTime = Timer;
-    [SerializeField] private Renderer render;
 
     // ===== | Properties | =====
     public float Health
@@ -68,7 +67,6 @@ public class EnemyController : MonoBehaviour
                     if (hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.CompareTag("Ball"))
                     {
                         wanderTime = Timer;
-                        render.material.color = Color.red;
                         agent.SetDestination(target.position);
                     }
                     else
@@ -88,7 +86,6 @@ public class EnemyController : MonoBehaviour
     {
         if (wanderTime >= Timer)
         {
-            render.material.color = Color.green;
             agent.SetDestination(RandomNavSphere(transform.position, Random.Range(30, 40)));
             wanderTime = 0;
         }
