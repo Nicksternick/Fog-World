@@ -35,7 +35,7 @@
                 {
                     "name": "Spell2",
                     "type": "Button",
-                    "id": "bc012d24-88ae-4096-b0f9-4448310260e9",
+                    "id": "d24b19ee-61f7-4e40-bf09-5a7fc9bac697",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -122,7 +122,7 @@
                 },
                 {
                     "name": "",
-                    "id": "a144c375-9aab-401e-bdb8-850aae4773f3",
+                    "id": "75a93bde-e02d-4365-b9f9-2dfbb6bbf32e",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",

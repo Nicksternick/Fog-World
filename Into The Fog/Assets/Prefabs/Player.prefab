@@ -150,15 +150,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d4489255689f54abdba6a1f2017d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerActions:
+    m_Name: Player Actions
+    m_Id: ad241ecf-760c-47bb-83c6-36553bea4be4
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
   rb: {fileID: 8052031205664826921}
   speed: 5
   turnSpeed: 720
   dashCooldown: 1
-  dashCountdown: -0.00036848814
-  dashUptime: -0.0008106516
   dashSpeed: 20
   healthBar: {fileID: 0}
-  projectileManager: {fileID: 0}
 --- !u!1 &2913905033926961424
 GameObject:
   m_ObjectHideFlags: 0
