@@ -56,7 +56,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Clip: 1
-    - _Feather: 0.627
+    - _Feather: 0.69
     - _Power: 1
     - _QueueControl: 0
     - _QueueOffset: 0
