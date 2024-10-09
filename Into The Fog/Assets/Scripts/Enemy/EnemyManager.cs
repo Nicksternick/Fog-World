@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour
 {
     //Variables
     [SerializeField] private GameObject enemy;
-    [SerializeField] private List<GameObject> enemyList;
+    [SerializeField] public List<GameObject> enemyList;
     //IMPORTANT NOTE: This must be the unique player object placed into the scene and not the player prefab
     //The Enemies wont chase the player otherwise.
     [SerializeField] public GameObject player;

@@ -21,8 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashCooldown = 5;
     /// <summary>The speed of the dash</summary>
     [SerializeField] private float dashSpeed = 10;
-    /// <summary>A reference to the players healthbar</summary>
-    [SerializeField] HealthBar healthBar;
+    
 
     public static event Action<PlayerController> playerDamageEvent;
 
@@ -39,7 +38,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        healthBar.SetMaxHealth(health);
+       
     }
 
     void Update()
@@ -165,7 +164,6 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health -= amount;
-        healthBar.SetHealth(health);
         if (playerDamageEvent!=null)
         {
             playerDamageEvent(this);
