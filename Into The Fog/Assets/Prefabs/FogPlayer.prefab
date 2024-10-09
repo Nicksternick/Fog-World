@@ -49,8 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78213153021b2dc4fa9a15d9f6f0c9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
   moveSpeed: 10
-  dashSpeed: 50
+  dashSpeed: 35
+  dashCooldown: 1
+  dashTime: 0.2
   input: {fileID: 4471029826668248026}
   cameraPivot: {fileID: 3024777861223414066}
   playerCamera: {fileID: 6913787966183013508}

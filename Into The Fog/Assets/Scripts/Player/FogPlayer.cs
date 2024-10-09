@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,8 @@ public class FogPlayer : MonoBehaviour
     [SerializeField] private float health = 100;
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] private float dashSpeed = 1;
+    [SerializeField] private float dashCooldown = 1;
+    [SerializeField] private float dashTime = 1;
 
     [Header("Player Inputs")]
     // ----- | Inputs from PlayerInput | -----
@@ -30,12 +33,19 @@ public class FogPlayer : MonoBehaviour
     [SerializeField] private Rigidbody playerRigidBody;
     [SerializeField] private MeshRenderer playerModel;
 
-    private Vector3 moveVector;
+    private Vector3 moveDirection = Vector3.zero;
+    private Vector3 dashDirection = Vector3.zero;
+
+    private bool isDashing = false;
+    private bool canDash = true;
+
+    private Timer dashTimer;
 
     // ===== | Methods | =====
     private void Awake()
     {
         move = input.actions.FindAction("Move");
+        dashTimer = gameObject.AddComponent<Timer>();
     }
 
     private void Update()
@@ -45,8 +55,31 @@ public class FogPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isDashing)
+        {
+            NormalMove();
+        }
+        else
+        {
+            DashMove();
+        }
+        
+    }
+
+    // ----- | Movement Functions | -----
+
+    /// <summary>
+    /// Nicholas 10/9/2024
+    /// Finds the axis to move on, then moves 
+    /// along that axis based on the given inputs
+    /// </summary>
+    private void NormalMove()
+    {
+        // Only look for the axis if
+        // the input action is not null
         if (move != null)
         {
+            // Get the input for move and cast it to a vector 2
             Vector2 readValue = move.ReadValue<Vector2>().normalized;
 
             // Get the right and forward vectors from the camera's orientation
@@ -54,11 +87,74 @@ public class FogPlayer : MonoBehaviour
             Vector3 cameraForward = Vector3.ProjectOnPlane(playerCamera.transform.forward, Vector3.up).normalized;
 
             // Combine the input with camera orientation to create movement direction
-            moveVector = (cameraRight * readValue.x + cameraForward * readValue.y).normalized;
+            moveDirection = (cameraRight * readValue.x + cameraForward * readValue.y).normalized;
         }
 
-        playerRigidBody.MovePosition(transform.position + (moveVector * moveSpeed * Time.deltaTime));
+        // Move the player based on the movement speed
+        playerRigidBody.MovePosition(transform.position + (moveDirection * moveSpeed * Time.deltaTime));
     }
+
+    /// <summary>
+    /// Nicholas 10/9/2024
+    /// Moves the player using the dash functionality
+    /// </summary>
+    private void DashMove()
+    {
+        playerRigidBody.MovePosition(transform.position + (dashDirection * dashSpeed * Time.deltaTime));
+    }
+
+    // ----- | Dashing Functions | -----
+
+    /// <summary>
+    /// Nicholas 10/9/2024
+    /// Reads an input and then switches the player movement to dashing
+    /// </summary>
+    public void Dash(InputAction.CallbackContext callback)
+    {
+        // Check to see if the input is pressed
+        // when the player is able to dash
+        if (callback.started && canDash)
+        {
+            // Get the current direction of the player
+            dashDirection = playerModel.transform.forward;
+
+            // Setup the variables so the player
+            // can enter the dashing state
+            canDash = false;
+            isDashing = true;
+
+            // Setup the timer to stop dashing when the time is over
+            dashTimer.SetMaxTime(dashTime);
+            dashTimer.OnCountDownEnd.AddListener(EndDash);
+            dashTimer.StartTimer();
+        }
+    }
+
+    /// <summary>
+    /// Nicholas 10/9/2024
+    /// Ends the cooldown so the player can dash again
+    /// </summary>
+    private void EndDashCooldown() { canDash = true; }
+
+    /// <summary>
+    /// Nicholas 10/9/2024
+    /// Ends the dashing state and returns 
+    /// the player to normal movement
+    /// </summary>
+    private void EndDash() 
+    {
+        // Setup the variables again
+        isDashing = false;
+        canDash = false;
+
+        // Set up the timer to call EndDashCooldown
+        dashTimer.SetMaxTime(dashCooldown);
+        dashTimer.OnCountDownEnd.RemoveListener(EndDash);
+        dashTimer.OnCountDownEnd.AddListener(EndDashCooldown);
+        dashTimer.StartTimer();
+    }
+
+    // ----- | Other Functions | -----
 
     /// <summary>
     /// Nicholas 10/8/24
@@ -67,13 +163,20 @@ public class FogPlayer : MonoBehaviour
     /// </summary>
     private void LookAtMouse()
     {
+        // Setup the plane and distance for later in the method
         Plane plane = new Plane(Vector3.up, 0);
         float distance;
+
+        // Get a ray based on the mouses current position
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
 
+        // Check the to see if there is a point that the mouse hit
         if(plane.Raycast(ray, out distance))
         {
+            // Get that point
             Vector3 mousePosition = ray.GetPoint(distance);
+
+            // Make the player look at it, then reset it's x and z rotation
             playerModel.transform.LookAt(mousePosition, Vector3.up);
             Quaternion rotation = playerModel.transform.rotation;
             rotation.x = 0;
