@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6557898239618076509}
   - component: {fileID: 8052031205664826921}
   - component: {fileID: 2298373652944531630}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -162,7 +162,6 @@ MonoBehaviour:
   turnSpeed: 720
   dashCooldown: 1
   dashSpeed: 20
-  healthBar: {fileID: 0}
 --- !u!1 &2913905033926961424
 GameObject:
   m_ObjectHideFlags: 0

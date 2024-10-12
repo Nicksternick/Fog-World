@@ -1,44 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : Enemy
 {
     //Variables
-    [SerializeField] public Transform target;
     [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private float health;
-    [SerializeField] public HealthBar healthBar;
 
-    private const float Timer = 2;
-    private const float ChaseDistance = 50;
-    private float wanderTime = Timer;
+    private const float timer = 2;
+    private const float chaseDistance = 50;
+    private float wanderTime = timer;
 
-    // ===== | Properties | =====
-    public float Health
-    {
-        get { return health; }
-    }
-   
-    /// <summary>
-    /// AJ Wagner - 10/2/2024
-    /// Added basic support for the health bar
-    /// </summary>
-    // Start is called before the first frame update
-    void Start()
-    {
-        healthBar.SetMaxHealth(health);
-        agent.speed += 1;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = new Color (1, 1, 1, 0.1f);
-        Gizmos.DrawSphere(transform.position, ChaseDistance);
-    }
+    // ===== | Methods | =====
 
     /// <summary>
     /// Ruby 9/20/2024
@@ -48,55 +20,40 @@ public class EnemyController : MonoBehaviour
     {
         if (target != null)
         {
-            if (Vector3.Distance(transform.position, target.position) > ChaseDistance)
+            if (!PlayerInRange(chaseDistance))
             {
                 Wander();
             }
-
-            if (Vector3.Distance(transform.position, target.position) < ChaseDistance)
+            else if (PlayerInRange(chaseDistance))
             {
-                Vector3 direction = target.position - transform.position;
-                direction = direction.normalized;
-
-                float dist = Vector3.Distance(transform.position, target.position);
-
-                if (Physics.Raycast(transform.position, direction, out RaycastHit hit, dist))
+                if (!PlayerInSight(chaseDistance).Equals(default(RaycastHit)))
                 {
-                    Debug.DrawLine(transform.position, hit.point);
-
-                    if (hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.CompareTag("Ball"))
-                    {
-                        wanderTime = Timer;
-                        agent.SetDestination(target.position);
-                    }
-                    else
-                    {
-                        Wander();
-                    }
+                    wanderTime = timer;
+                    agent.SetDestination(target.position);
+                }
+                else
+                {
+                    Wander();
                 }
             }
-            
-            //Vector3 pos = Vector3.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime);
-            //rb.MovePosition(pos);
-            //transform.LookAt(target);
         }
     }
     
-    public void Wander()
+    private void Wander()
     {
-        if (wanderTime >= Timer)
+        if (wanderTime >= timer)
         {
             agent.SetDestination(RandomNavSphere(transform.position, Random.Range(30, 40)));
             wanderTime = 0;
         }
 
-        if (wanderTime < Timer)
+        if (wanderTime < timer)
         {
             wanderTime += Time.deltaTime;
         }
     }
 
-    public Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask = -1)
+    private Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask = -1)
     {
         Vector3 randDirection = Random.insideUnitSphere * dist;
 
@@ -107,19 +64,13 @@ public class EnemyController : MonoBehaviour
 
         return navHit.position;
     }
-
-    /// <summary>
-    /// Nicholas 10/3/2024
-    /// Reduces the enemy health value
-    /// </summary>
-    /// <param name="amount"></param>
-    public void takeDamage(float amount)
+    public new RaycastHit PlayerInSight(float range)
     {
-        health -= amount;
-        healthBar.SetHealth(health);
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        return base.PlayerInSight(range);
+    }
+
+    public new bool PlayerInRange(float range)
+    {
+        return base.PlayerInRange(range);
     }
 }

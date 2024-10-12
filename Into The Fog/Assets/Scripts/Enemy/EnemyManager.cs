@@ -57,7 +57,7 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i< enemySpawn.Length; i++)
         {
             enemyList.Add(Instantiate(enemy, enemySpawn[i], Quaternion.identity));
-            enemyList[i].GetComponent<EnemyController>().target = player.transform;
+            enemyList[i].GetComponent<EnemyController>().Target = player.transform;
         }
     }
 }
