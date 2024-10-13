@@ -62,6 +62,12 @@ public class ProjectileManager : MonoBehaviour
        );
     }
 
+    /// <summary>
+    /// Create the respective projectile for spells
+    /// </summary>
+    /// <param name="caller"> Gameobject Caller </param>
+    /// <param name="element"> Spell element </param>
+    /// <param name="form"> Spell Form </param>
     public void CreateProjectile(GameObject caller, Elements element, Forms form)
     {
         switch (form) 

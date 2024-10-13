@@ -19,6 +19,13 @@ public class SpellCrafter : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Jay 10/13/2024
+    /// </summary>
+    /// <param name="element"> Spell element </param>
+    /// <param name="form"> Spell form </param>
+    /// <param name="cooldown"> Spell cooldown </param>
+    /// <returns> The custom spell with the inputted properties </returns>
     public Spell CraftSpell(Elements element, Forms form, float cooldown)
     {
         Spell newSpell = ScriptableObject.CreateInstance<Spell>();

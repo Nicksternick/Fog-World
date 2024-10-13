@@ -9,8 +9,18 @@ public class Spell : ScriptableObject
     private Forms form;
     private float cooldown;
 
+    /// <summary>
+    /// Jay 10/13/2024
+    /// Spell's Cooldown
+    /// </summary>
     public float Cooldown {  get { return cooldown; } set {  cooldown = value; } }
 
+    /// <summary>
+    /// Jay 10/1/2024
+    /// </summary>
+    /// <param name="element"> Spell element </param>
+    /// <param name="form"> Spell form </param>
+    /// <param name="cooldown"> Spell cooldown </param>
     public void Initialize(Elements element, Forms form, float cooldown) 
     {
         this.element = element;
@@ -18,6 +28,10 @@ public class Spell : ScriptableObject
         this.cooldown = cooldown;
     }
 
+    /// <summary>
+    /// Sets off projectile creation process
+    /// </summary>
+    /// <param name="caller"> The gameobject that invoked this method </param>
     public void CastSpell(GameObject caller)
     {
         ProjectileManager.Instance.CreateProjectile(caller, element, form);

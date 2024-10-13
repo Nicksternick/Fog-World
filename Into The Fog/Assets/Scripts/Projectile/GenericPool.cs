@@ -10,7 +10,7 @@ public class GenericPool<T> where T : MonoBehaviour
     {
         this.prefab = prefab;
 
-        // Initialize the pool, no need to pass functions for creating, activating, or deactivating.
+        // Initialize the pool
         objectPool = new ObjectPool<T>(
             CreateInstance,
             OnTakeFromPool,
@@ -22,35 +22,55 @@ public class GenericPool<T> where T : MonoBehaviour
         );
     }
 
-    // Create a new instance from the prefab
+    /// <summary>
+    /// Jay 10/8/2024
+    /// Create a new instance from the prefab
+    /// </summary>
     private T CreateInstance()
     {
         return Object.Instantiate(prefab);
     }
 
-    // When an object is taken from the pool
+    /// <summary>
+    /// Jay 10/8/2024
+    /// When an object is taken from the pool
+    /// </summary>
     private void OnTakeFromPool(T obj)
     {
         obj.gameObject.SetActive(true);
     }
 
-    // When an object is returned to the pool
+    /// <summary>
+    /// Jay 10/8/2024
+    /// When an object is returned to the pool
+    /// </summary>
     private void OnReturnToPool(T obj)
     {
         obj.gameObject.SetActive(false);
     }
 
-    // When the pool is destroying the object
+    /// <summary>
+    /// Jay 10/8/2024
+    /// When the pool is destroying the object
+    /// </summary>
     private void OnDestroyInstance(T obj)
     {
         Object.Destroy(obj.gameObject);
     }
-
+    
+    /// <summary>
+    /// Gets object from pool
+    /// </summary>
+    /// <returns> Pooled object </returns>
     public T GetFromPool()
     {
         return objectPool.Get();
     }
 
+    /// <summary>
+    /// Jay 10/8/2024
+    /// Returns object to pool
+    /// </summary>
     public void ReturnToPool(T obj)
     {
         objectPool.Release(obj);
