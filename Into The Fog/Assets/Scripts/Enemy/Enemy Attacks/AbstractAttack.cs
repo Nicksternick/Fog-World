@@ -9,12 +9,12 @@ public abstract class AbstractAttack : MonoBehaviour
     // ===== | Variables | =====
     [SerializeField] protected EnemyController enemy;
     protected Collider playerCollider;
-    protected bool canAttack;
+    protected bool playerInAttackRange;
 
     // ===== | Methods | =====
     private void Awake()
     {
-        canAttack = false;
+        playerInAttackRange = false;
 
         if (enemy == null)
         {
@@ -26,7 +26,7 @@ public abstract class AbstractAttack : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            canAttack = true;
+            playerInAttackRange = true;
             playerCollider = other;
         }
     }
@@ -35,7 +35,7 @@ public abstract class AbstractAttack : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            canAttack = false;
+            playerInAttackRange = false;
             playerCollider = null;
         }
     }
