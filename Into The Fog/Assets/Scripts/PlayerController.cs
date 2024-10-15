@@ -24,13 +24,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashSpeed = 10;
     private Vector3 input;
 
-<<<<<<< Updated upstream
+
     [SerializeField] private ProjectileManager projectileManager;
 
-    public float PlayerHp 
-    { 
-        get { return hp; } 
-=======
+    public float PlayerHp
+    {
+        get { return hp; }
+    }
+
     /// <summary>Countdown until spells are usable again</summary>
     private float primarySpellCountdown = 3.0f;
     private float secondarySpellCountdown = 3.0f;
@@ -46,8 +47,6 @@ public class PlayerController : MonoBehaviour
     {
         fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 3.0f);
         iceBall = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 3.0f);
-
->>>>>>> Stashed changes
     }
 
     void Update()
@@ -155,19 +154,6 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-<<<<<<< Updated upstream
-            projectileManager.GetBallFromPool
-                (transform.position + transform.forward * 2,
-                transform.rotation, this.gameObject,
-                ProjectileManager.Elements.Fire);
-        }
-        if(Input.GetMouseButtonDown(1))
-        {
-            projectileManager.GetBallFromPool
-                (transform.position + transform.forward * 2,
-                transform.rotation, this.gameObject,
-                ProjectileManager.Elements.Ice);
-=======
             if(primarySpellCountdown > fireBall.Cooldown)
             {
                 primarySpellCountdown = 0.0f;
@@ -181,7 +167,6 @@ public class PlayerController : MonoBehaviour
                 secondarySpellCountdown = 0.0f;
                 iceBall.CastSpell(gameObject);
             }
->>>>>>> Stashed changes
         }
     }
 

@@ -12,38 +12,26 @@ public enum Forms
     Ball,
 }
 
+/// <summary>
+/// Enum to represent various elemental types.
+/// </summary>
+public enum Elements
+{
+    Fire,
+    Ice,
+}
+
 public class ProjectileManager : MonoBehaviour
 {
-    [SerializeField]
-<<<<<<< Updated upstream
-    private GameObject ballPrefab;  // Prefab for the ball
+    // ===== | Variables | =====
+    public static ProjectileManager Instance;
 
-    private ObjectPool<Ball> ballPool;  // Pool for Ball objects
-=======
+    [SerializeField]
     private Ball ballPrefab;  // Prefab for the ball
     private GenericPool<Ball> ballPool; // Pool for Ball objects
->>>>>>> Stashed changes
-
-    /// <summary>
-    /// Enum to represent various elemental types.
-    /// </summary>
-    public enum Elements
-    {
-        Fire,
-        Ice,
-    }
 
     void Start()
     {
-<<<<<<< Updated upstream
-        // Initialize the object pool
-        ballPool = new ObjectPool<Ball>(
-            CreateBall,
-            OnTakeBallFromPool,
-            OnReturnBallToPool,
-            OnDestroyBall,
-            collectionCheck: true,
-=======
         if (Instance == null)
         {
             Instance = this;
@@ -56,7 +44,6 @@ public class ProjectileManager : MonoBehaviour
         // Initialize the generic object pool for Balls
         ballPool = new GenericPool<Ball>(
             ballPrefab,   // Pass the prefab directly
->>>>>>> Stashed changes
             defaultCapacity: 200,
             maxSize: 1000
        );
@@ -98,12 +85,8 @@ public class ProjectileManager : MonoBehaviour
                 break;
         }
 
-<<<<<<< Updated upstream
-        ball.Initialize(5.0f, new ProjectileData(1.0f, 1.0f, 1.0f, 3.0f, false));
-=======
         // Initialize with the data
         ball.Initialize(5.0f, new ProjectileData(1.0f, 1.0f, 5.0f, false));
->>>>>>> Stashed changes
 
         return ball;
     }
