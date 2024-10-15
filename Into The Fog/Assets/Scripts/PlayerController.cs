@@ -21,7 +21,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashCooldown = 5;
     /// <summary>The speed of the dash</summary>
     [SerializeField] private float dashSpeed = 10;
-    
+    /// <summary>Countdown until dash is usable again</summary>
+    private float dashCountdown = 0;
+    /// <summary>Countdown until dash speed stop</summary>
+    private float dashUptime = 0;
+    /// <summary>Speed during dash</summary>
+    private Vector3 input;
+
 
     public static event Action<PlayerController> playerDamageEvent;
 
@@ -29,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     public float PlayerHp
     {
-        get { return hp; }
+        get { return health; }
     }
 
     /// <summary>Countdown until spells are usable again</summary>
@@ -39,7 +45,6 @@ public class PlayerController : MonoBehaviour
     Spell fireBall;
     Spell iceBall;
 
-    private Vector3 input;
     /// <summary>
     /// AJ Wagner - 10/2/2024
     /// Added basic support for the health bar
