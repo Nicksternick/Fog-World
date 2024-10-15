@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 740810478403307629}
   - component: {fileID: 8109814221557458506}
+  - component: {fileID: -462986641045480283}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
@@ -47,3 +48,22 @@ MonoBehaviour:
   enemy: {fileID: 5300122117470067798, guid: 8b97ff834dd00534a938d323c76e45c8, type: 3}
   enemyList: []
   player: {fileID: 0}
+  enemySpawn: []
+  enemySpawners: {fileID: 0}
+  enemiesLeftText: {fileID: 0}
+--- !u!114 &-462986641045480283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7062274217238649689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cebd44c8a5bf9146bf32bc9d988a783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 770088205951079211, guid: 3d13ddb81b8fbf04f999dfd0917d239e,
+    type: 3}
+  player: {fileID: 0}
+  playerSpawnLocation: {x: 5, y: 1, z: 5}

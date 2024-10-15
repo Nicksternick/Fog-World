@@ -1,16 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
-using static Projectile;
-using static UnityEditor.Rendering.FilterWindow;
-
-/// <summary>
-/// Enum to represent various spell forms.
-/// </summary>
-public enum Forms
-{
-    Ball,
-}
 
 /// <summary>
 /// Enum to represent various elemental types.
@@ -21,6 +11,14 @@ public enum Elements
     Ice,
 }
 
+/// <summary>
+/// Enum to represent various spell forms.
+/// </summary>
+public enum Forms
+{
+    Ball,
+}
+
 public class ProjectileManager : MonoBehaviour
 {
     // ===== | Variables | =====
@@ -29,7 +27,6 @@ public class ProjectileManager : MonoBehaviour
     [SerializeField]
     private Ball ballPrefab;  // Prefab for the ball
     private GenericPool<Ball> ballPool; // Pool for Ball objects
-
     void Start()
     {
         if (Instance == null)
@@ -40,7 +37,7 @@ public class ProjectileManager : MonoBehaviour
         {
             Destroy(this);
         }
-
+        
         // Initialize the generic object pool for Balls
         ballPool = new GenericPool<Ball>(
             ballPrefab,   // Pass the prefab directly

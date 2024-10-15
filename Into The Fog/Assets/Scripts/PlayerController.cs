@@ -1,29 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    //Variables
+    // ===== | Variables | =====
 
-    private float hp;
+    [SerializeField] private InputActionMap playerActions;
 
+    /// <summary>The health of the player</summary>
+    [SerializeField] public float health = 100;
+    /// <summary>The rigid body of the player</summary>
     [SerializeField] private Rigidbody rb;
-    //Speed player Moves
+    /// <summary>Speed player Moves</summary>
     [SerializeField] private float speed = 5;
-    //Speed Player Rotates
+    /// <summary>Speed Player Rotates</summary>
     [SerializeField] private float turnSpeed = 720;
-    //Cooldown value of dash
+    /// <summary>Cooldown value of dash</summary>
     [SerializeField] private float dashCooldown = 5;
-    //Countdown until dash is usable again
-    [SerializeField] private float dashCountdown = 0;
-    //Countdown until dash speed stop
-    [SerializeField] private float dashUptime = 0;
-    //Speed during dash
+    /// <summary>The speed of the dash</summary>
     [SerializeField] private float dashSpeed = 10;
-    private Vector3 input;
+    
 
+    public static event Action<PlayerController> playerDamageEvent;
 
     [SerializeField] private ProjectileManager projectileManager;
 
@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     Spell fireBall;
     Spell iceBall;
 
+    private Vector3 input;
     /// <summary>
     /// AJ Wagner - 10/2/2024
     /// Added basic support for the health bar
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void GatherInput()
     {
-        input = new Vector3(Input.GetAxisRaw("Horizontal"), 0,Input.GetAxisRaw("Vertical"));
+        input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
     }
     
     /// <summary>
@@ -77,7 +78,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Look()
     {
-
         if (input != Vector3.zero)
         {
             var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
@@ -175,8 +175,19 @@ public class PlayerController : MonoBehaviour
     /// This makes the player take damage
     /// </summary>
     /// <param name="amount"> Amount of damage </param>
-    void takeDamage(float amount)
+    public void TakeDamage(float amount)
     {
-        hp -= amount;
+        health -= amount;
+        if (playerDamageEvent!=null)
+        {
+            playerDamageEvent(this);
+        }
+        /*
+        if (health <= 0)
+        {
+            gameObject.SetActive(false);
+            SceneManager.LoadScene("GameOver");
+        }
+        */
     }
 }
