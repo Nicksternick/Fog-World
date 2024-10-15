@@ -2,13 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spell : MonoBehaviour
+[CreateAssetMenu(fileName = "New Spell", menuName = "Spells/Spell")]
+public class Spell : ScriptableObject
 {
-    private ProjectileData spellData;
+    private Elements element;
+    private Forms form;
+    private float cooldown;
 
-    public Spell() 
+    /// <summary>
+    /// Jay 10/13/2024
+    /// Spell's Cooldown
+    /// </summary>
+    public float Cooldown {  get { return cooldown; } set {  cooldown = value; } }
+
+    /// <summary>
+    /// Jay 10/1/2024
+    /// </summary>
+    /// <param name="element"> Spell element </param>
+    /// <param name="form"> Spell form </param>
+    /// <param name="cooldown"> Spell cooldown </param>
+    public void Initialize(Elements element, Forms form, float cooldown) 
     {
-        
+        this.element = element;
+        this.form = form;
+        this.cooldown = cooldown;
+    }
+
+    /// <summary>
+    /// Sets off projectile creation process
+    /// </summary>
+    /// <param name="caller"> The gameobject that invoked this method </param>
+    public void CastSpell(GameObject caller)
+    {
+        ProjectileManager.Instance.CreateProjectile(caller, element, form);
     }
 
 }

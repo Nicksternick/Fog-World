@@ -11,15 +11,22 @@ public enum Elements
     Ice,
 }
 
+/// <summary>
+/// Enum to represent various spell forms.
+/// </summary>
+public enum Forms
+{
+    Ball,
+}
+
 public class ProjectileManager : MonoBehaviour
 {
     // ===== | Variables | =====
     public static ProjectileManager Instance;
 
     [SerializeField]
-    private GameObject ballPrefab;  // Prefab for the ball
-    private ObjectPool<Ball> ballPool;  // Pool for Ball objects
-
+    private Ball ballPrefab;  // Prefab for the ball
+    private GenericPool<Ball> ballPool; // Pool for Ball objects
     void Start()
     {
         if (Instance == null)
@@ -30,54 +37,41 @@ public class ProjectileManager : MonoBehaviour
         {
             Destroy(this);
         }
-
-        // Initialize the object pool
-        ballPool = new ObjectPool<Ball>(
-            CreateBall,
-            OnTakeBallFromPool,
-            OnReturnBallToPool,
-            OnDestroyBall,
-            collectionCheck: true,
+        
+        // Initialize the generic object pool for Balls
+        ballPool = new GenericPool<Ball>(
+            ballPrefab,   // Pass the prefab directly
             defaultCapacity: 200,
             maxSize: 1000
-        );
+       );
     }
 
-    // Create new Ball object from the prefab
-    private Ball CreateBall()
+    /// <summary>
+    /// Create the respective projectile for spells
+    /// </summary>
+    /// <param name="caller"> Gameobject Caller </param>
+    /// <param name="element"> Spell element </param>
+    /// <param name="form"> Spell Form </param>
+    public void CreateProjectile(GameObject caller, Elements element, Forms form)
     {
-        // Instantiate the ball from a prefab
-        GameObject ballObject = Instantiate(ballPrefab, Vector3.zero, Quaternion.identity);
-        Ball ball = ballObject.GetComponent<Ball>();
+        switch (form) 
+        {
+            case Forms.Ball:
+                GetBallFromPool(caller, element);
+                break;
+        }
+    }
 
-        // Set up object pool reference in the ball
+    // Public method to get a Ball from the pool
+    public Ball GetBallFromPool(GameObject caller, Elements element)
+    {
+        Ball ball = ballPool.GetFromPool();
         ball.SetPool(ballPool);
-
-        return ball;
-    }
-
-    private void OnTakeBallFromPool(Ball ball)
-    {
-        ball.gameObject.SetActive(true);
-    }
-
-    private void OnReturnBallToPool(Ball ball)
-    {
-        ball.gameObject.SetActive(false);
-    }
-
-    private void OnDestroyBall(Ball ball)
-    {
-        Destroy(ball.gameObject);
-    }
-
-    public Ball GetBallFromPool(Vector3 position, Quaternion rotation, GameObject caller, Elements element)
-    {
-        Ball ball = ballPool.Get();
-        ball.transform.position = position;
-        ball.transform.rotation = rotation;
+        ball.transform.position = caller.transform.position + caller.transform.forward * 2;
+        ball.transform.rotation = caller.transform.rotation;
         ball.Caller = caller;
 
+        // Customize the ball based on its element
         switch (element)
         {
             case Elements.Fire:
@@ -88,13 +82,15 @@ public class ProjectileManager : MonoBehaviour
                 break;
         }
 
-        ball.Initialize(5.0f, new ProjectileData(1.0f, 1.0f, 5.0f, 3.0f, false));
+        // Initialize with the data
+        ball.Initialize(5.0f, new ProjectileData(1.0f, 1.0f, 5.0f, false));
 
         return ball;
     }
 
+    // Public method to return the Ball to the pool
     public void ReturnBallToPool(Ball ball)
     {
-        ballPool.Release(ball);
+        ballPool.ReturnToPool(ball);
     }
 }

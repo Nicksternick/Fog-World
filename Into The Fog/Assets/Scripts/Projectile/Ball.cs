@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 
 public class Ball : Projectile
 {
-    private ObjectPool<Ball> ballPool;
+    private GenericPool<Ball> pool;
     protected Coroutine despawnAfterTimeCoroutine;
 
     public override void Initialize(float timeUntilDestroy, ProjectileData data)
@@ -32,12 +32,13 @@ public class Ball : Projectile
         {
             Debug.Log("Hit Enemy!");
             EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
-            enemyController.takeDamage(25);
+            
+            //enemyController.takeDamage(25);
 
             // Return to object pool
-            if (ballPool != null)
+            if (pool != null)
             {
-                ballPool.Release(this);
+                pool.ReturnToPool(this);
             }
         }
 
@@ -61,9 +62,9 @@ public class Ball : Projectile
         }
 
         // Return to object pool
-        if (ballPool != null)
+        if (pool != null)
         {
-            ballPool.Release(this);
+            pool.ReturnToPool(this);
         }
     }
 
@@ -72,8 +73,16 @@ public class Ball : Projectile
     /// Set object pool for the ball
     /// </summary>
     /// <returns></returns>
-    public virtual void SetPool(ObjectPool<Ball> pool)
+    public void SetPool(GenericPool<Ball> pool)
     {
-        ballPool = pool;
+        this.pool = pool;
+    }
+
+    public void ReturnToPool()
+    {
+        if (pool != null)
+        {
+            pool.ReturnToPool(this);
+        }
     }
 }
