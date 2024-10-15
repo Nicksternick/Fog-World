@@ -1,35 +1,28 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : Enemy
+public class BasicNavigation : AbstractNavigation
 {
-    //Variables
-    [SerializeField] private NavMeshAgent agent;
-
+    // ===== | Variables | =====
     private const float timer = 2;
     private const float chaseDistance = 50;
     private float wanderTime = timer;
 
     // ===== | Methods | =====
-
-    /// <summary>
-    /// Ruby 9/20/2024
-    /// Makes enemy follow the player
-    /// </summary>
-    void Update()
+    public override void Move()
     {
-        if (target != null)
+        if (Controller.Target != null)
         {
-            if (!PlayerInRange(chaseDistance))
+            if (!Controller.PlayerInRange(chaseDistance))
             {
                 Wander();
             }
-            else if (PlayerInRange(chaseDistance))
+            else if (Controller.PlayerInRange(chaseDistance))
             {
-                if (!PlayerInSight(chaseDistance).Equals(default(RaycastHit)))
+                if (!Controller.PlayerInSight(chaseDistance).Equals(default(RaycastHit)))
                 {
                     wanderTime = timer;
-                    agent.SetDestination(target.position);
+                    EnemyAgent.SetDestination(Controller.Target.position);
                 }
                 else
                 {
@@ -38,12 +31,12 @@ public class EnemyController : Enemy
             }
         }
     }
-    
+
     private void Wander()
     {
         if (wanderTime >= timer)
         {
-            agent.SetDestination(RandomNavSphere(transform.position, Random.Range(30, 40)));
+            EnemyAgent.SetDestination(RandomNavSphere(transform.position, Random.Range(30, 40)));
             wanderTime = 0;
         }
 
@@ -63,14 +56,5 @@ public class EnemyController : Enemy
         NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
 
         return navHit.position;
-    }
-    public new RaycastHit PlayerInSight(float range)
-    {
-        return base.PlayerInSight(range);
-    }
-
-    public new bool PlayerInRange(float range)
-    {
-        return base.PlayerInRange(range);
     }
 }

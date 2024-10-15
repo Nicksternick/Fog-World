@@ -8,9 +8,8 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     // ===== | Variables | =====
-    [SerializeField] private float damage;
-    [SerializeField] private float damageCooldown;
-    [SerializeField] private bool canAttack;
+    private float damageCooldown;
+    private bool canAttack;
 
     private const float MaxTimer = 2;
 

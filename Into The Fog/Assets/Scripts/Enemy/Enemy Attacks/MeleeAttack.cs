@@ -5,9 +5,9 @@ using UnityEngine;
 public class MeleeAttack : AbstractAttack
 {
     // ===== | Variables | =====
-    [SerializeField] private float damage;
-    [SerializeField] private float damageCooldown;
-    [SerializeField] private bool canAttack;
+    private float damage;
+    private float damageCooldown;
+    private bool canAttack;
 
     private const float MaxTimer = 2;
 
@@ -32,5 +32,36 @@ public class MeleeAttack : AbstractAttack
                 canAttack = true;
             }
         }
+    }
+
+    public override void Attack()
+    {
+        if(!playerInAttackRange)
+            return;
+
+        if (canAttack)
+        {
+            canAttack = false;
+            PlayerController player = playerCollider.gameObject.GetComponent<PlayerController>();
+            Rigidbody rb = player.GetComponent<Rigidbody>();
+
+            rb.velocity = Vector3.zero;
+            rb.AddForce(CalculatePushForce(15, player.transform.position - transform.position), ForceMode.Impulse);
+
+            float damage = Random.Range(10, 15);
+            player.TakeDamage(damage);
+        }
+    }
+
+    /// <summary>
+    /// Nicholas 9/30/2024
+    /// Calculates the force to apply to the player
+    /// </summary>
+    /// <param name="pushForce"></param>
+    /// <returns></returns>
+    private Vector3 CalculatePushForce(float pushForce, Vector3 direction)
+    {
+        direction = direction.normalized;
+        return new Vector3(direction.x, direction.y) * pushForce;
     }
 }

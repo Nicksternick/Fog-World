@@ -7,7 +7,6 @@ using UnityEngine;
 public abstract class AbstractAttack : MonoBehaviour
 {
     // ===== | Variables | =====
-    [SerializeField] protected EnemyController enemy;
     protected Collider playerCollider;
     protected bool playerInAttackRange;
 
@@ -15,11 +14,6 @@ public abstract class AbstractAttack : MonoBehaviour
     private void Awake()
     {
         playerInAttackRange = false;
-
-        if (enemy == null)
-        {
-            enemy = GetComponent<EnemyController>();
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,4 +33,6 @@ public abstract class AbstractAttack : MonoBehaviour
             playerCollider = null;
         }
     }
+
+    public abstract void Attack();
 }

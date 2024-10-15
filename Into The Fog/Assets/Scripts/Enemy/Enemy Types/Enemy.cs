@@ -76,7 +76,6 @@ public abstract class Enemy : MonoBehaviour
 
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, dist, layerMask))
             {
-                Debug.Log(hit.transform.gameObject.name);
                 if (hit.collider.gameObject.CompareTag("Player"))
                     return hit;
             }
