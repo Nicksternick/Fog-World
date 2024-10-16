@@ -21,10 +21,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashCooldown = 5;
     /// <summary>The speed of the dash</summary>
     [SerializeField] private float dashSpeed = 10;
-    
-
-    public static event Action<PlayerController> playerDamageEvent;
-
     /// <summary>Countdown until dash is usable again</summary>
     private float dashCountdown = 0;
     /// <summary>Countdown until dash speed stop</summary>
@@ -32,13 +28,31 @@ public class PlayerController : MonoBehaviour
     /// <summary>Speed during dash</summary>
     private Vector3 input;
 
+
+    public static event Action<PlayerController> playerDamageEvent;
+
+    [SerializeField] private ProjectileManager projectileManager;
+
+    public float PlayerHp
+    {
+        get { return health; }
+    }
+
+    /// <summary>Countdown until spells are usable again</summary>
+    private float primarySpellCountdown = 3.0f;
+    private float secondarySpellCountdown = 3.0f;
+
+    Spell fireBall;
+    Spell iceBall;
+
     /// <summary>
     /// AJ Wagner - 10/2/2024
     /// Added basic support for the health bar
     /// </summary>
     void Start()
     {
-       
+        fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 3.0f);
+        iceBall = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 3.0f);
     }
 
     void Update()
@@ -140,19 +154,24 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void CastSpell()
     {
-        if(Input.GetMouseButtonDown(0))
+        primarySpellCountdown += Time.deltaTime;
+        secondarySpellCountdown += Time.deltaTime;
+
+        if (Input.GetMouseButtonDown(0))
         {
-            ProjectileManager.Instance.GetBallFromPool
-                (transform.position + transform.forward * 2,
-                transform.rotation, this.gameObject,
-                Elements.Fire);
+            if(primarySpellCountdown > fireBall.Cooldown)
+            {
+                primarySpellCountdown = 0.0f;
+                fireBall.CastSpell(gameObject);
+            }
         }
         if(Input.GetMouseButtonDown(1))
         {
-            ProjectileManager.Instance.GetBallFromPool
-                (transform.position + transform.forward * 2,
-                transform.rotation, this.gameObject,
-                Elements.Ice);
+            if (secondarySpellCountdown > iceBall.Cooldown)
+            {
+                secondarySpellCountdown = 0.0f;
+                iceBall.CastSpell(gameObject);
+            }
         }
     }
 
