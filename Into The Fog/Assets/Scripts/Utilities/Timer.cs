@@ -75,7 +75,7 @@ public class Timer : MonoBehaviour
         currentTime -= Time.deltaTime;
         if (currentTime <= 0 && isCountingDown)
         {
-            Debug.Log("Timer Exit");
+            //Debug.Log("Timer Exit");
             // Stop the timer and trigger the unity event
             isCountingDown = false;
             onCountDownEnd.Invoke();

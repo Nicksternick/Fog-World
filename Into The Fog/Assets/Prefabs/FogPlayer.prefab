@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   moveSpeed: 10
-  dashSpeed: 30
+  dashSpeed: 35
   dashCooldown: 1
   dashTime: 0.2
   input: {fileID: 4471029826668248026}
@@ -106,11 +106,35 @@ MonoBehaviour:
     m_ActionId: 4dd67970-43ad-4cbb-ad85-7c16393b4854
     m_ActionName: FogPlayer/Dash[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 895945568556180447}
+        m_TargetAssemblyTypeName: FogPlayer, Assembly-CSharp
+        m_MethodName: CastSpell1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c034e6bc-8f6e-4ff7-b72f-c2dca4729dbf
     m_ActionName: FogPlayer/Spell1[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 895945568556180447}
+        m_TargetAssemblyTypeName: FogPlayer, Assembly-CSharp
+        m_MethodName: CastSpell2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d24b19ee-61f7-4e40-bf09-5a7fc9bac697
     m_ActionName: FogPlayer/Spell2[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0

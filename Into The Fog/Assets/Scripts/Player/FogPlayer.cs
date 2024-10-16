@@ -40,6 +40,12 @@ public class FogPlayer : MonoBehaviour
 
     private Timer dashTimer;
 
+    private Spell fireBall;
+    private Spell iceBall;
+
+    private float primarySpellCountdown = 3.0f;
+    private float secondarySpellCountdown = 3.0f;
+
     // ===== | Methods | =====
     private void Awake()
     {
@@ -47,9 +53,17 @@ public class FogPlayer : MonoBehaviour
         dashTimer = gameObject.AddComponent<Timer>();
     }
 
+    void Start()
+    {
+        fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 3.0f);
+        iceBall = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 3.0f);
+    }
+
     private void Update()
     {
         LookAtMouse();
+        primarySpellCountdown += Time.deltaTime;
+        secondarySpellCountdown += Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -99,16 +113,25 @@ public class FogPlayer : MonoBehaviour
     /// </summary>
     private void DashMove()
     {
-        // Get a ray based on the mouses current position
-        Ray ray = new Ray(transform.position, moveDirection);
+        Vector3 rayOrigin = transform.position;
+        rayOrigin.y = transform.localScale.y / 2;
 
-        float distance = 10;
+        // Get a ray based on the mouses current position
+        Ray ray = new Ray(rayOrigin, dashDirection);
+
+        float distance = dashSpeed * Time.deltaTime;
         RaycastHit hit;
 
         // Check the to see if there is a point that the mouse hit
         if (Physics.Raycast(ray, out hit, distance))
         {
-            
+            Vector3 position = hit.point;
+            position.x -= (transform.localScale.x / 2) * dashDirection.x;
+            position.z -= (transform.localScale.z / 2) * dashDirection.z;
+            position.y = 0;
+            playerRigidBody.transform.position = position;
+            dashTimer.CancelTimer();
+            EndDash();
         }
 
         playerRigidBody.MovePosition(transform.position + (dashDirection * dashSpeed * Time.deltaTime));
@@ -136,6 +159,7 @@ public class FogPlayer : MonoBehaviour
 
             // Setup the timer to stop dashing when the time is over
             dashTimer.SetMaxTime(dashTime);
+            dashTimer.OnCountDownEnd.RemoveAllListeners();
             dashTimer.OnCountDownEnd.AddListener(EndDash);
             dashTimer.StartTimer();
         }
@@ -160,12 +184,36 @@ public class FogPlayer : MonoBehaviour
 
         // Set up the timer to call EndDashCooldown
         dashTimer.SetMaxTime(dashCooldown);
-        dashTimer.OnCountDownEnd.RemoveListener(EndDash);
+        dashTimer.OnCountDownEnd.RemoveAllListeners();
         dashTimer.OnCountDownEnd.AddListener(EndDashCooldown);
         dashTimer.StartTimer();
     }
 
     // ----- | Other Functions | -----
+
+    public void CastSpell1(InputAction.CallbackContext callback)
+    {
+        if (callback.performed)
+        {
+            if (primarySpellCountdown > fireBall.Cooldown)
+            {
+                primarySpellCountdown = 0.0f;
+                fireBall.CastSpell(playerModel.gameObject);
+            }
+        }
+    }
+
+    public void CastSpell2(InputAction.CallbackContext callback)
+    {
+        if (callback.performed)
+        {
+            if (secondarySpellCountdown > iceBall.Cooldown)
+            {
+                secondarySpellCountdown = 0.0f;
+                iceBall.CastSpell(playerModel.gameObject);
+            }
+        }
+    }
 
     /// <summary>
     /// Nicholas 10/8/24

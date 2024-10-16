@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 440367270236501697}
+  - component: {fileID: 4380860993098647861}
+  - component: {fileID: 8789529672499676683}
   m_Layer: 0
   m_Name: Projectile Manager
   m_TagString: Untagged
@@ -31,3 +33,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4380860993098647861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886483659623355374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af9b5e1963492b5458bf3807f2805731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: -2314426742805507339, guid: 092d8e65b1be4ce41a83f862bddd4b4a,
+    type: 3}
+--- !u!114 &8789529672499676683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886483659623355374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9674ce401e2de534388f551e653d9124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
