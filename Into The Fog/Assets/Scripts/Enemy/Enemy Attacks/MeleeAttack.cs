@@ -1,16 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Nicholas 9/30/2024
-/// Deals damage to the player when 
-/// they enter the attacks collider
-/// </summary>
-public class EnemyAttack : MonoBehaviour
+public class MeleeAttack : AbstractAttack
 {
     // ===== | Variables | =====
-    [SerializeField] private float damage;
-    [SerializeField] private float damageCooldown;
-    [SerializeField] private bool canAttack;
+    private float damage;
+    private float damageCooldown;
+    private bool canAttack;
 
     private const float MaxTimer = 2;
 
@@ -37,30 +34,21 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    public override void Attack()
     {
-        //Gizmos.color = new Color(1, 0, 0, 0.5f);
-        //Gizmos.DrawSphere(transform.position, 1.2f);
+        if(!playerInAttackRange)
+            return;
 
-        //Gizmos.color = Color.blue;
-        //Gizmos.DrawRay(transform.position, transform.forward);
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        // Check to see if the enemy collided with the enemy.
-        if (other.gameObject.CompareTag("Player") && canAttack)
+        if (canAttack)
         {
-            
             canAttack = false;
-            PlayerController player = other.gameObject.GetComponent<PlayerController>();
+            PlayerController player = playerCollider.gameObject.GetComponent<PlayerController>();
             Rigidbody rb = player.GetComponent<Rigidbody>();
 
             rb.velocity = Vector3.zero;
             rb.AddForce(CalculatePushForce(15, player.transform.position - transform.position), ForceMode.Impulse);
 
             float damage = Random.Range(10, 15);
-            Debug.Log($"Player took {damage} damage");
             player.TakeDamage(damage);
         }
     }

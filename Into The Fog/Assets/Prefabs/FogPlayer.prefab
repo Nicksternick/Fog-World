@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4471029826668248026}
   - component: {fileID: 592145224690483877}
   - component: {fileID: 7652867981283466845}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FogPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}

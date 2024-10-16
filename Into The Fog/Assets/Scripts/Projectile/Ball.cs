@@ -32,8 +32,7 @@ public class Ball : Projectile
         {
             Debug.Log("Hit Enemy!");
             EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
-            
-            //enemyController.takeDamage(25);
+            enemyController.TakeDamage(25);
 
             // Return to object pool
             if (pool != null)

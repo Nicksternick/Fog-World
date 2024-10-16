@@ -7,13 +7,16 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private GameObject player;
+    [SerializeField] private PlayerController player;
     [SerializeField] private Vector3 playerSpawnLocation;
-    [SerializeField] private GameObject enemyManager;
+    [SerializeField] private EnemyManager enemyManager;
     /// <summary>A reference to the players healthbar</summary>
     [SerializeField] HealthBar healthBar;
 
     public static LevelManager Instance;
+
+    // ===== | Properties | =====
+    public PlayerController Player {  get { return player; } }
 
     // ===== | Methods | =====
     private void Awake()
@@ -21,7 +24,6 @@ public class LevelManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this);
         }
         else
         {
@@ -41,7 +43,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemyManager.GetComponent<EnemyManager>().enemyList.Count <= 0)
+        if (enemyManager.enemyList.Count <= 0)
         {
             SceneManager.LoadScene("YouWin");
         }
@@ -63,8 +65,8 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private void spawnPlayer()
     {
-        player = (Instantiate(playerPrefab, playerSpawnLocation, playerPrefab.transform.rotation));
-        enemyManager.GetComponent<EnemyManager>().player = player;
+        player = (Instantiate(playerPrefab, playerSpawnLocation, playerPrefab.transform.rotation)).GetComponent<PlayerController>();
+        enemyManager.player = player.gameObject;
     }
 
     /// <summary>
@@ -74,10 +76,10 @@ public class LevelManager : MonoBehaviour
     /// <param name="playerController">Event stuff</param>
     private void CheckLose(PlayerController playerController)
     {
-        healthBar.SetHealth(player.GetComponent<PlayerController>().health);
-        if (player.GetComponent<PlayerController>().health <= 0)
+        healthBar.SetHealth(player.health);
+        if (player.health <= 0)
         {
-            player.SetActive(false);
+            player.gameObject.SetActive(false);
             SceneManager.LoadScene("GameOver");
         }
     }

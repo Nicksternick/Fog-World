@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &67906734376766118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1398681314509307945}
+  - component: {fileID: 2037640238059954878}
+  m_Layer: 0
+  m_Name: Enemy Navigation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1398681314509307945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67906734376766118}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3889691771670335807}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2037640238059954878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67906734376766118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c1880e847895341a1e9bd9527cbb8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5300122117470067798
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,11 +74,12 @@ Transform:
   m_GameObject: {fileID: 5300122117470067798}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.7535791, y: 0.5, z: -2.4277325}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3378956835143377010}
+  - {fileID: 1398681314509307945}
   - {fileID: 4264974812230631134}
   - {fileID: 4988425975817667031}
   m_Father: {fileID: 0}
@@ -123,10 +168,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  agent: {fileID: 8624020490602003632}
   health: 100
   healthBar: {fileID: 373000099041273866}
-  renderer: {fileID: 3133123401080718769}
+  agent: {fileID: 8624020490602003632}
+  navigation: {fileID: 2037640238059954878}
+  attack: {fileID: 1997897936530266939}
 --- !u!195 &8624020490602003632
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -159,6 +205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3378956835143377010}
   - component: {fileID: 430576886816990113}
+  - component: {fileID: 1997897936530266939}
   - component: {fileID: 1263578639313593425}
   m_Layer: 0
   m_Name: Enemy Attack
@@ -189,14 +236,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7846113145627362911}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aadc952833740e34199be4df67850c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  damageCooldown: 0
-  canAttack: 0
+--- !u!114 &1997897936530266939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846113145627362911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3eca6a191c61a14fb1510c08a71e770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &1263578639313593425
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -286,12 +342,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ab78643c9df4fc46a0a5ec0405b1711, type: 3}
---- !u!23 &3133123401080718769 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 0ab78643c9df4fc46a0a5ec0405b1711,
-    type: 3}
-  m_PrefabInstance: {fileID: 4375953490523183413}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4264974812230631134 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0ab78643c9df4fc46a0a5ec0405b1711,
