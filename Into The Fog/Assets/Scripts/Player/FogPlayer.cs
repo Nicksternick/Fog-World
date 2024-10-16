@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -100,6 +99,18 @@ public class FogPlayer : MonoBehaviour
     /// </summary>
     private void DashMove()
     {
+        // Get a ray based on the mouses current position
+        Ray ray = new Ray(transform.position, moveDirection);
+
+        float distance = 10;
+        RaycastHit hit;
+
+        // Check the to see if there is a point that the mouse hit
+        if (Physics.Raycast(ray, out hit, distance))
+        {
+            
+        }
+
         playerRigidBody.MovePosition(transform.position + (dashDirection * dashSpeed * Time.deltaTime));
     }
 
@@ -116,7 +127,7 @@ public class FogPlayer : MonoBehaviour
         if (callback.started && canDash)
         {
             // Get the current direction of the player
-            dashDirection = playerModel.transform.forward;
+            dashDirection = moveDirection;
 
             // Setup the variables so the player
             // can enter the dashing state

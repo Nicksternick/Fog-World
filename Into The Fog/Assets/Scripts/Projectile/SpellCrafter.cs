@@ -7,7 +7,7 @@ public class SpellCrafter : MonoBehaviour
     public static SpellCrafter Instance;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (Instance == null)
         {

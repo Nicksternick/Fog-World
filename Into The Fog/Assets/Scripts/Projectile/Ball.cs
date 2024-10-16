@@ -31,7 +31,7 @@ public class Ball : Projectile
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("Hit Enemy!");
-            EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
+            Enemy enemyController = collision.gameObject.GetComponent<Enemy>();
             enemyController.TakeDamage(25);
 
             // Return to object pool
