@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +12,7 @@ public class FogPlayer : MonoBehaviour
 
     [Header("Player Attributes")]
     // ----- | Player Attributes | -----
-    [SerializeField] private float health = 100;
+    [SerializeField] public float health = 100;
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] private float dashSpeed = 1;
     [SerializeField] private float dashCooldown = 1;
@@ -52,6 +53,8 @@ public class FogPlayer : MonoBehaviour
         move = input.actions.FindAction("Move");
         dashTimer = gameObject.AddComponent<Timer>();
     }
+
+    public static event Action<FogPlayer> playerDamageEvent;
 
     void Start()
     {
@@ -242,5 +245,21 @@ public class FogPlayer : MonoBehaviour
             rotation.z = 0;
             playerModel.transform.rotation = rotation;
         } 
+    }
+
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+        if (playerDamageEvent != null)
+        {
+            playerDamageEvent(this);
+        }
+        /*
+        if (health <= 0)
+        {
+            gameObject.SetActive(false);
+            SceneManager.LoadScene("GameOver");
+        }
+        */
     }
 }

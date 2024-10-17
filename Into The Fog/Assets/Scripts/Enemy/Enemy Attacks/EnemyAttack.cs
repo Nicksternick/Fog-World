@@ -52,7 +52,7 @@ public class EnemyAttack : MonoBehaviour
         {
             
             canAttack = false;
-            PlayerController player = other.gameObject.GetComponent<PlayerController>();
+            FogPlayer player = other.gameObject.GetComponent<FogPlayer>();
             Rigidbody rb = player.GetComponent<Rigidbody>();
 
             rb.velocity = Vector3.zero;

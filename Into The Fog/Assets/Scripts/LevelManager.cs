@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private PlayerController player;
+    [SerializeField] private FogPlayer player;
     [SerializeField] private Vector3 playerSpawnLocation;
     [SerializeField] private EnemyManager enemyManager;
     /// <summary>A reference to the players healthbar</summary>
@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
 
     // ===== | Properties | =====
-    public PlayerController Player {  get { return player; } }
+    /*public PlayerController Player {  get { return player; } }
 
     // ===== | Methods | =====
     private void Awake()
@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
         }
 
     }
-
+    */
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemyManager.enemyList.Count <= 0)
+        if (enemyManager.hiveList.Count <= 0)
         {
             SceneManager.LoadScene("YouWin");
         }
@@ -51,12 +51,12 @@ public class LevelManager : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerController.playerDamageEvent += CheckLose;
+        FogPlayer.playerDamageEvent += CheckLose;
     }
 
     private void OnDisable()
     {
-        PlayerController.playerDamageEvent -= CheckLose;
+        FogPlayer.playerDamageEvent -= CheckLose;
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private void spawnPlayer()
     {
-        player = (Instantiate(playerPrefab, playerSpawnLocation, playerPrefab.transform.rotation)).GetComponent<PlayerController>();
+        player = (Instantiate(playerPrefab, playerSpawnLocation, playerPrefab.transform.rotation)).GetComponent<FogPlayer>();
         enemyManager.player = player.gameObject;
     }
 
@@ -74,7 +74,7 @@ public class LevelManager : MonoBehaviour
     /// Checks if hte player has lost and updates the healthbar
     /// </summary>
     /// <param name="playerController">Event stuff</param>
-    private void CheckLose(PlayerController playerController)
+    private void CheckLose(FogPlayer fogPlayer)
     {
         healthBar.SetHealth(player.health);
         if (player.health <= 0)
@@ -83,4 +83,5 @@ public class LevelManager : MonoBehaviour
             SceneManager.LoadScene("GameOver");
         }
     }
+
 }

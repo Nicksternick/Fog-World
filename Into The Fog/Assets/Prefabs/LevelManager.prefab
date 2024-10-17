@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cebd44c8a5bf9146bf32bc9d988a783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 770088205951079211, guid: 3d13ddb81b8fbf04f999dfd0917d239e,
+  playerPrefab: {fileID: 770088205951079211, guid: 66e3212fabfb1a94ea2e09d5d89013f9,
     type: 3}
   player: {fileID: 0}
-  playerSpawnLocation: {x: 5, y: 1, z: 5}
+  playerSpawnLocation: {x: -60, y: 1, z: -40}
   enemyManager: {fileID: 0}
   healthBar: {fileID: 0}
