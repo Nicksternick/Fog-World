@@ -42096,6 +42096,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5549b21d439371e49bc82c602c4c4bc9, type: 3}
+--- !u!1 &723267401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 723267402}
+  m_Layer: 0
+  m_Name: Spawner1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &723267402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723267401}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 36.7, y: 25.404179, z: 44.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 925225521}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &723980743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50510,10 +50541,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8109814221557458506, guid: c8bf63fb9d2ad3f4b8543a518f974e69,
         type: 3}
+      propertyPath: hive
+      value: 
+      objectReference: {fileID: 8606495034574451800, guid: 7d69dfe016812c747907131595cf5ca3,
+        type: 3}
+    - target: {fileID: 8109814221557458506, guid: c8bf63fb9d2ad3f4b8543a518f974e69,
+        type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 5300122117470067798, guid: 73bc3d9b9dc68ea40a6743edf9751802,
         type: 3}
+    - target: {fileID: 8109814221557458506, guid: c8bf63fb9d2ad3f4b8543a518f974e69,
+        type: 3}
+      propertyPath: hiveSpawners
+      value: 
+      objectReference: {fileID: 925225520}
     - target: {fileID: 8109814221557458506, guid: c8bf63fb9d2ad3f4b8543a518f974e69,
         type: 3}
       propertyPath: enemySpawners
@@ -55310,6 +55352,40 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1044063556}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &925225520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 925225521}
+  m_Layer: 0
+  m_Name: HiveSpawners
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &925225521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925225520}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -49.475193, y: -25.404179, z: -17.882685}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 723267402}
+  - {fileID: 1586202138}
+  - {fileID: 1598823662}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &925618726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94031,6 +94107,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 454096116}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1586202137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1586202138}
+  m_Layer: 0
+  m_Name: Spawner1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1586202138
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586202137}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 93.2, y: 25.404179, z: -11.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 925225521}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1587516496 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: edc23668436c0a14fbff3f9c90fe8110,
@@ -94771,6 +94878,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404ace3782773a340980255ddbf88e79, type: 3}
+--- !u!1 &1598823661
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1598823662}
+  m_Layer: 0
+  m_Name: Spawner1 (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1598823662
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598823661}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 109.7, y: 25.404179, z: 44.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 925225521}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1599213142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129867,4 +130005,5 @@ SceneRoots:
   - {fileID: 861042570}
   - {fileID: 1390497143}
   - {fileID: 1993180602}
+  - {fileID: 925225521}
   - {fileID: 354206309}
