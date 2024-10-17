@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
 
     // ===== | Properties | =====
-    public PlayerController Player {  get { return player; } }
+    /*public PlayerController Player {  get { return player; } }
 
     // ===== | Methods | =====
     private void Awake()
@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
         }
 
     }
-
+    */
     // Start is called before the first frame update
     void Start()
     {
