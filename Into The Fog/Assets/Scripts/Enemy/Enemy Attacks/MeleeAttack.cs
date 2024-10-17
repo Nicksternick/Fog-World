@@ -42,7 +42,7 @@ public class MeleeAttack : AbstractAttack
         if (canAttack)
         {
             canAttack = false;
-            PlayerController player = playerCollider.gameObject.GetComponent<PlayerController>();
+            FogPlayer player = playerCollider.gameObject.GetComponent<FogPlayer>();
             Rigidbody rb = player.GetComponent<Rigidbody>();
 
             rb.velocity = Vector3.zero;
