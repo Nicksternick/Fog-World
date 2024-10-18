@@ -97,7 +97,6 @@ public class FogPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CheckAndMoveToNavMesh();
         if (!mapCamera.gameObject.activeSelf)
         {
             if (!isDashing)
@@ -108,19 +107,6 @@ public class FogPlayer : MonoBehaviour
             {
                 DashMove();
             }
-        }
-    }
-
-    private void CheckAndMoveToNavMesh()
-    {
-        // Get the current position of the GameObject
-        Vector3 currentPosition = transform.position;
-
-        // Check if the current position is on the NavMesh
-        if (!NavMesh.SamplePosition(currentPosition, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
-        {
-            // If not on the NavMesh, move to the closest point
-            transform.position = hit.position;
         }
     }
 
