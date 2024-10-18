@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Nicholas 10/8/24
@@ -12,7 +14,7 @@ public class FogPlayer : MonoBehaviour
 
     [Header("Player Attributes")]
     // ----- | Player Attributes | -----
-    [SerializeField] public float health = 100;
+    [SerializeField] private float health = 100;
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] private float dashSpeed = 1;
     [SerializeField] private float dashCooldown = 1;
@@ -27,6 +29,7 @@ public class FogPlayer : MonoBehaviour
     // ----- | Camera SubObjects | -----
     [SerializeField] private GameObject cameraPivot;
     [SerializeField] private Camera playerCamera;
+    [SerializeField] private Camera mapCamera;
 
     [Header("Collider And Model")]
     // ----- | Collider/Model SubObject | -----
@@ -47,6 +50,14 @@ public class FogPlayer : MonoBehaviour
     private float primarySpellCountdown = 3.0f;
     private float secondarySpellCountdown = 3.0f;
 
+    public static event Action<FogPlayer> playerDamageEvent;
+
+    // ===== | Properties | =====
+    public float Health
+    {
+        get { return health; }
+    }
+
     // ===== | Methods | =====
     private void Awake()
     {
@@ -54,32 +65,63 @@ public class FogPlayer : MonoBehaviour
         dashTimer = gameObject.AddComponent<Timer>();
     }
 
-    public static event Action<FogPlayer> playerDamageEvent;
-
     void Start()
     {
-        fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 3.0f);
+        fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 0.4f);
         iceBall = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 3.0f);
+        UIManager.Instance.Spell1.SetMaxCooldown(fireBall.Cooldown);
+        UIManager.Instance.HealthBar.SetMaxHealth(health);
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            mapCamera.gameObject.SetActive(!mapCamera.gameObject.activeSelf);
+        }
+
         LookAtMouse();
-        primarySpellCountdown += Time.deltaTime;
-        secondarySpellCountdown += Time.deltaTime;
+
+        if (primarySpellCountdown < fireBall.Cooldown)
+        {
+            primarySpellCountdown += Time.deltaTime;
+            UIManager.Instance.Spell1.SetCooldown(primarySpellCountdown);
+        }
+        //secondarySpellCountdown += Time.deltaTime;
+
+        if (Health <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     private void FixedUpdate()
     {
-        if (!isDashing)
+        CheckAndMoveToNavMesh();
+        if (!mapCamera.gameObject.activeSelf)
         {
-            NormalMove();
+            if (!isDashing)
+            {
+                NormalMove();
+            }
+            else
+            {
+                DashMove();
+            }
         }
-        else
+    }
+
+    private void CheckAndMoveToNavMesh()
+    {
+        // Get the current position of the GameObject
+        Vector3 currentPosition = transform.position;
+
+        // Check if the current position is on the NavMesh
+        if (!NavMesh.SamplePosition(currentPosition, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
         {
-            DashMove();
+            // If not on the NavMesh, move to the closest point
+            transform.position = hit.position;
         }
-        
     }
 
     // ----- | Movement Functions | -----
@@ -179,7 +221,7 @@ public class FogPlayer : MonoBehaviour
     /// Ends the dashing state and returns 
     /// the player to normal movement
     /// </summary>
-    private void EndDash() 
+    private void EndDash()
     {
         // Setup the variables again
         isDashing = false;
@@ -198,7 +240,7 @@ public class FogPlayer : MonoBehaviour
     {
         if (callback.performed)
         {
-            if (primarySpellCountdown > fireBall.Cooldown)
+            if (primarySpellCountdown >= fireBall.Cooldown)
             {
                 primarySpellCountdown = 0.0f;
                 fireBall.CastSpell(playerModel.gameObject);
@@ -208,14 +250,14 @@ public class FogPlayer : MonoBehaviour
 
     public void CastSpell2(InputAction.CallbackContext callback)
     {
-        if (callback.performed)
-        {
-            if (secondarySpellCountdown > iceBall.Cooldown)
-            {
-                secondarySpellCountdown = 0.0f;
-                iceBall.CastSpell(playerModel.gameObject);
-            }
-        }
+        //if (callback.performed)
+        //{
+        //    if (secondarySpellCountdown > iceBall.Cooldown)
+        //    {
+        //        secondarySpellCountdown = 0.0f;
+        //        iceBall.CastSpell(playerModel.gameObject);
+        //    }
+        //}
     }
 
     /// <summary>
@@ -233,7 +275,7 @@ public class FogPlayer : MonoBehaviour
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
 
         // Check the to see if there is a point that the mouse hit
-        if(plane.Raycast(ray, out distance))
+        if (plane.Raycast(ray, out distance))
         {
             // Get that point
             Vector3 mousePosition = ray.GetPoint(distance);
@@ -244,22 +286,13 @@ public class FogPlayer : MonoBehaviour
             rotation.x = 0;
             rotation.z = 0;
             playerModel.transform.rotation = rotation;
-        } 
+        }
     }
 
     public void TakeDamage(float amount)
     {
         health -= amount;
-        if (playerDamageEvent != null)
-        {
-            playerDamageEvent(this);
-        }
-        /*
-        if (health <= 0)
-        {
-            gameObject.SetActive(false);
-            SceneManager.LoadScene("GameOver");
-        }
-        */
+        playerDamageEvent(this);
+        UIManager.Instance.HealthBar.SetHealth(health);
     }
 }

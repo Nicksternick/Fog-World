@@ -13,6 +13,7 @@ public class EnemyController : Enemy
     {
         navigation.Controller = this;
         navigation.EnemyAgent = agent;
+        agent.speed += 0.15f;
     }
 
     /// <summary>

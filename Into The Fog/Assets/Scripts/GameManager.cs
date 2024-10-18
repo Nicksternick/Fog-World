@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ChangeScene("MVI Scene+");
+            ChangeScene("Cave Level");
         }
     }
 

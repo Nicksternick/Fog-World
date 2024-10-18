@@ -41,7 +41,15 @@ public class Ball : Projectile
             }
         }
 
-        
+        // If the Ball hits the wall
+        if (collision.gameObject.layer == 6)
+        {
+            // Return to object pool
+            if (pool != null)
+            {
+                pool.ReturnToPool(this);
+            }
+        }
     }
 
     /// <summary>

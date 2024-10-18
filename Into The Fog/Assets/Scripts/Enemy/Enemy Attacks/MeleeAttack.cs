@@ -46,9 +46,9 @@ public class MeleeAttack : AbstractAttack
             Rigidbody rb = player.GetComponent<Rigidbody>();
 
             rb.velocity = Vector3.zero;
-            rb.AddForce(CalculatePushForce(15, player.transform.position - transform.position), ForceMode.Impulse);
+            //rb.AddForce(CalculatePushForce(5, player.transform.position - transform.position), ForceMode.Impulse);
 
-            float damage = Random.Range(10, 15);
+            float damage = Random.Range(8, 13);
             player.TakeDamage(damage);
         }
     }

@@ -50,7 +50,7 @@ public abstract class Enemy : MonoBehaviour
         if (health <= 0 )
         {
             isDead = true;
-            onDeath.Invoke();
+            //onDeath.Invoke();
 
             Destroy(gameObject);
         }

@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -16,7 +17,18 @@ public class HealthBar : MonoBehaviour
 {
     // The slider beneath the sprite that's in charge
     // of the health's representation
-    [SerializeField] public Slider health;
+    [SerializeField] private Slider health;
+
+    // ===== | Properties | =====
+    public float Value
+    {
+        get { return health.value; }
+    }
+
+    public float MaxValue
+    {
+        get { return health.maxValue; }
+    }
 
     // Sets the max health for the bar
     public void SetMaxHealth(float unitHealth)
@@ -28,7 +40,7 @@ public class HealthBar : MonoBehaviour
     // Takes health value and sets the bar appropriately
     public void SetHealth(float currentHealth)
     {
-        health.value = currentHealth;
+        health.value = Mathf.Min(currentHealth, MaxValue);
     }
 
     // This method is redundant, commenting it out for now
