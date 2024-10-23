@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -13,24 +14,13 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] public GameObject player;
     [SerializeField] private Vector3[] enemySpawn;
     [SerializeField] private Vector3[] hiveSpawn;
-    [SerializeField] private GameObject enemySpawners;
+    [SerializeField] private GameObject[] enemySpawners;
     [SerializeField] private GameObject hiveSpawners;
     [SerializeField] TextMeshProUGUI enemiesLeftText;
 
     // Start is called before the first frame update
     void Start()
     {
-        List<Vector3> list = new List<Vector3>();
-
-        foreach (Transform transform in enemySpawners.GetComponentsInChildren<Transform>())
-        {
-            list.Add(transform.position);
-        }
-
-        list.RemoveAt(0);
-
-        enemySpawn = list.ToArray();
-
         List<Vector3> hiveList = new List<Vector3>();
 
         foreach (Transform transform in hiveSpawners.GetComponentsInChildren<Transform>())
@@ -65,16 +55,23 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     void spawn()
     {
-        //Spawns all of the enemies
-        for (int i = 0; i< enemySpawn.Length; i++)
-        {
-            enemyList.Add(Instantiate(enemy, enemySpawn[i], Quaternion.identity));
-            enemyList[i].GetComponent<EnemyController>().Target = player.transform;
-        }
         for (int i = 0; i < hiveSpawn.Length; i++)
         {
             hiveList.Add(Instantiate(hive, hiveSpawn[i], Quaternion.identity));
             //hiveList[i].GetComponent<EnemyController>().Target = player.transform;
         }
+        //Spawns all of the enemies
+        for (int i = 0; i < enemySpawners.Length; i++)
+        {
+            for (int j = 0; j < enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions.Length; j++)
+            {
+                enemyList.Add(Instantiate(enemySpawners[i].GetComponent<EnemySpawner>().spawnEnemy, 
+                    enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions[j].position, 
+                    Quaternion.identity));
+
+                enemyList[j].GetComponent<EnemyController>().Target = player.transform;
+            } 
+        }
+        
     }
 }

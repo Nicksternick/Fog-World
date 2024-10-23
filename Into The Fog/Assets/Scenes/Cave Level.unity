@@ -53066,6 +53066,11 @@ PrefabInstance:
       propertyPath: enemiesLeftText
       value: 
       objectReference: {fileID: 1636402317}
+    - target: {fileID: 8109814221557458506, guid: c8bf63fb9d2ad3f4b8543a518f974e69,
+        type: 3}
+      propertyPath: enemySpawners.Array.data[0]
+      value: 
+      objectReference: {fileID: 1390497142}
     m_RemovedComponents:
     - {fileID: -462986641045480283, guid: c8bf63fb9d2ad3f4b8543a518f974e69, type: 3}
     m_RemovedGameObjects: []
@@ -88317,6 +88322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1390497143}
+  - component: {fileID: 1390497144}
   m_Layer: 0
   m_Name: EnemySpawners
   m_TagString: Untagged
@@ -88360,6 +88366,21 @@ Transform:
   - {fileID: 36429120}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1390497144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390497142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f91611383e0da844886c3954d976660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnEnemy: {fileID: 5300122117470067798, guid: 73bc3d9b9dc68ea40a6743edf9751802,
+    type: 3}
+  spawnPositions: []
 --- !u!4 &1390988445 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eadc1884da5530b409110e4f4dfce2d1,
