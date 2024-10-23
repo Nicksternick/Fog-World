@@ -15,27 +15,35 @@ public class GuardNavigation : AbstractNavigation
     private void Start()
     {
         guardOrigin = transform.position;
+        guardRadius = 10;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(guardOrigin, guardRadius);
     }
 
     public override void Move()
     {
         if (Controller.Target != null)
         {
-            if (!Controller.PlayerInRange(chaseDistance))
+            float distanceToPlayer = Vector3.Distance(Controller.Target.transform.position, guardOrigin);
+
+            if (distanceToPlayer > guardRadius)
             {
                 Wander();
             }
-            else if (Controller.PlayerInRange(chaseDistance))
+            else
             {
-                if (!Controller.PlayerInSight(chaseDistance).Equals(default(RaycastHit)))
-                {
-                    wanderTime = timer;
-                    EnemyAgent.SetDestination(Controller.Target.position);
-                }
-                else
-                {
-                    Wander();
-                }
+                EnemyAgent.ResetPath();
+                wanderTime = 0;
+
+                Controller.transform.LookAt(Controller.Target.transform, Vector3.up);
+                Quaternion rotation = Controller.transform.rotation;
+                rotation.x = 0;
+                rotation.z = 0;
+                Controller.transform.rotation = rotation;
             }
         }
     }
@@ -44,7 +52,7 @@ public class GuardNavigation : AbstractNavigation
     {
         if (wanderTime >= timer)
         {
-            EnemyAgent.SetDestination(RandomNavSphere(transform.position, Random.Range(30, 40)));
+            EnemyAgent.SetDestination(RandomNavSphere(guardOrigin, guardRadius));
             wanderTime = 0;
         }
 
