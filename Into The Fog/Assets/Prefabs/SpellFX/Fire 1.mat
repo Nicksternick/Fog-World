@@ -55,14 +55,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Clip: 1
-    - _Feather: 0.26
+    - _Clip: 0.511
+    - _Feather: 0.844
     - _Power: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Size: 0.317
-    - _Tiling: 1
+    - _Size: 0.332
+    - _Tiling: 2
     m_Colors:
     - _Color: {r: 128, g: 6.1911974, b: 1.8113174, a: 1}
-    - _Move: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _Move: {r: 0.1, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
