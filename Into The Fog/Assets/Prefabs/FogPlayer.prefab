@@ -52,9 +52,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   moveSpeed: 10
-  dashSpeed: 35
+  dashSpeed: 25
   dashCooldown: 1
-  dashTime: 0.2
+  dashTime: 0.25
   input: {fileID: 4471029826668248026}
   cameraPivot: {fileID: 3024777861223414066}
   playerCamera: {fileID: 6913787966183013508}
