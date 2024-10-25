@@ -13,5 +13,10 @@ public abstract class AbstractNavigation : MonoBehaviour
     public NavMeshAgent EnemyAgent { set; protected get; }
 
     // ===== | Methods | =====
+
+    /// <summary>
+    /// Nicholas 10/16/2024
+    /// Calls the navigation logic for the enemy
+    /// </summary>
     public abstract void Move();
 }
