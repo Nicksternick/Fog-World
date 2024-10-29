@@ -6,16 +6,18 @@ using UnityEngine.Pool;
 
 public abstract class Projectile : MonoBehaviour
 {
-    protected GameObject caller;             // The object that fired the projectile
-    protected float timeUntilDestroy;        // Duration before the projectile is destroyed
-    protected ProjectileData data;           // Projectile Base Stats
-    protected Vector3 position;              // Current position of the projectile
-    protected Vector3 velocity;              // Current velocity of the projectile
-    protected quaternion rotation;           // Current rotation of the projectile
-    protected Rigidbody rb;                  // Rigidbody
+    protected GameObject caller;                    // The object that fired the projectile
+    protected float timeUntilDestroy;               // Duration before the projectile is destroyed
+    protected ProjectileData data;                  // Projectile Base Stats
+    protected Vector3 position;                     // Current position of the projectile
+    protected Vector3 velocity;                     // Current velocity of the projectile
+    protected quaternion rotation;                  // Current rotation of the projectile
+    protected Rigidbody rb;                         // Rigidbody
+    protected Coroutine despawnAfterTimeCoroutine;  // Coroutine that auto despawns projectile
 
 
     public abstract void Initialize(float timeUntilDestroy, ProjectileData data);
+    protected abstract void DespawnProjectile();
 
 
     public Vector3 Position => position;   
@@ -49,6 +51,20 @@ public abstract class Projectile : MonoBehaviour
         {
             renderer.material.color = color;
         }
+    }
+
+    protected virtual IEnumerator DespawnAfterTime()
+    {
+        float elapsedTime = 0f;
+
+        // Wait until the timeUntilDestroy period is completed
+        while (elapsedTime < timeUntilDestroy)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null; // Wait till next frame
+        }
+        
+        DespawnProjectile();
     }
 
     private void Update()
