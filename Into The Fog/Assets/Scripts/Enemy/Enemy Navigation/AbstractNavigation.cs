@@ -16,7 +16,14 @@ public abstract class AbstractNavigation : MonoBehaviour
     /// this Navigation has reference to</summary>
     public NavMeshAgent EnemyAgent { set; protected get; }
 
+    [SerializeField] protected float baseSpeed = 4;
+
     // ===== | Methods | =====
+
+    private void Start()
+    {
+        EnemyAgent.speed = baseSpeed;
+    }
 
     /// <summary>
     /// Nicholas 10/16/2024

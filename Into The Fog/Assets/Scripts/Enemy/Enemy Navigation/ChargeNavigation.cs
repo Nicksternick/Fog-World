@@ -12,7 +12,6 @@ public class ChargeNavigation : AbstractNavigation
 
     // ===== | Charge Variables | =====
     private float sightConeRadius = 60;
-    private float baseSpeed = 4;
     private float chargeWaitTime;
 
     private EnemyState enemyState;
