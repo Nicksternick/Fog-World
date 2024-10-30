@@ -19,8 +19,6 @@ public class GuardNavigation : AbstractNavigation
     private float jumpCooldownTime;
     private float jumpCooldown;
 
-    private float baseSpeed = 4;
-
     private EnemySate enemyState;
 
     /// <summary>
