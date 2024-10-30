@@ -25,8 +25,9 @@ public class Ball : Projectile
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionEnter(Collision collision)
     {
+        base.OnCollisionEnter(collision);
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("Hit Enemy!");
