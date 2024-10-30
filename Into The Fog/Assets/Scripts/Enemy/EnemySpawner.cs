@@ -8,6 +8,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] public Transform[] spawnPositions;
          
     // Start is called before the first frame update
+    /// <summary>
+    /// Makes a list of all spawn locations
+    /// </summary>
     void Start()
     {
         List<Transform> list = new List<Transform>();

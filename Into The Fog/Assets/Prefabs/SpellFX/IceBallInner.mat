@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fire
+  m_Name: IceBallInner
   m_Shader: {fileID: -6465566751694194690, guid: daf09444234b9f948996c197523c11e1,
     type: 3}
   m_Parent: {fileID: 0}
@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Grain:
-        m_Texture: {fileID: 2800000, guid: 4b6a378097c16844ba8b6bcbc68314d0, type: 3}
+        m_Texture: {fileID: 2800000, guid: f228156ae21d9f941a9e165ec31014d4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -55,14 +55,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Clip: 0.735
-    - _Feather: 1
-    - _Power: 1
+    - _Clip: 0.5
+    - _Feather: 0.699
+    - _Power: 3
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Size: 1
-    - _Tiling: 1
+    - _Size: 0.715
+    - _Tiling: 2
     m_Colors:
-    - _Color: {r: 0.025157154, g: 0.0060915095, b: 0.0060915095, a: 0}
-    - _Move: {r: -1, g: 0, b: 0, a: 0}
+    - _Color: {r: 0, g: 2.1367545, b: 5.937106, a: 1}
+    - _Move: {r: 0.4, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

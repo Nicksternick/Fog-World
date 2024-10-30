@@ -14,6 +14,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float health;
     [SerializeField] protected HealthBar healthBar;
     [SerializeField] protected float takeDamageCooldown;
+    [SerializeField] public bool isImportant;
     protected bool isDead = false;
     protected UnityEvent onDeath;
     protected float lastDamaged;
