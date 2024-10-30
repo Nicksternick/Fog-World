@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     private float secondarySpellCountdown = 3.0f;
 
     Spell fireBall;
-    Spell iceBall;
+    Spell iceLaser;
 
     /// <summary>
     /// AJ Wagner - 10/2/2024
@@ -51,8 +51,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 3.0f);
-        iceBall = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 3.0f);
+        fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Laser, 3.0f);
+        iceLaser = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.AoE, 3.0f);
     }
 
     void Update()
@@ -167,10 +167,10 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(1))
         {
-            if (secondarySpellCountdown > iceBall.Cooldown)
+            if (secondarySpellCountdown > iceLaser.Cooldown)
             {
                 secondarySpellCountdown = 0.0f;
-                iceBall.CastSpell(gameObject);
+                iceLaser.CastSpell(gameObject);
             }
         }
     }
