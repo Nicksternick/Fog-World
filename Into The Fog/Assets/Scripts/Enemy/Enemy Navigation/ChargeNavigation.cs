@@ -11,7 +11,7 @@ public class ChargeNavigation : AbstractNavigation
 
 
     // ===== | Charge Variables | =====
-    private float sightConeRadius = 30;
+    private float sightConeRadius = 60;
     private float baseSpeed = 4;
     private float chargeWaitTime;
 
@@ -52,7 +52,7 @@ public class ChargeNavigation : AbstractNavigation
                         enemyState = EnemyState.Wandering;
                     }
 
-                    if (chargeWaitTime < 2f)
+                    if (chargeWaitTime < 1f)
                     {
                         chargeWaitTime += Time.deltaTime;
                     }
@@ -67,12 +67,12 @@ public class ChargeNavigation : AbstractNavigation
                                 EnemyAgent.SetDestination(hit.point);
                         }
 
-                        EnemyAgent.speed = 20;
+                        EnemyAgent.speed = 30;
                         enemyState = EnemyState.Charge;
                     }
                     break;
                 case EnemyState.Cooldown:
-                    if (chargeWaitTime < 2f)
+                    if (chargeWaitTime < 0.5f)
                     {
                         chargeWaitTime += Time.deltaTime;
                     }
