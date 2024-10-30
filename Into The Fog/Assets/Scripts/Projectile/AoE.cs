@@ -24,26 +24,31 @@ public class AoE : Projectile
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected override void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        base.OnTriggerEnter(other);
+
+        // Check if the other object is tagged as "Enemy"
+        if (other.CompareTag("Enemy"))
         {
             Debug.Log("Hit Enemy!");
-            Enemy enemyController = collision.gameObject.GetComponent<Enemy>();
-            enemyController.TakeDamage(25);
-
+            Enemy enemyController = other.GetComponent<Enemy>();
+            if (enemyController != null)
+            {
+                enemyController.TakeDamage(25);
+            }
         }
 
-        // If the aoe hits the wall
-        if (collision.gameObject.layer == 6)
+        // Check if the trigger hit an object on the wall layer (layer 6)
+        if (other.gameObject.layer == 6)
         {
-            // Return to object pool
             if (pool != null)
             {
                 pool.ReturnToPool(this);
             }
         }
     }
+
 
     /// <summary>
     /// Jay 10/27/2024
