@@ -53,6 +53,26 @@ public abstract class Projectile : MonoBehaviour
         }
     }
 
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        Debuff enemyDebuff = collision.gameObject.GetComponent<Debuff>();
+        if (enemyDebuff != null)
+        {
+            // Apply the debuff with the specified element type
+            enemyDebuff.TriggerDebuff(data.Element);
+        }
+    }
+
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        Debuff enemyDebuff = other.gameObject.GetComponent<Debuff>();
+        if (enemyDebuff != null)
+        {
+            // Apply the debuff with the specified element type
+            enemyDebuff.TriggerDebuff(data.Element);
+        }
+    }
+
     protected virtual IEnumerator DespawnAfterTime()
     {
         float elapsedTime = 0f;

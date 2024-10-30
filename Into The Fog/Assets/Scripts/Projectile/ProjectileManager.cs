@@ -119,7 +119,7 @@ public class ProjectileManager : MonoBehaviour
         }
 
         // Initialize with the data
-        ball.Initialize(5.0f, new ProjectileData(1.0f, 1.0f, 5.0f, false));
+        ball.Initialize(5.0f, new ProjectileData(1.0f, 1.0f, 5.0f, false, element));
 
         return ball;
     }
@@ -149,7 +149,7 @@ public class ProjectileManager : MonoBehaviour
         }
 
         // Initialize with the data
-        laser.Initialize(3.0f, new ProjectileData(1.0f, 1.0f, 0.0f, false));
+        laser.Initialize(3.0f, new ProjectileData(1.0f, 1.0f, 0.0f, false, element));
 
         return laser;
     }
@@ -198,7 +198,7 @@ public class ProjectileManager : MonoBehaviour
         }
 
         // Initialize with the data
-        aoe.Initialize(3.0f, new ProjectileData(1.0f, 1.0f, 0.0f, false));
+        aoe.Initialize(3.0f, new ProjectileData(1.0f, 1.0f, 0.0f, false, element));
 
         return aoe;
     }
