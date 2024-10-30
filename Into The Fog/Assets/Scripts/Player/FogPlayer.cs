@@ -278,7 +278,7 @@ public class FogPlayer : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health -= amount;
-        playerDamageEvent(this);
         UIManager.Instance.HealthBar.SetHealth(health);
+        playerDamageEvent(this);
     }
 }
