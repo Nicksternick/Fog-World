@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject enemy;
     [SerializeField] private GameObject hive;
     [SerializeField] public List<GameObject> enemyList;
-    [SerializeField] public List<GameObject> hiveList;
+    [SerializeField] public List<GameObject> importantList;
     [SerializeField] public GameObject player;
     [SerializeField] private Vector3[] enemySpawn;
     [SerializeField] private Vector3[] hiveSpawn;
@@ -21,32 +21,21 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        List<Vector3> hiveList = new List<Vector3>();
-
-        foreach (Transform transform in hiveSpawners.GetComponentsInChildren<Transform>())
-        {
-            hiveList.Add(transform.position);
-        }
-
-        hiveList.RemoveAt(0);
-
-        hiveSpawn = hiveList.ToArray();
-
         spawn();
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < hiveList.Count; i++)
+        for (int i = 0; i < importantList.Count; i++)
         {
-            if (hiveList[i] == null)
+            if (importantList[i] == null)
             {
-                hiveList.RemoveAt(i);
+                importantList.RemoveAt(i);
             }
         }
 
-        enemiesLeftText.text = "Hives Left: " + hiveList.Count;
+        enemiesLeftText.text = "Hives Left: " + importantList.Count;
     }
 
     /// <summary>
@@ -55,22 +44,31 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     void spawn()
     {
-        for (int i = 0; i < hiveSpawn.Length; i++)
-        {
-            hiveList.Add(Instantiate(hive, hiveSpawn[i], Quaternion.identity));
-            //hiveList[i].GetComponent<EnemyController>().Target = player.transform;
-        }
         //Spawns all of the enemies
         for (int i = 0; i < enemySpawners.Length; i++)
         {
-            for (int j = 0; j < enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions.Length; j++)
+            if (enemySpawners[i].GetComponent<EnemySpawner>().spawnEnemy.GetComponent<Enemy>().isImportant)
             {
-                enemyList.Add(Instantiate(enemySpawners[i].GetComponent<EnemySpawner>().spawnEnemy, 
-                    enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions[j].position, 
-                    Quaternion.identity));
+                for (int j = 0; j < enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions.Length; j++)
+                {
+                    importantList.Add(Instantiate(enemySpawners[i].GetComponent<EnemySpawner>().spawnEnemy,
+                        enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions[j].position,
+                        Quaternion.identity));
+                    importantList[j].GetComponent<Enemy>().Target = player.transform;
+                }
+            }
+            else
+            {
+                for (int j = 0; j < enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions.Length; j++)
+                {
+                    enemyList.Add(Instantiate(enemySpawners[i].GetComponent<EnemySpawner>().spawnEnemy,
+                        enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions[j].position,
+                        Quaternion.identity));
 
-                enemyList[j].GetComponent<EnemyController>().Target = player.transform;
-            } 
+                    enemyList[j].GetComponent<EnemyController>().Target = player.transform;
+                }
+            }
+            
         }
         
     }

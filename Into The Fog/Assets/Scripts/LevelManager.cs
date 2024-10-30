@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemyManager.hiveList.Count <= 0)
+        if (enemyManager.importantList.Count <= 0)
         {
             SceneManager.LoadScene("YouWin");
         }

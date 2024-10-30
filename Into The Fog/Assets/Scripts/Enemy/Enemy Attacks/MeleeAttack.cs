@@ -5,17 +5,18 @@ using UnityEngine;
 public class MeleeAttack : AbstractAttack
 {
     // ===== | Variables | =====
-    private float damage;
+    [SerializeField] private float damage;
     private float damageCooldown;
     private bool canAttack;
 
-    private const float MaxTimer = 2;
+    [SerializeField] private float attackCooldown = 2;
+    [SerializeField] private float knockBackForce;
 
     // ===== | Methods | =====
     // Start is called before the first frame update
     void Start()
     {
-        damageCooldown = MaxTimer;
+        damageCooldown = attackCooldown;
         canAttack = true;
     }
 
@@ -28,7 +29,7 @@ public class MeleeAttack : AbstractAttack
 
             if (damageCooldown < 0)
             {
-                damageCooldown = MaxTimer;
+                damageCooldown = attackCooldown;
                 canAttack = true;
             }
         }
@@ -46,9 +47,8 @@ public class MeleeAttack : AbstractAttack
             Rigidbody rb = player.GetComponent<Rigidbody>();
 
             rb.velocity = Vector3.zero;
-            rb.AddForce(CalculatePushForce(30, player.transform.position - transform.position), ForceMode.Impulse);
-
-            float damage = Random.Range(8, 13);
+            rb.AddForce((player.transform.position - transform.parent.position).normalized * knockBackForce, ForceMode.Impulse);
+            //CalculatePushForce(knockBackForce, player.transform.position - transform.parent.position)
             player.TakeDamage(damage);
         }
     }

@@ -34,7 +34,7 @@ public class FogPlayer : MonoBehaviour
     [Header("Collider And Model")]
     // ----- | Collider/Model SubObject | -----
     [SerializeField] private Rigidbody playerRigidBody;
-    [SerializeField] private MeshRenderer playerModel;
+    [SerializeField] private Transform playerModel;
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 dashDirection = Vector3.zero;
@@ -278,7 +278,7 @@ public class FogPlayer : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health -= amount;
-        playerDamageEvent(this);
         UIManager.Instance.HealthBar.SetHealth(health);
+        playerDamageEvent(this);
     }
 }

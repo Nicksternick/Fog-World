@@ -14,6 +14,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float health;
     [SerializeField] protected HealthBar healthBar;
     [SerializeField] protected float takeDamageCooldown;
+    [SerializeField] public bool isImportant;
     protected bool isDead = false;
     protected UnityEvent onDeath;
     protected float lastDamaged;
@@ -30,13 +31,16 @@ public abstract class Enemy : MonoBehaviour
     // ===== | Methods | =====
     private void Awake()
     {
+        onDeath = new UnityEvent();
+        lastDamaged = 0;
+    }
+
+    private void Start()
+    {
         if (healthBar != null)
             healthBar.SetMaxHealth(health);
         else
             Debug.LogWarning($"HealthBar for enemy {gameObject.GetInstanceID()} was not set");
-
-        onDeath = new UnityEvent();
-        lastDamaged = 0;
     }
 
     /// <summary>
