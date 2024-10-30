@@ -54,11 +54,7 @@ public class EnemyManager : MonoBehaviour
                     importantList.Add(Instantiate(enemySpawners[i].GetComponent<EnemySpawner>().spawnEnemy,
                         enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions[j].position,
                         Quaternion.identity));
-
-                    if (importantList[j].GetComponent<EnemyController>())
-                    {
-                        importantList[j].GetComponent<EnemyController>().Target = player.transform;
-                    }
+                    importantList[j].GetComponent<Enemy>().Target = player.transform;
                 }
             }
             else
