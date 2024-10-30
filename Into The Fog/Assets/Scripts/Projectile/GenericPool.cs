@@ -46,7 +46,10 @@ public class GenericPool<T> where T : MonoBehaviour
     /// </summary>
     private void OnReturnToPool(T obj)
     {
-        obj.gameObject.SetActive(false);
+        if (obj.gameObject.activeSelf)
+        {
+            obj.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>

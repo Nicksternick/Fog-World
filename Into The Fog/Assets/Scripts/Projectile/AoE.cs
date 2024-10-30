@@ -1,10 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 
-public class Ball : Projectile
+public class AoE : Projectile
 {
-    private GenericPool<Ball> pool;
+    private GenericPool<AoE> pool;
 
     public override void Initialize(float timeUntilDestroy, ProjectileData data)
     {
@@ -12,7 +12,6 @@ public class Ball : Projectile
         this.data = data;
 
         despawnAfterTimeCoroutine = StartCoroutine(DespawnAfterTime());
-        SetVelocity();
     }
 
     private void OnDisable()
@@ -33,14 +32,9 @@ public class Ball : Projectile
             Enemy enemyController = collision.gameObject.GetComponent<Enemy>();
             enemyController.TakeDamage(25);
 
-            // Return to object pool
-            if (pool != null)
-            {
-                pool.ReturnToPool(this);
-            }
         }
 
-        // If the ball hits the wall
+        // If the aoe hits the wall
         if (collision.gameObject.layer == 6)
         {
             // Return to object pool
@@ -66,10 +60,10 @@ public class Ball : Projectile
 
     /// <summary>
     /// Jay 10/1/2024
-    /// Set object pool for the ball
+    /// Set object pool for the aoe
     /// </summary>
     /// <returns></returns>
-    public void SetPool(GenericPool<Ball> pool)
+    public void SetPool(GenericPool<AoE> pool)
     {
         this.pool = pool;
     }

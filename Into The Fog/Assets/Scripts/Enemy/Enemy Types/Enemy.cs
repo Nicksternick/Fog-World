@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,9 +13,11 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected Transform target;
     [SerializeField] protected float health;
     [SerializeField] protected HealthBar healthBar;
+    [SerializeField] protected float takeDamageCooldown;
     [SerializeField] public bool isImportant;
     protected bool isDead = false;
     protected UnityEvent onDeath;
+    protected float lastDamaged;
 
     // ===== | Properties | =====
     /// <summary>The current health of the enemy</summary>
@@ -34,6 +37,7 @@ public abstract class Enemy : MonoBehaviour
             Debug.LogWarning($"HealthBar for enemy {gameObject.GetInstanceID()} was not set");
 
         onDeath = new UnityEvent();
+        lastDamaged = 0;
     }
 
     /// <summary>
@@ -42,18 +46,22 @@ public abstract class Enemy : MonoBehaviour
     /// </summary>
     public virtual void TakeDamage(float damage)
     {
-        // Reduce the enemy health, and update the health bar
-        health -= damage;
-        if (healthBar != null)
-            healthBar.SetHealth(health);
-
-        // If the enemies health is reduced to zero, call the onDeath functions
-        if (health <= 0 )
+        // Check damage cooldown
+        if (Time.time >= lastDamaged + takeDamageCooldown)
         {
-            isDead = true;
-            //onDeath.Invoke();
+            // Reduce the enemy health, and update the health bar
+            health -= damage;
+            if (healthBar != null)
+                healthBar.SetHealth(health);
 
-            Destroy(gameObject);
+            // If the enemies health is reduced to zero, call the onDeath functions
+            if (health <= 0)
+            {
+                isDead = true;
+                //onDeath.Invoke();
+
+                Destroy(gameObject);
+            }
         }
     }
 
