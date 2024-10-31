@@ -7,10 +7,12 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private FogIconSpell spell1;
+    [SerializeField] private FogIconSpell spell2;
 
     // ===== | Properties | =====
     public HealthBar HealthBar { get { return healthBar; } }
     public FogIconSpell Spell1 { get { return spell1; } }
+    public FogIconSpell Spell2 { get { return spell2; } }
 
     // ===== | Methods | =====
     private void Awake()

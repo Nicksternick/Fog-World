@@ -15,6 +15,9 @@ public class Spell : ScriptableObject
     /// </summary>
     public float Cooldown {  get { return cooldown; } set {  cooldown = value; } }
 
+    public Elements Element { get { return element; } }
+    public Forms Form { get { return form; } }
+
     /// <summary>
     /// Jay 10/1/2024
     /// </summary>

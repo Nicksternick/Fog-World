@@ -8,6 +8,7 @@ using UnityEngine.Pool;
 /// </summary>
 public enum Elements
 {
+    None = -1,
     Fire,
     Ice,
 }
@@ -17,6 +18,7 @@ public enum Elements
 /// </summary>
 public enum Forms
 {
+    None = -1,
     Ball,
     Laser,
     AoE

@@ -44,8 +44,8 @@ public class FogPlayer : MonoBehaviour
 
     private Timer dashTimer;
 
-    private Spell fireBall;
-    private Spell iceBall;
+    [SerializeField] private Spell fireBall;
+    [SerializeField] private Spell iceBall;
 
     private float primarySpellCountdown = 3.0f;
     private float secondarySpellCountdown = 3.0f;
@@ -67,9 +67,19 @@ public class FogPlayer : MonoBehaviour
 
     void Start()
     {
-        fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 0.4f);
-        iceBall = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 3.0f);
+        
+
+        fireBall = GameManager.Instance.GetPlayerSpell(0);
+        iceBall = GameManager.Instance.GetPlayerSpell(1);
+
+        if (fireBall == null)
+            fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 0.4f);
+
+        if (fireBall == null)
+            fireBall = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 0.4f);
+
         UIManager.Instance.Spell1.SetMaxCooldown(fireBall.Cooldown);
+        UIManager.Instance.Spell2.SetMaxCooldown(iceBall.Cooldown);
         UIManager.Instance.HealthBar.SetMaxHealth(health);
     }
 
@@ -82,12 +92,23 @@ public class FogPlayer : MonoBehaviour
 
         LookAtMouse();
 
-        if (primarySpellCountdown < fireBall.Cooldown)
+        if (fireBall != null)
         {
-            primarySpellCountdown += Time.deltaTime;
-            UIManager.Instance.Spell1.SetCooldown(primarySpellCountdown);
+            if (primarySpellCountdown < fireBall.Cooldown)
+            {
+                primarySpellCountdown += Time.deltaTime;
+                UIManager.Instance.Spell1.SetCooldown(primarySpellCountdown);
+            }
         }
-        //secondarySpellCountdown += Time.deltaTime;
+
+        if (iceBall != null)
+        {
+            if (secondarySpellCountdown < iceBall.Cooldown)
+            {
+                secondarySpellCountdown += Time.deltaTime;
+                UIManager.Instance.Spell2.SetCooldown(secondarySpellCountdown);
+            }
+        }
 
         if (Health <= 0)
         {
@@ -226,24 +247,30 @@ public class FogPlayer : MonoBehaviour
     {
         if (callback.performed)
         {
-            if (primarySpellCountdown >= fireBall.Cooldown)
+            if (fireBall != null)
             {
-                primarySpellCountdown = 0.0f;
-                fireBall.CastSpell(playerModel.gameObject);
+                if (primarySpellCountdown >= fireBall.Cooldown)
+                {
+                    primarySpellCountdown = 0.0f;
+                    fireBall.CastSpell(playerModel.gameObject);
+                }
             }
         }
     }
 
     public void CastSpell2(InputAction.CallbackContext callback)
     {
-        //if (callback.performed)
-        //{
-        //    if (secondarySpellCountdown > iceBall.Cooldown)
-        //    {
-        //        secondarySpellCountdown = 0.0f;
-        //        iceBall.CastSpell(playerModel.gameObject);
-        //    }
-        //}
+        if (callback.performed)
+        {
+            if (iceBall != null)
+            {
+                if (secondarySpellCountdown > iceBall.Cooldown)
+                {
+                    secondarySpellCountdown = 0.0f;
+                    iceBall.CastSpell(playerModel.gameObject);
+                }
+            }
+        }
     }
 
     /// <summary>

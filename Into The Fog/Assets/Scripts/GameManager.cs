@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     // ===== | Variables | =====
     public static GameManager Instance;
 
+    [SerializeField] private Spell[] playerSpells;
+
     // ===== | Methods | =====
     private void Awake()
     {
@@ -18,6 +20,8 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this);
+
+            playerSpells = new Spell[2];
         }
         else
         {
@@ -31,6 +35,16 @@ public class GameManager : MonoBehaviour
         {
             ChangeScene("Cave Level");
         }
+    }
+
+    public void SetPlayerSpell(Spell spell, int index)
+    {
+        playerSpells[index] = spell;
+    }
+
+    public Spell GetPlayerSpell(int index)
+    {
+        return playerSpells[index] != null ? playerSpells[index] : null; 
     }
 
     /// <summary>

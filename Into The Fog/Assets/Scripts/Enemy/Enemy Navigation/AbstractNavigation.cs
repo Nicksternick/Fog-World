@@ -22,7 +22,7 @@ public abstract class AbstractNavigation : MonoBehaviour
 
     private void Start()
     {
-        EnemyAgent.speed = baseSpeed;
+        //EnemyAgent.speed = baseSpeed;
     }
 
     /// <summary>

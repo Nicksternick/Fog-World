@@ -8,8 +8,6 @@ public class BoxPusher : MonoBehaviour
 {
     // The BoxCollider we are checking for
     [SerializeField] private BoxCollider boxCollider;
-    [SerializeField] private float pushForce = 10f;
-    private Rigidbody playerRb;
 
     private void Awake()
     {
