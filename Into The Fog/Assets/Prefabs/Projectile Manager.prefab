@@ -47,6 +47,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: -2314426742805507339, guid: 092d8e65b1be4ce41a83f862bddd4b4a,
     type: 3}
+  laserPrefab: {fileID: 1511557264487731907, guid: dbaa996700e1acd4dbc4c4ed4afc421f,
+    type: 3}
+  aoePrefab: {fileID: 1276999169672634283, guid: d3b2bce056e5fba4e9184c59463693f4,
+    type: 3}
 --- !u!114 &8789529672499676683
 MonoBehaviour:
   m_ObjectHideFlags: 0

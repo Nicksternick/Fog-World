@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -8,6 +6,10 @@ public class SpellMenuItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 {
     public Image image;                 // The image from the item PREFAB
     public Transform parentAfterDrag;
+
+    [SerializeField] protected SpellComponentType componentType;
+
+    public SpellComponentType ComponentType { get { return componentType; } }
 
     // Switches parent and hides image so it can snap to a new slot
     public void OnBeginDrag(PointerEventData eventData)
