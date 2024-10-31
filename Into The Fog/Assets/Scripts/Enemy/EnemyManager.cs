@@ -54,7 +54,7 @@ public class EnemyManager : MonoBehaviour
                     importantList.Add(Instantiate(enemySpawners[i].GetComponent<EnemySpawner>().spawnEnemy,
                         enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions[j].position,
                         Quaternion.identity));
-                    importantList[j].GetComponent<Enemy>().Target = player.transform;
+                    importantList[importantList.Count-1].GetComponent<Enemy>().Target = player.transform;
                 }
             }
             else
@@ -65,7 +65,7 @@ public class EnemyManager : MonoBehaviour
                         enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions[j].position,
                         Quaternion.identity));
 
-                    enemyList[j].GetComponent<EnemyController>().Target = player.transform;
+                    enemyList[enemyList.Count-1].GetComponent<Enemy>().Target = player.transform;
                 }
             }
             

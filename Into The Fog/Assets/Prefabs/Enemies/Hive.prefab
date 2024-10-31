@@ -419,8 +419,11 @@ MonoBehaviour:
   target: {fileID: 0}
   health: 100
   healthBar: {fileID: 4663523264535087475}
+  takeDamageCooldown: 0
   isImportant: 1
-  enemy: {fileID: 5300122117470067798, guid: 73bc3d9b9dc68ea40a6743edf9751802, type: 3}
+  agent: {fileID: 0}
+  navigation: {fileID: 0}
+  enemy: {fileID: 5300122117470067798, guid: 485b283d5e70b8244b05b66c1ba1adfc, type: 3}
   enemyList: []
   spawnCooldown: 0
 --- !u!54 &4013055325642195611
