@@ -40,13 +40,13 @@ public class AoE : Projectile
         }
 
         // Check if the trigger hit an object on the wall layer (layer 6)
-        if (other.gameObject.layer == 6)
-        {
-            if (pool != null)
-            {
-                pool.ReturnToPool(this);
-            }
-        }
+        //if (other.gameObject.layer == 6)
+        //{
+        //    if (pool != null)
+        //    {
+        //        pool.ReturnToPool(this);
+        //    }
+        //}
     }
 
 

@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 6799472259322858413}
   - component: {fileID: 7732784260813394975}
   - component: {fileID: 1511557264487731907}
-  - component: {fileID: -2498155478743579676}
+  - component: {fileID: 3609385540085514161}
   m_Layer: 8
   m_Name: Laser
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: aae392ef8da4f954c90af4d182eb0ce0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a0550783ca97a9488d595004cde269e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &-2498155478743579676
+--- !u!54 &3609385540085514161
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,10 +140,10 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126

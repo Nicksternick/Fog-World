@@ -151,7 +151,7 @@ public class ProjectileManager : MonoBehaviour
         }
 
         // Initialize with the data
-        laser.Initialize(3.0f, new ProjectileData(1.0f, 1.0f, 0.0f, false, element));
+        laser.Initialize(1.0f, new ProjectileData(0.3f, 1.0f, 0.0f, false, element));
 
         return laser;
     }
@@ -161,10 +161,25 @@ public class ProjectileManager : MonoBehaviour
     // Public method to get a Laser from the pool
     public AoE GetAoEFromPool(GameObject caller, Elements element)
     {
+        // Check the to see if there is a point that the mouse hit
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         AoE aoe = aoePool.GetFromPool();
         aoe.SetPool(aoePool);
+
+        // ===== | Nicholas: Update Mouse Code To Make Placement More Consistent | =====
+
+        // Setup the plane and distance for later in the method
+        Plane plane = new Plane(Vector3.up, 0);
+        float distance;
+        Vector3 mousePosition = Vector3.zero;
+
+        if (plane.Raycast(ray, out distance))
+        {
+            // Get that point
+            mousePosition = ray.GetPoint(distance);
+        }
+
 
         // Ternary statement that spawns AoE under a enemy or the player if they are in the way of the raycast
         Vector3 spawnPosition = Vector3.zero;
@@ -183,7 +198,9 @@ public class ProjectileManager : MonoBehaviour
             else { spawnPosition = hit.point; }
         }
 
-        aoe.transform.position = spawnPosition;
+        spawnPosition.y = 0.0f;
+
+        aoe.transform.position = mousePosition;
         aoe.transform.rotation = caller.transform.rotation;
         aoe.Caller = caller;
 

@@ -41,8 +41,7 @@ public class FogPlayer : MonoBehaviour
 
     private bool isDashing = false;
     private bool canDash = true;
-
-    private Timer dashTimer;
+    private float dashTimer;
 
     [SerializeField] private Spell fireBall;
     [SerializeField] private Spell iceBall;
@@ -62,12 +61,13 @@ public class FogPlayer : MonoBehaviour
     private void Awake()
     {
         move = input.actions.FindAction("Move");
-        dashTimer = gameObject.AddComponent<Timer>();
+        //dashTimer = gameObject.AddComponent<Timer>();
     }
 
     void Start()
     {
-        
+        UIManager.Instance.StaminaBar.SetMaxHealth(dashCooldown);
+        UIManager.Instance.StaminaBar.SetHealth(dashCooldown);
 
         fireBall = GameManager.Instance.GetPlayerSpell(0);
         iceBall = GameManager.Instance.GetPlayerSpell(1);
@@ -75,8 +75,8 @@ public class FogPlayer : MonoBehaviour
         if (fireBall == null)
             fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 0.4f);
 
-        if (fireBall == null)
-            fireBall = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 0.4f);
+        if (iceBall == null)
+            iceBall = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 0.4f);
 
         UIManager.Instance.Spell1.SetMaxCooldown(fireBall.Cooldown);
         UIManager.Instance.Spell2.SetMaxCooldown(iceBall.Cooldown);
@@ -107,6 +107,16 @@ public class FogPlayer : MonoBehaviour
             {
                 secondarySpellCountdown += Time.deltaTime;
                 UIManager.Instance.Spell2.SetCooldown(secondarySpellCountdown);
+            }
+        }
+
+        if (!canDash && !isDashing)
+        {
+            dashTimer += Time.deltaTime;
+            UIManager.Instance.StaminaBar.SetHealth(dashTimer);
+            if (dashTimer > dashCooldown)
+            {
+                EndDashCooldown();
             }
         }
 
@@ -182,9 +192,12 @@ public class FogPlayer : MonoBehaviour
             position.z -= (transform.localScale.z / 2) * dashDirection.z;
             position.y = 0;
             playerRigidBody.transform.position = position;
-            dashTimer.CancelTimer();
             EndDash();
         }
+
+        dashTimer += Time.deltaTime;
+        if (dashTimer > dashTime)
+            EndDash();
 
         playerRigidBody.MovePosition(transform.position + (dashDirection * dashSpeed * Time.deltaTime));
     }
@@ -209,11 +222,13 @@ public class FogPlayer : MonoBehaviour
             canDash = false;
             isDashing = true;
 
+            dashTimer = 0;
+
             // Setup the timer to stop dashing when the time is over
-            dashTimer.SetMaxTime(dashTime);
-            dashTimer.OnCountDownEnd.RemoveAllListeners();
-            dashTimer.OnCountDownEnd.AddListener(EndDash);
-            dashTimer.StartTimer();
+            //dashTimer.SetMaxTime(dashTime);
+            //dashTimer.OnCountDownEnd.RemoveAllListeners();
+            //dashTimer.OnCountDownEnd.AddListener(EndDash);
+            //dashTimer.StartTimer();
         }
     }
 
@@ -234,11 +249,13 @@ public class FogPlayer : MonoBehaviour
         isDashing = false;
         canDash = false;
 
+        dashTimer = 0;
+
         // Set up the timer to call EndDashCooldown
-        dashTimer.SetMaxTime(dashCooldown);
-        dashTimer.OnCountDownEnd.RemoveAllListeners();
-        dashTimer.OnCountDownEnd.AddListener(EndDashCooldown);
-        dashTimer.StartTimer();
+        //dashTimer.SetMaxTime(dashCooldown);
+        //dashTimer.OnCountDownEnd.RemoveAllListeners();
+        //dashTimer.OnCountDownEnd.AddListener(EndDashCooldown);
+        //dashTimer.StartTimer();
     }
 
     // ----- | Other Functions | -----

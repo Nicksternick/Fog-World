@@ -16,6 +16,9 @@ public class Timer : MonoBehaviour
 
     // ===== | Properties | =====
     public bool IsCounting { get { return isCountingDown; } }
+
+    public float CurrentTime { get { return currentTime; } }
+
     public UnityEvent OnCountDownEnd { get { return onCountDownEnd; } }
     public float MaxTime { get { return maxTime; } }
 
@@ -35,7 +38,7 @@ public class Timer : MonoBehaviour
         // Only start the timer if it's not already counting
         if (!isCountingDown)
         {
-            currentTime = maxTime;
+            currentTime = 0;
             isCountingDown = true;
         }
         else
@@ -72,8 +75,8 @@ public class Timer : MonoBehaviour
     private void Update()
     {
         // Decrement the time and see if it's below zero
-        currentTime -= Time.deltaTime;
-        if (currentTime <= 0 && isCountingDown)
+        currentTime += Time.deltaTime;
+        if (currentTime >= maxTime && isCountingDown)
         {
             //Debug.Log("Timer Exit");
             // Stop the timer and trigger the unity event

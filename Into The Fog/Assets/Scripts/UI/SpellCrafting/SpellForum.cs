@@ -53,7 +53,7 @@ public class SpellForum : MonoBehaviour
             Spell createdSpell = SpellCrafter.Instance.CraftSpell(elementSlot.Element, shapeSlot.Form, 1);
             GameManager.Instance.SetPlayerSpell(createdSpell, index);
 
-            headsUpText.text = "Spell Successfully Crafted!";
+            headsUpText.text = $"Spell {index + 1} Successfully Crafted!";
         }
         else
         {

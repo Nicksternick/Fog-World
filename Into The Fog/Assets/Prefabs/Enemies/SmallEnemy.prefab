@@ -567,7 +567,12 @@ PrefabInstance:
     - target: {fileID: 8802599336525366775, guid: fc79c3867710b4c4e9849984a71cb27f,
         type: 3}
       propertyPath: m_Value
-      value: 100
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802599336525366775, guid: fc79c3867710b4c4e9849984a71cb27f,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

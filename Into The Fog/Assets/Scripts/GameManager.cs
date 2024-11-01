@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
         {
             ChangeScene("Cave Level");
         }
+
+        if (Input.GetKeyDown(KeyCode.Home))
+        {
+            ChangeScene("SpellCraftingScene");
+        }
     }
 
     public void SetPlayerSpell(Spell spell, int index)

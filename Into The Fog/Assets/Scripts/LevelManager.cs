@@ -14,9 +14,16 @@ public class LevelManager : MonoBehaviour
 
     public static LevelManager Instance;
 
+    public List<GameObject> ImportantEnemies { get { return enemyManager.importantList; } }
+
     // Start is called before the first frame update
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
         spawnPlayer();
     }
 

@@ -521,6 +521,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1896950624726300224, guid: fc79c3867710b4c4e9849984a71cb27f,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4295306047482473267, guid: fc79c3867710b4c4e9849984a71cb27f,
         type: 3}
       propertyPath: m_Pivot.x
@@ -625,6 +630,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: (Canvas) EnemyHealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802599336525366775, guid: fc79c3867710b4c4e9849984a71cb27f,
+        type: 3}
+      propertyPath: m_Value
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802599336525366775, guid: fc79c3867710b4c4e9849984a71cb27f,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
