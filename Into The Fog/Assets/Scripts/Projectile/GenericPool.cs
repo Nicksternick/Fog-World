@@ -76,7 +76,10 @@ public class GenericPool<T> where T : MonoBehaviour
     /// </summary>
     public void ReturnToPool(T obj)
     {
-        objectPool.Release(obj);
+        if (obj.gameObject.activeSelf)
+        {
+            objectPool.Release(obj);
+        }
     }
 }
 
