@@ -56,7 +56,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Clip: 0.5
-    - _Feather: 0.699
+    - _Feather: 1
     - _Power: 3
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -64,5 +64,5 @@ Material:
     - _Tiling: 2
     m_Colors:
     - _Color: {r: 0, g: 2.1367545, b: 5.937106, a: 1}
-    - _Move: {r: 0.4, g: 0, b: 0, a: 0}
+    - _Move: {r: 0.2, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
