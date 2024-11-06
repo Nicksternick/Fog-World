@@ -6,22 +6,18 @@ public class AoE : Projectile
 {
     private GenericPool<AoE> pool;
 
+    /// <summary>
+    /// Jay 11/5/24
+    /// Initialization of the projectile 
+    /// </summary>
+    /// <param name="timeUntilDestroy"> When to despawn </param>
+    /// <param name="data"> Projectile Stats </param>
     public override void Initialize(float timeUntilDestroy, ProjectileData data)
     {
         this.timeUntilDestroy = timeUntilDestroy;
         this.data = data;
 
         despawnAfterTimeCoroutine = StartCoroutine(DespawnAfterTime());
-    }
-
-    private void OnDisable()
-    {
-        // Stop the coroutine if it's running
-        if (despawnAfterTimeCoroutine != null)
-        {
-            StopCoroutine(despawnAfterTimeCoroutine);
-            despawnAfterTimeCoroutine = null;
-        }
     }
 
     protected override void OnTriggerEnter(Collider other)
@@ -35,18 +31,9 @@ public class AoE : Projectile
             Enemy enemyController = other.GetComponent<Enemy>();
             if (enemyController != null)
             {
-                enemyController.TakeDamage(25);
+                enemyController.TakeDamage(data.Damage);
             }
         }
-
-        // Check if the trigger hit an object on the wall layer (layer 6)
-        //if (other.gameObject.layer == 6)
-        //{
-        //    if (pool != null)
-        //    {
-        //        pool.ReturnToPool(this);
-        //    }
-        //}
     }
 
 

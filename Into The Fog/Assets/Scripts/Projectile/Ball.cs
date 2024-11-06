@@ -6,6 +6,12 @@ public class Ball : Projectile
 {
     private GenericPool<Ball> pool;
 
+    /// <summary>
+    /// Jay 11/5/24
+    /// Initialization of the projectile 
+    /// </summary>
+    /// <param name="timeUntilDestroy"> When to despawn </param>
+    /// <param name="data"> Projectile Stats </param>
     public override void Initialize(float timeUntilDestroy, ProjectileData data)
     {
         this.timeUntilDestroy = timeUntilDestroy;
@@ -15,15 +21,6 @@ public class Ball : Projectile
         SetVelocity();
     }
 
-    private void OnDisable()
-    {
-        // Stop the coroutine if it's running
-        if (despawnAfterTimeCoroutine != null)
-        {
-            StopCoroutine(despawnAfterTimeCoroutine);
-            despawnAfterTimeCoroutine = null;
-        }
-    }
 
     protected override void OnCollisionEnter(Collision collision)
     {
@@ -32,7 +29,7 @@ public class Ball : Projectile
         {
             Debug.Log("Hit Enemy!");
             Enemy enemyController = collision.gameObject.GetComponent<Enemy>();
-            enemyController.TakeDamage(25);
+            enemyController.TakeDamage(data.Damage);
 
             // Return to object pool
             if (pool != null)
