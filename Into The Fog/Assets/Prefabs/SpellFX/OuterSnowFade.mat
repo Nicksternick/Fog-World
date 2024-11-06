@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Outline
+  m_Name: OuterSnowFade
   m_Shader: {fileID: -6465566751694194690, guid: 3b7fd1e416fef0d4b8e5e8c5985dcf08,
     type: 3}
   m_Parent: {fileID: 0}
@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Noise:
-        m_Texture: {fileID: 2800000, guid: 42931ac2db83d264ba92e7c2741a04b9, type: 3}
+        m_Texture: {fileID: 2800000, guid: f228156ae21d9f941a9e165ec31014d4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -55,14 +55,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Clip: 1
-    - _Feather: 0.398
+    - _Clip: 0.8
+    - _Feather: 0.206
     - _Power: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Size: 0.52
+    - _Size: 1
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.670157, g: 128, b: 106.40073, a: 0.81960785}
     - _Move: {r: 0, g: 0.1, b: 0, a: 0}
-    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling: {r: 1, g: 3.39, b: 0, a: 0}
   m_BuildTextureStacks: []
