@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,16 +14,16 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Spell[] playerSpells;
 
-    [SerializeField] private Elements[] savedElementInventory;
-    [SerializeField] private Forms[] savedFormInventory;
+    [SerializeField] private List<Elements> savedElementInventory;
+    [SerializeField] private List<Forms> savedFormInventory;
 
-    public Elements[] SavedElementInventory 
+    public List<Elements> SavedElementInventory 
     { 
         get { return savedElementInventory; } 
         set { savedElementInventory = value; }
     }
 
-    public Forms[] SavedFormInventory 
+    public List<Forms> SavedFormInventory 
     { 
         get { return savedFormInventory; } 
         set { savedFormInventory = value; }
