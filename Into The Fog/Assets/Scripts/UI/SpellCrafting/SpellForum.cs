@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Rendering.FilterWindow;
 
 public class SpellForum : MonoBehaviour
 {
@@ -28,6 +30,9 @@ public class SpellForum : MonoBehaviour
     [SerializeField] GameObject[] elementItemPrefabs;
     [SerializeField] GameObject[] formItemPrefabs;
 
+    [SerializeField] private List<Elements> currentElementInventory;
+    [SerializeField] private List<Forms> currentFormInventory;
+
     // ===== | Methods | =====
     private void Start()
     {
@@ -35,6 +40,8 @@ public class SpellForum : MonoBehaviour
             Instance = this;
 
         LoadSpell();
+
+        LoadInventory();
     }
 
     private void Update()
@@ -81,6 +88,29 @@ public class SpellForum : MonoBehaviour
         shape.transform.localScale = Vector3.one;
     }
 
+    public void LoadInventory()
+    {
+        foreach (Elements element in GameManager.Instance.SavedElementInventory)
+        {
+            SpellMenuItem elementItem = Instantiate(elementItemPrefabs[(int)element])
+            .GetComponent<SpellMenuItem>();
+
+            elementItem.parentAfterDrag = elementInventory.transform;
+            elementItem.transform.SetParent(elementInventory.transform);
+            elementItem.transform.localScale = Vector3.one;
+        }
+
+        foreach (Forms form in GameManager.Instance.SavedFormInventory)
+        {
+            SpellMenuItem formItem = Instantiate(formItemPrefabs[(int)form])
+            .GetComponent<SpellMenuItem>();
+
+            formItem.parentAfterDrag = shapeInventory.transform;
+            formItem.transform.SetParent(shapeInventory.transform);
+            formItem.transform.localScale = Vector3.one;
+        }
+    }
+
     public void ComponentDropped(SpellMenuItem item)
     {
         if (item.ComponentType == SpellComponentType.Element)
@@ -114,12 +144,9 @@ public class SpellForum : MonoBehaviour
         if (elementSlot.Element != Elements.None &&
             shapeSlot.Form != Forms.None)
         {
-            if (GameManager.Instance.GetPlayerSpell((int)selectedSpell) == null)
-            {
-                Spell createdSpell = SpellCrafter.Instance.CraftSpell(
-                elementSlot.Element, shapeSlot.Form, (int)selectedSpell);
-                GameManager.Instance.SetPlayerSpell(createdSpell, (int)selectedSpell);
-            }
+            Spell createdSpell = SpellCrafter.Instance.CraftSpell(
+                elementSlot.Element, shapeSlot.Form, 1);
+            GameManager.Instance.SetPlayerSpell(createdSpell, (int)selectedSpell);
         }
         else
         {
@@ -136,12 +163,9 @@ public class SpellForum : MonoBehaviour
         if (elementSlot.Element != Elements.None &&
             shapeSlot.Form != Forms.None)
         {
-            if (GameManager.Instance.GetPlayerSpell((int)selectedSpell) == null)
-            {
-                Spell createdSpell = SpellCrafter.Instance.CraftSpell(
-                elementSlot.Element, shapeSlot.Form, (int)selectedSpell);
-                GameManager.Instance.SetPlayerSpell(createdSpell, (int)selectedSpell);
-            }
+            Spell createdSpell = SpellCrafter.Instance.CraftSpell(
+                elementSlot.Element, shapeSlot.Form, 1);
+            GameManager.Instance.SetPlayerSpell(createdSpell, (int)selectedSpell);
         }
         else
         {
@@ -156,6 +180,8 @@ public class SpellForum : MonoBehaviour
         {
             LoadSpell();
         }
+
+        headsUpText.text = $"Spell {index + 1}";
     }
 
     public void ClearSpell()

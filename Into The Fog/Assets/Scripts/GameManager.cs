@@ -13,6 +13,21 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Spell[] playerSpells;
 
+    [SerializeField] private Elements[] savedElementInventory;
+    [SerializeField] private Forms[] savedFormInventory;
+
+    public Elements[] SavedElementInventory 
+    { 
+        get { return savedElementInventory; } 
+        set { savedElementInventory = value; }
+    }
+
+    public Forms[] SavedFormInventory 
+    { 
+        get { return savedFormInventory; } 
+        set { savedFormInventory = value; }
+    }
+
     // ===== | Methods | =====
     private void Awake()
     {
