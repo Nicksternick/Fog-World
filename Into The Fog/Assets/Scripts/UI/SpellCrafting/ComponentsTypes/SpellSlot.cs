@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 
 public enum SpellComponentType
 {
+    None = -1,
     Element,
     Shape
 }
@@ -13,20 +14,47 @@ public class SpellSlot : MonoBehaviour, IDropHandler
     [SerializeField] protected SpellComponentType componentType;
     [SerializeField] protected SpellMenuItem item;
 
+    // ===== | Properties | =====
+    public bool HasChild { get { return transform.childCount != 0; } }
+
+    public SpellMenuItem Item { get { return item; } }
+
     // ===== | Methods | =====
     public void OnDrop(PointerEventData eventData)
     {
-        if (0 == transform.childCount)
-        {
-            GameObject dropped = eventData.pointerDrag;
-            SpellMenuItem item = dropped.GetComponent<SpellMenuItem>();
+        GameObject dropped = eventData.pointerDrag;
+        SpellMenuItem item = dropped.GetComponent<SpellMenuItem>();
 
-            if (item.ComponentType == componentType)
+        //Debug.Log("Drop");
+
+        if (item.ComponentType == componentType)
+        {
+            if (0 == transform.childCount)
             {
-                this.item = item;
+                item.parentAfterDrag = transform;
+            }
+            else
+            {
+                SpellForum.Instance.SendComponentToInventory(this.item);
+                ClearSlot();
+
                 item.parentAfterDrag = transform;
             }
         }
     }
 
+    public bool IsChild()
+    {
+        return HasChild;
+    }
+
+    public void SetSlot(SpellMenuItem item)
+    {
+        this.item = item;
+    }
+
+    public void ClearSlot()
+    {
+        item = null;
+    }
 }

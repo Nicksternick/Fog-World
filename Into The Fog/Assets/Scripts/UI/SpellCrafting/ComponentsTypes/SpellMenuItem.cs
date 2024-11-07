@@ -28,7 +28,10 @@ public class SpellMenuItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     // Assigns new parent and reenables the item's ability to be moved
     public void OnEndDrag(PointerEventData eventData)
     {
+        //Debug.Log("Drag End");
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
+
+        SpellForum.Instance.ComponentDropped(this);
     }
 }

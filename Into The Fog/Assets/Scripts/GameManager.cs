@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this);
-
-            playerSpells = new Spell[2];
         }
         else
         {
