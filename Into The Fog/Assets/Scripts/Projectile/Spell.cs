@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Spell", menuName = "Spells/Spell")]
 public class Spell : ScriptableObject
 {
-    private Elements element;
-    private Forms form;
-    private float cooldown;
+    [SerializeField] private Elements element;
+    [SerializeField] private Forms form;
+    [SerializeField] private float cooldown;
 
     /// <summary>
     /// Jay 10/13/2024
