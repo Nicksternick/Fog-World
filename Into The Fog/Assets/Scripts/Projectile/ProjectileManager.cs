@@ -1,9 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-using UnityEngine.Pool;
-using static UnityEditor.Rendering.FilterWindow;
 
 /// <summary>
 /// Enum to represent various elemental types.
@@ -135,6 +131,8 @@ public class ProjectileManager : MonoBehaviour
     /// <param name="element"> The spell's element </param>
     private void ApplyFX(Projectile projectile, Elements element)
     {
+        return;
+
         Shader shader = null;
         
         // Retrieve the corresponding shader from the correct list

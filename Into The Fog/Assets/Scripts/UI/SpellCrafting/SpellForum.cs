@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.Rendering.FilterWindow;
 
 public class SpellForum : MonoBehaviour
 {
@@ -90,6 +89,9 @@ public class SpellForum : MonoBehaviour
 
     public void LoadInventory()
     {
+        currentElementInventory = GameManager.Instance.SavedElementInventory;
+        currentFormInventory = GameManager.Instance.SavedFormInventory;
+
         foreach (Elements element in GameManager.Instance.SavedElementInventory)
         {
             SpellMenuItem elementItem = Instantiate(elementItemPrefabs[(int)element])
@@ -109,6 +111,24 @@ public class SpellForum : MonoBehaviour
             formItem.transform.SetParent(shapeInventory.transform);
             formItem.transform.localScale = Vector3.one;
         }
+    }
+
+    public void SaveInventory()
+    {
+        currentElementInventory.Clear();
+        foreach (ElementItem element in elementInventory.GetComponentsInChildren<ElementItem>())
+        {
+            currentElementInventory.Add(element.Element);
+        }
+
+        currentFormInventory.Clear();
+        foreach (FormItem form in shapeInventory.GetComponentsInChildren<FormItem>())
+        {
+            currentFormInventory.Add(form.Form);
+        }
+
+        GameManager.Instance.SavedElementInventory = currentElementInventory;
+        GameManager.Instance.SavedFormInventory = currentFormInventory;
     }
 
     public void ComponentDropped(SpellMenuItem item)

@@ -45,12 +45,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) &&
+            !Input.GetKey(KeyCode.LeftShift))
         {
             ChangeScene("Cave Level");
         }
 
-        if (Input.GetKeyDown(KeyCode.Home))
+        if (Input.GetKeyDown(KeyCode.Escape) &&
+            Input.GetKey(KeyCode.LeftShift))
         {
             ChangeScene("SpellCraftingScene");
         }

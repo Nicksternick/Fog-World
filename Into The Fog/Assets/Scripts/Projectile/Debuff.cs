@@ -18,13 +18,15 @@ public class Debuff : MonoBehaviour
     void Start()
     {
         enemyAgent = GetComponent<NavMeshAgent>();
-        enemyRenderer = GetComponent<Renderer>();
+        enemyRenderer = GetComponentInChildren<Renderer>();
 
         if (enemyAgent != null)
             originalSpeed = enemyAgent.speed;
 
         if (enemyRenderer != null)
             originalColor = enemyRenderer.material.color;
+
+        Debug.Log(enemyRenderer.material.name);
     }
 
     public void TriggerDebuff(Elements elementType)
