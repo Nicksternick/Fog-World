@@ -63,8 +63,10 @@ MonoBehaviour:
   mapCamera: {fileID: 6620038726626976966}
   playerRigidBody: {fileID: 7652867981283466845}
   playerModel: {fileID: 1201862282387680046}
-  fireBall: {fileID: 0}
-  iceBall: {fileID: 0}
+  spell1: {fileID: 0}
+  spell2: {fileID: 0}
+  castSpell: {fileID: 8300000, guid: 5043899f8d72bb44b957759cc22793ff, type: 3}
+  failSpell: {fileID: 8300000, guid: 5c782f0c418d0cb41923c6c5e9e50e78, type: 3}
 --- !u!114 &4471029826668248026
 MonoBehaviour:
   m_ObjectHideFlags: 0
