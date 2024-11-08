@@ -56,11 +56,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _Clip: 0.511
-    - _Feather: 0.844
+    - _Feather: 0.625
     - _Power: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Size: 0.332
+    - _Size: 0.71
     - _Tiling: 2
     m_Colors:
     - _Color: {r: 128, g: 6.1911974, b: 1.8113174, a: 1}
