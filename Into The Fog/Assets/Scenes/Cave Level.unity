@@ -31927,6 +31927,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Projectile Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 4380860993098647861, guid: 1e5d1a49adf093748917af1e097d5dac,
+        type: 3}
+      propertyPath: laserPrefab
+      value: 
+      objectReference: {fileID: 1269247929629438614, guid: 8af380d26381ebf4eac3ffa4e8d39e7b,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
