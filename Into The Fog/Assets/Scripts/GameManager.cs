@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,21 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Spell[] playerSpells;
 
+    [SerializeField] private List<Elements> savedElementInventory;
+    [SerializeField] private List<Forms> savedFormInventory;
+
+    public List<Elements> SavedElementInventory 
+    { 
+        get { return savedElementInventory; } 
+        set { savedElementInventory = value; }
+    }
+
+    public List<Forms> SavedFormInventory 
+    { 
+        get { return savedFormInventory; } 
+        set { savedFormInventory = value; }
+    }
+
     // ===== | Methods | =====
     private void Awake()
     {
@@ -20,8 +36,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this);
-
-            playerSpells = new Spell[2];
         }
         else
         {
@@ -31,12 +45,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) &&
+            !Input.GetKey(KeyCode.LeftShift))
         {
             ChangeScene("Cave Level");
         }
 
-        if (Input.GetKeyDown(KeyCode.Home))
+        if (Input.GetKeyDown(KeyCode.Escape) &&
+            Input.GetKey(KeyCode.LeftShift))
         {
             ChangeScene("SpellCraftingScene");
         }

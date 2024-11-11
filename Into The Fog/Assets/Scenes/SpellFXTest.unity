@@ -31924,6 +31924,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4380860993098647861, guid: 1e5d1a49adf093748917af1e097d5dac,
         type: 3}
+      propertyPath: aoePrefab
+      value: 
+      objectReference: {fileID: 3881975197469924584, guid: 07cb5782801d8f3449b6a7ceae421d23,
+        type: 3}
+    - target: {fileID: 4380860993098647861, guid: 1e5d1a49adf093748917af1e097d5dac,
+        type: 3}
       propertyPath: ballPrefab
       value: 
       objectReference: {fileID: 1876766397642614782, guid: ef5c1963473e6f44d85810d10aaa508e,

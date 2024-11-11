@@ -43,8 +43,11 @@ public class FogPlayer : MonoBehaviour
     private bool canDash = true;
     private float dashTimer;
 
-    [SerializeField] private Spell fireBall;
-    [SerializeField] private Spell iceBall;
+    [SerializeField] private Spell spell1;
+    [SerializeField] private Spell spell2;
+
+    [SerializeField] private AudioClip castSpell;
+    [SerializeField] private AudioClip failSpell;
 
     private float primarySpellCountdown = 3.0f;
     private float secondarySpellCountdown = 3.0f;
@@ -69,17 +72,17 @@ public class FogPlayer : MonoBehaviour
         UIManager.Instance.StaminaBar.SetMaxHealth(dashCooldown);
         UIManager.Instance.StaminaBar.SetHealth(dashCooldown);
 
-        fireBall = GameManager.Instance.GetPlayerSpell(0);
-        iceBall = GameManager.Instance.GetPlayerSpell(1);
+        spell1 = GameManager.Instance.GetPlayerSpell(0);
+        spell2 = GameManager.Instance.GetPlayerSpell(1);
 
-        if (fireBall == null)
-            fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 0.4f);
+        if (spell1 == null)
+            spell1 = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 0.4f);
 
-        if (iceBall == null)
-            iceBall = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 0.4f);
+        if (spell2 == null)
+            spell2 = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 0.4f);
 
-        UIManager.Instance.Spell1.SetMaxCooldown(fireBall.Cooldown);
-        UIManager.Instance.Spell2.SetMaxCooldown(iceBall.Cooldown);
+        UIManager.Instance.Spell1.SetMaxCooldown(spell1.Cooldown);
+        UIManager.Instance.Spell2.SetMaxCooldown(spell2.Cooldown);
         UIManager.Instance.HealthBar.SetMaxHealth(health);
     }
 
@@ -92,18 +95,18 @@ public class FogPlayer : MonoBehaviour
 
         LookAtMouse();
 
-        if (fireBall != null)
+        if (spell1 != null)
         {
-            if (primarySpellCountdown < fireBall.Cooldown)
+            if (primarySpellCountdown < spell1.Cooldown)
             {
                 primarySpellCountdown += Time.deltaTime;
                 UIManager.Instance.Spell1.SetCooldown(primarySpellCountdown);
             }
         }
 
-        if (iceBall != null)
+        if (spell2 != null)
         {
-            if (secondarySpellCountdown < iceBall.Cooldown)
+            if (secondarySpellCountdown < spell2.Cooldown)
             {
                 secondarySpellCountdown += Time.deltaTime;
                 UIManager.Instance.Spell2.SetCooldown(secondarySpellCountdown);
@@ -264,12 +267,18 @@ public class FogPlayer : MonoBehaviour
     {
         if (callback.performed)
         {
-            if (fireBall != null)
+            if (spell1 != null)
             {
-                if (primarySpellCountdown >= fireBall.Cooldown)
+                if (primarySpellCountdown >= spell1.Cooldown)
                 {
                     primarySpellCountdown = 0.0f;
-                    fireBall.CastSpell(playerModel.gameObject);
+                    spell1.CastSpell(playerModel.gameObject);
+
+                    AudioManager.Instance.PlaySound(castSpell, 0.6f);
+                }
+                else
+                {
+                    AudioManager.Instance.PlaySound(failSpell, 0.6f);
                 }
             }
         }
@@ -279,12 +288,18 @@ public class FogPlayer : MonoBehaviour
     {
         if (callback.performed)
         {
-            if (iceBall != null)
+            if (spell2 != null)
             {
-                if (secondarySpellCountdown > iceBall.Cooldown)
+                if (secondarySpellCountdown > spell2.Cooldown)
                 {
                     secondarySpellCountdown = 0.0f;
-                    iceBall.CastSpell(playerModel.gameObject);
+                    spell2.CastSpell(playerModel.gameObject);
+
+                    AudioManager.Instance.PlaySound(castSpell, 0.6f);
+                }
+                else
+                {
+                    AudioManager.Instance.PlaySound(failSpell, 0.6f);
                 }
             }
         }

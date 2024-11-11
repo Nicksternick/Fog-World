@@ -183,7 +183,7 @@ public class ProjectileManager : MonoBehaviour
                 break;
         }
     }
-
+    
     ///// <summary>
     ///// Helper method to easily apply Spell effects
     ///// </summary>
