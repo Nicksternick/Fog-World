@@ -29,6 +29,16 @@ public class Debuff : MonoBehaviour
         Debug.Log(enemyRenderer.material.name);
     }
 
+    private void OnDisable()
+    {
+        // Stop the coroutine if it's running
+        foreach (Coroutine coroutine in activeDebuffs.Values)
+        {
+            if (coroutine != null) StopCoroutine(coroutine);
+        }
+        activeDebuffs.Clear();
+    }
+
     public void TriggerDebuff(Elements elementType)
     {
         if (activeDebuffs.ContainsKey(elementType))
