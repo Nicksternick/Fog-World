@@ -321,15 +321,41 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 4380860993098647861, guid: 1e5d1a49adf093748917af1e097d5dac,
         type: 3}
+      propertyPath: ballDamage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380860993098647861, guid: 1e5d1a49adf093748917af1e097d5dac,
+        type: 3}
       propertyPath: ballPrefab
       value: 
       objectReference: {fileID: 1876766397642614782, guid: ef5c1963473e6f44d85810d10aaa508e,
         type: 3}
     - target: {fileID: 4380860993098647861, guid: 1e5d1a49adf093748917af1e097d5dac,
         type: 3}
+      propertyPath: laserDamage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380860993098647861, guid: 1e5d1a49adf093748917af1e097d5dac,
+        type: 3}
       propertyPath: laserPrefab
       value: 
       objectReference: {fileID: 1511557264487731907, guid: dbaa996700e1acd4dbc4c4ed4afc421f,
+        type: 3}
+    - target: {fileID: 4380860993098647861, guid: 1e5d1a49adf093748917af1e097d5dac,
+        type: 3}
+      propertyPath: laserDuration
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380860993098647861, guid: 1e5d1a49adf093748917af1e097d5dac,
+        type: 3}
+      propertyPath: laserFxs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380860993098647861, guid: 1e5d1a49adf093748917af1e097d5dac,
+        type: 3}
+      propertyPath: laserFxs.Array.data[0]
+      value: 
+      objectReference: {fileID: -6465566751694194690, guid: daf09444234b9f948996c197523c11e1,
         type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1738,7 +1764,7 @@ SceneRoots:
   - {fileID: 1379917832}
   - {fileID: 129898056}
   - {fileID: 57983326}
-  - {fileID: 2154246269301172735}
+  - {fileID: 1399031887}
   - {fileID: 1164222579}
   - {fileID: 1767741727}
   - {fileID: 2106094584}
