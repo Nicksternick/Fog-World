@@ -33,7 +33,7 @@ public class Laser : Projectile
         base.OnCollisionEnter(other);
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Hit Enemy!");
+            //Debug.Log("Hit Enemy!");
             Enemy enemyController = other.gameObject.GetComponent<Enemy>();
             enemyController.TakeDamage(data.Damage);
         }

@@ -27,7 +27,7 @@ public class AoE : Projectile
         // Check if the other object is tagged as "Enemy"
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Hit Enemy!");
+            //Debug.Log("Hit Enemy!");
             Enemy enemyController = other.GetComponent<Enemy>();
             if (enemyController != null)
             {
