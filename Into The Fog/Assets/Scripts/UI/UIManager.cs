@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private HealthBar staminaBar;
     [SerializeField] private FogIconSpell spell1;
     [SerializeField] private FogIconSpell spell2;
+    [SerializeField] private TextMeshProUGUI levelText;
 
     // ===== | Properties | =====
     public HealthBar HealthBar { get { return healthBar; } }
@@ -27,5 +29,10 @@ public class UIManager : MonoBehaviour
         {
             Destroy(this);
         }
+    }
+
+    private void Start()
+    {
+        levelText.text = $"Level: {GameManager.Instance.CurrentLevel}";
     }
 }

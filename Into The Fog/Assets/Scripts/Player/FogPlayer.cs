@@ -49,6 +49,8 @@ public class FogPlayer : MonoBehaviour
     [SerializeField] private AudioClip castSpell;
     [SerializeField] private AudioClip failSpell;
 
+    [SerializeField] private Animator animator;
+
     private float primarySpellCountdown = 3.0f;
     private float secondarySpellCountdown = 3.0f;
 
@@ -166,6 +168,15 @@ public class FogPlayer : MonoBehaviour
 
             // Combine the input with camera orientation to create movement direction
             moveDirection = (cameraRight * readValue.x + cameraForward * readValue.y).normalized;
+
+            if (readValue == Vector2.zero)
+            {
+                animator.SetBool("IsMoving", false);
+            }
+            else
+            {
+                animator.SetBool("IsMoving", true);
+            }
         }
 
         // Move the player based on the movement speed
@@ -227,6 +238,8 @@ public class FogPlayer : MonoBehaviour
 
             dashTimer = 0;
 
+            animator.SetBool("IsSprinting", true);
+
             // Setup the timer to stop dashing when the time is over
             //dashTimer.SetMaxTime(dashTime);
             //dashTimer.OnCountDownEnd.RemoveAllListeners();
@@ -254,6 +267,8 @@ public class FogPlayer : MonoBehaviour
 
         dashTimer = 0;
 
+        animator.SetBool("IsSprinting", false);
+
         // Set up the timer to call EndDashCooldown
         //dashTimer.SetMaxTime(dashCooldown);
         //dashTimer.OnCountDownEnd.RemoveAllListeners();
@@ -275,6 +290,8 @@ public class FogPlayer : MonoBehaviour
                     spell1.CastSpell(playerModel.gameObject);
 
                     AudioManager.Instance.PlaySound(castSpell, 0.6f);
+
+                    animator.SetTrigger("SpellCasted");
                 }
                 else
                 {
@@ -296,6 +313,8 @@ public class FogPlayer : MonoBehaviour
                     spell2.CastSpell(playerModel.gameObject);
 
                     AudioManager.Instance.PlaySound(castSpell, 0.6f);
+
+                    animator.SetTrigger("SpellCasted");
                 }
                 else
                 {
@@ -336,6 +355,7 @@ public class FogPlayer : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        animator.SetTrigger("DamageTaken");
         health -= amount;
         UIManager.Instance.HealthBar.SetHealth(health);
         playerDamageEvent(this);
