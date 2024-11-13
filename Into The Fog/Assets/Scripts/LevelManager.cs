@@ -27,12 +27,12 @@ public class LevelManager : MonoBehaviour
             Instance = this;
         }
 
-        //spawnPlayer();
+        spawnPlayer();
     }
 
     private void Start()
     {
-        if (rockMaterials.Length != 0)
+        if (rockMaterials != null)
         {
             GameObject wallContainer = GameObject.FindGameObjectWithTag("WallContainer");
             if (wallContainer != null)
@@ -49,7 +49,7 @@ public class LevelManager : MonoBehaviour
             }
         }
         
-        if (floorMaterials.Length != 0)
+        if (floorMaterials != null)
             Invoke(nameof(GenerateFloorMaterial), 0.5f);
     }
 
@@ -66,7 +66,6 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        return;
         if (enemyManager.importantList.Count <= 0)
         {
             GameManager.Instance.IncrementCurrentLevel();

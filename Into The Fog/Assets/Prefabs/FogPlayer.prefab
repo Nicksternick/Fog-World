@@ -64,8 +64,6 @@ MonoBehaviour:
   mapCamera: {fileID: 6620038726626976966}
   playerRigidBody: {fileID: 7652867981283466845}
   playerModel: {fileID: 7339939906933075725}
-  spell1: {fileID: 0}
-  spell2: {fileID: 0}
   castSpell: {fileID: 8300000, guid: 5043899f8d72bb44b957759cc22793ff, type: 3}
   failSpell: {fileID: 8300000, guid: 5c782f0c418d0cb41923c6c5e9e50e78, type: 3}
   animator: {fileID: 3527862990984513377}
@@ -147,6 +145,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d24b19ee-61f7-4e40-bf09-5a7fc9bac697
     m_ActionName: FogPlayer/Spell2[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 895945568556180447}
+        m_TargetAssemblyTypeName: FogPlayer, Assembly-CSharp
+        m_MethodName: CastSpell3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: aaec3963-c666-4b09-a218-b70d66505134
+    m_ActionName: FogPlayer/Spell3[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FogPlayer

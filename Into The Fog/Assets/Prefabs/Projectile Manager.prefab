@@ -49,10 +49,15 @@ MonoBehaviour:
     ballPrefabs:
       elementPrefabs:
       - {fileID: 3769233092723763707, guid: 4bd9c70edc99be14f8b86d4332292a75, type: 3}
+      - {fileID: -3221386004627547693, guid: 9105a54b2502b4643901c627db15ffc8, type: 3}
     laserPrefabs:
-      elementPrefabs: []
+      elementPrefabs:
+      - {fileID: 1269247929629438614, guid: 8af380d26381ebf4eac3ffa4e8d39e7b, type: 3}
+      - {fileID: 4571354320962529432, guid: f846eb53e59078044a5c6b5898108084, type: 3}
     aoePrefabs:
-      elementPrefabs: []
+      elementPrefabs:
+      - {fileID: 339031803915908701, guid: 6203946b6a65a0140ab5ae2d71cec546, type: 3}
+      - {fileID: 2849055946136808057, guid: a3bfb976960667c4ca5a4168c9727fd4, type: 3}
   ballDamage: 25
   ballDuration: 5
   laserDamage: 25

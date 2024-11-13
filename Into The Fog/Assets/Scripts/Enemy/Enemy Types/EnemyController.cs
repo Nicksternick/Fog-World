@@ -19,8 +19,6 @@ public class EnemyController : Enemy
     private void Start()
     {
         EnemyStart();
-
-        Debug.Log(GameManager.Instance.CurrentLevel);
         agent.speed += (speedModifier * GameManager.Instance.CurrentLevel);
     }
 

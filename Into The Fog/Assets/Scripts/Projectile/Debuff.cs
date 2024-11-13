@@ -26,7 +26,7 @@ public class Debuff : MonoBehaviour
         if (enemyRenderer != null)
             originalColor = enemyRenderer.material.color;
 
-        Debug.Log(enemyRenderer.material.name);
+        //Debug.Log(enemyRenderer.material.name);
     }
 
     private void OnDisable()
