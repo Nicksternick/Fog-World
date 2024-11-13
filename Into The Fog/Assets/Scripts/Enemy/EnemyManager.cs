@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject[] enemySpawners;
     [SerializeField] private GameObject hiveSpawners;
     [SerializeField] TextMeshProUGUI enemiesLeftText;
+    [SerializeField] private float hiveNum;
 
     // Start is called before the first frame update
     void Start()
@@ -49,12 +51,23 @@ public class EnemyManager : MonoBehaviour
         {
             if (enemySpawners[i].GetComponent<EnemySpawner>().spawnEnemy.GetComponent<Enemy>().isImportant)
             {
-                for (int j = 0; j < enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions.Length; j++)
+                List<int> chosen = new List<int>();
+                int picked;
+                for (int j = 0; j < hiveNum; j++)
                 {
-                    importantList.Add(Instantiate(enemySpawners[i].GetComponent<EnemySpawner>().spawnEnemy,
-                        enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions[j].position,
+                    picked = Random.Range(0, enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions.Length);
+                    if (!chosen.Contains(picked))
+                    {
+                        importantList.Add(Instantiate(enemySpawners[i].GetComponent<EnemySpawner>().spawnEnemy,
+                        enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions[picked].position,
                         Quaternion.identity));
-                    importantList[importantList.Count-1].GetComponent<Enemy>().Target = player.transform;
+                        importantList[importantList.Count - 1].GetComponent<Enemy>().Target = player.transform;
+                        chosen.Add(picked);
+                    }
+                    else
+                    {
+                        j--;
+                    }
                 }
             }
             else
