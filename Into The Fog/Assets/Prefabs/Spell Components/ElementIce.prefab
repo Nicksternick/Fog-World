@@ -164,4 +164,5 @@ MonoBehaviour:
   image: {fileID: 2658585531219501580}
   parentAfterDrag: {fileID: 0}
   componentType: 0
+  onDrag: {fileID: 8300000, guid: cafa903c0f77ed241bf1ad1905bfdd6d, type: 3}
   spellElement: 1

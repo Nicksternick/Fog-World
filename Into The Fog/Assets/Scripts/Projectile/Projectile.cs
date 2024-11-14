@@ -78,13 +78,16 @@ public abstract class Projectile : MonoBehaviour
     /// <param name="collision"> The collsion object created </param>
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        // Get the enemy's debuff script
-        Debuff enemyDebuff = collision.gameObject.GetComponent<Debuff>();
-
-        if (enemyDebuff != null)
+        if(data.Element != Elements.Fire)
         {
-            // Apply the debuff with the specified element type
-            enemyDebuff.TriggerDebuff(data.Element);
+            // Get the enemy's debuff script
+            Debuff enemyDebuff = collision.gameObject.GetComponent<Debuff>();
+
+            if (enemyDebuff != null)
+            {
+                // Apply the debuff with the specified element type
+                enemyDebuff.TriggerDebuff(data.Element);
+            }
         }
     }
 
@@ -100,14 +103,18 @@ public abstract class Projectile : MonoBehaviour
     /// <param name="collision"> The collsion object created </param>
     protected virtual void OnTriggerEnter(Collider other)
     {
-        // Get the enemey's debuff script
-        Debuff enemyDebuff = other.gameObject.GetComponent<Debuff>();
-
-        if (enemyDebuff != null)
+        if (data.Element != Elements.Fire)
         {
-            // Apply the debuff with the specified element type
-            enemyDebuff.TriggerDebuff(data.Element);
+            // Get the enemey's debuff script
+            Debuff enemyDebuff = other.gameObject.GetComponent<Debuff>();
+
+            if (enemyDebuff != null)
+            {
+                // Apply the debuff with the specified element type
+                enemyDebuff.TriggerDebuff(data.Element);
+            }
         }
+
     }
 
     /// <summary>

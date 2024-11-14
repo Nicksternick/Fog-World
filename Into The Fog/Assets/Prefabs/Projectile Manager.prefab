@@ -45,19 +45,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af9b5e1963492b5458bf3807f2805731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: -2314426742805507339, guid: 092d8e65b1be4ce41a83f862bddd4b4a,
-    type: 3}
-  ballFxs:
-  - {fileID: 2100000, guid: aae392ef8da4f954c90af4d182eb0ce0, type: 2}
-  - {fileID: 2100000, guid: 532bf7b9f8442344996196c6c634a3eb, type: 2}
-  laserPrefab: {fileID: 1511557264487731907, guid: dbaa996700e1acd4dbc4c4ed4afc421f,
-    type: 3}
-  laserFxs: []
-  aoePrefab: {fileID: 1276999169672634283, guid: d3b2bce056e5fba4e9184c59463693f4,
-    type: 3}
-  aoeFxs:
-  - {fileID: 2100000, guid: aae392ef8da4f954c90af4d182eb0ce0, type: 2}
-  - {fileID: 0}
+  projectilePrefabs:
+    ballPrefabs:
+      elementPrefabs:
+      - {fileID: 3769233092723763707, guid: 4bd9c70edc99be14f8b86d4332292a75, type: 3}
+      - {fileID: -3221386004627547693, guid: 9105a54b2502b4643901c627db15ffc8, type: 3}
+    laserPrefabs:
+      elementPrefabs:
+      - {fileID: 1269247929629438614, guid: 8af380d26381ebf4eac3ffa4e8d39e7b, type: 3}
+      - {fileID: 4571354320962529432, guid: f846eb53e59078044a5c6b5898108084, type: 3}
+    aoePrefabs:
+      elementPrefabs:
+      - {fileID: 339031803915908701, guid: 6203946b6a65a0140ab5ae2d71cec546, type: 3}
+      - {fileID: 2849055946136808057, guid: a3bfb976960667c4ca5a4168c9727fd4, type: 3}
   ballDamage: 25
   ballDuration: 5
   laserDamage: 25

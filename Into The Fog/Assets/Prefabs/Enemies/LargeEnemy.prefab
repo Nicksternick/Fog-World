@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 4
+  chargeSound: {fileID: 8300000, guid: d4b7bfa2fa73fd84eaf95f164548317b, type: 3}
 --- !u!1 &7846113145627362911
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +220,7 @@ MonoBehaviour:
   damage: 20
   attackCooldown: 3
   knockBackForce: 60
+  onEnemyHit: {fileID: 8300000, guid: f5af7e89101d427448b4c63fef7747bc, type: 3}
 --- !u!135 &1263578639313593425
 SphereCollider:
   m_ObjectHideFlags: 0

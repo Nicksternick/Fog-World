@@ -12,6 +12,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Vector3 playerSpawnLocation;
     [SerializeField] private EnemyManager enemyManager;
 
+    [SerializeField] private Material[] rockMaterials;
+    [SerializeField] private Material[] floorMaterials;
+
     public static LevelManager Instance;
 
     public List<GameObject> ImportantEnemies { get { return enemyManager.importantList; } }
@@ -27,11 +30,45 @@ public class LevelManager : MonoBehaviour
         spawnPlayer();
     }
 
+    private void Start()
+    {
+        if (rockMaterials != null)
+        {
+            GameObject wallContainer = GameObject.FindGameObjectWithTag("WallContainer");
+            if (wallContainer != null)
+            {
+                MeshRenderer[] walls = wallContainer.GetComponentsInChildren<MeshRenderer>();
+                Material rockMaterial = rockMaterials[Random.Range(0, rockMaterials.Length)];
+                foreach (MeshRenderer wall in walls)
+                {
+                    if (wall != null)
+                    {
+                        wall.material = rockMaterial;
+                    }
+                }
+            }
+        }
+        
+        if (floorMaterials != null)
+            Invoke(nameof(GenerateFloorMaterial), 0.5f);
+    }
+
+    public void GenerateFloorMaterial()
+    {
+        GameObject floor = GameObject.FindGameObjectWithTag("Floor");
+        if (floor != null)
+        {
+            MeshRenderer floorRenderer = floor.GetComponent<MeshRenderer>();
+            floorRenderer.material = floorMaterials[Random.Range(0, floorMaterials.Length)];
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (enemyManager.importantList.Count <= 0)
         {
+            GameManager.Instance.IncrementCurrentLevel();
             SceneManager.LoadScene("YouWin");
         }
     }

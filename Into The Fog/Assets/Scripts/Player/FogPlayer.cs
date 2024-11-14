@@ -43,11 +43,18 @@ public class FogPlayer : MonoBehaviour
     private bool canDash = true;
     private float dashTimer;
 
-    [SerializeField] private Spell fireBall;
-    [SerializeField] private Spell iceBall;
+    private Spell spell1;
+    private Spell spell2;
+    private Spell spell3;
 
-    private float primarySpellCountdown = 3.0f;
-    private float secondarySpellCountdown = 3.0f;
+    [SerializeField] private AudioClip castSpell;
+    [SerializeField] private AudioClip failSpell;
+
+    [SerializeField] private Animator animator;
+
+    private float spell1Countdown = 3.0f;
+    private float spell2Countdown = 3.0f;
+    private float spell3Countdown = 3.0f;
 
     public static event Action<FogPlayer> playerDamageEvent;
 
@@ -69,17 +76,22 @@ public class FogPlayer : MonoBehaviour
         UIManager.Instance.StaminaBar.SetMaxHealth(dashCooldown);
         UIManager.Instance.StaminaBar.SetHealth(dashCooldown);
 
-        fireBall = GameManager.Instance.GetPlayerSpell(0);
-        iceBall = GameManager.Instance.GetPlayerSpell(1);
+        spell1 = GameManager.Instance.GetPlayerSpell(0);
+        spell2 = GameManager.Instance.GetPlayerSpell(1);
+        spell3 = GameManager.Instance.GetPlayerSpell(2);
 
-        if (fireBall == null)
-            fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 0.4f);
+        if (spell1 == null)
+            spell1 = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 0.4f);
 
-        if (iceBall == null)
-            iceBall = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 0.4f);
+        if (spell2 == null)
+            spell2 = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 0.4f);
 
-        UIManager.Instance.Spell1.SetMaxCooldown(fireBall.Cooldown);
-        UIManager.Instance.Spell2.SetMaxCooldown(iceBall.Cooldown);
+        UIManager.Instance.Spell1.SetMaxCooldown(spell1.Cooldown);
+        spell1Countdown = spell1.Cooldown;
+        UIManager.Instance.Spell2.SetMaxCooldown(spell2.Cooldown);
+        spell2Countdown = spell2.Cooldown;
+        UIManager.Instance.Spell3.SetMaxCooldown(spell3.Cooldown);
+        spell3Countdown = spell3.Cooldown;
         UIManager.Instance.HealthBar.SetMaxHealth(health);
     }
 
@@ -92,21 +104,30 @@ public class FogPlayer : MonoBehaviour
 
         LookAtMouse();
 
-        if (fireBall != null)
+        if (spell1 != null)
         {
-            if (primarySpellCountdown < fireBall.Cooldown)
+            if (spell1Countdown < spell1.Cooldown)
             {
-                primarySpellCountdown += Time.deltaTime;
-                UIManager.Instance.Spell1.SetCooldown(primarySpellCountdown);
+                spell1Countdown += Time.deltaTime;
+                UIManager.Instance.Spell1.SetCooldown(spell1Countdown);
             }
         }
 
-        if (iceBall != null)
+        if (spell2 != null)
         {
-            if (secondarySpellCountdown < iceBall.Cooldown)
+            if (spell2Countdown < spell2.Cooldown)
             {
-                secondarySpellCountdown += Time.deltaTime;
-                UIManager.Instance.Spell2.SetCooldown(secondarySpellCountdown);
+                spell2Countdown += Time.deltaTime;
+                UIManager.Instance.Spell2.SetCooldown(spell2Countdown);
+            }
+        }
+
+        if (spell3 != null)
+        {
+            if (spell3Countdown < spell3.Cooldown)
+            {
+                spell3Countdown += Time.deltaTime;
+                UIManager.Instance.Spell3.SetCooldown(spell3Countdown);
             }
         }
 
@@ -163,6 +184,15 @@ public class FogPlayer : MonoBehaviour
 
             // Combine the input with camera orientation to create movement direction
             moveDirection = (cameraRight * readValue.x + cameraForward * readValue.y).normalized;
+
+            if (readValue == Vector2.zero)
+            {
+                animator.SetBool("IsMoving", false);
+            }
+            else
+            {
+                animator.SetBool("IsMoving", true);
+            }
         }
 
         // Move the player based on the movement speed
@@ -224,6 +254,8 @@ public class FogPlayer : MonoBehaviour
 
             dashTimer = 0;
 
+            animator.SetBool("IsSprinting", true);
+
             // Setup the timer to stop dashing when the time is over
             //dashTimer.SetMaxTime(dashTime);
             //dashTimer.OnCountDownEnd.RemoveAllListeners();
@@ -251,6 +283,8 @@ public class FogPlayer : MonoBehaviour
 
         dashTimer = 0;
 
+        animator.SetBool("IsSprinting", false);
+
         // Set up the timer to call EndDashCooldown
         //dashTimer.SetMaxTime(dashCooldown);
         //dashTimer.OnCountDownEnd.RemoveAllListeners();
@@ -264,12 +298,20 @@ public class FogPlayer : MonoBehaviour
     {
         if (callback.performed)
         {
-            if (fireBall != null)
+            if (spell1 != null)
             {
-                if (primarySpellCountdown >= fireBall.Cooldown)
+                if (spell1Countdown >= spell1.Cooldown)
                 {
-                    primarySpellCountdown = 0.0f;
-                    fireBall.CastSpell(playerModel.gameObject);
+                    spell1Countdown = 0.0f;
+                    spell1.CastSpell(playerModel.gameObject);
+
+                    AudioManager.Instance.PlaySound(castSpell, 0.6f);
+
+                    animator.SetTrigger("SpellCasted");
+                }
+                else
+                {
+                    AudioManager.Instance.PlaySound(failSpell, 0.6f);
                 }
             }
         }
@@ -279,12 +321,43 @@ public class FogPlayer : MonoBehaviour
     {
         if (callback.performed)
         {
-            if (iceBall != null)
+            if (spell2 != null)
             {
-                if (secondarySpellCountdown > iceBall.Cooldown)
+                if (spell2Countdown >= spell2.Cooldown)
                 {
-                    secondarySpellCountdown = 0.0f;
-                    iceBall.CastSpell(playerModel.gameObject);
+                    spell2Countdown = 0.0f;
+                    spell2.CastSpell(playerModel.gameObject);
+
+                    AudioManager.Instance.PlaySound(castSpell, 0.6f);
+
+                    animator.SetTrigger("SpellCasted");
+                }
+                else
+                {
+                    AudioManager.Instance.PlaySound(failSpell, 0.6f);
+                }
+            }
+        }
+    }
+
+    public void CastSpell3(InputAction.CallbackContext callback)
+    {
+        if (callback.performed)
+        {
+            if (spell3 != null)
+            {
+                if (spell3Countdown >= spell3.Cooldown)
+                {
+                    spell3Countdown = 0.0f;
+                    spell3.CastSpell(playerModel.gameObject);
+
+                    AudioManager.Instance.PlaySound(castSpell, 0.6f);
+
+                    animator.SetTrigger("SpellCasted");
+                }
+                else
+                {
+                    AudioManager.Instance.PlaySound(failSpell, 0.6f);
                 }
             }
         }
@@ -321,6 +394,7 @@ public class FogPlayer : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        animator.SetTrigger("DamageTaken");
         health -= amount;
         UIManager.Instance.HealthBar.SetHealth(health);
         playerDamageEvent(this);

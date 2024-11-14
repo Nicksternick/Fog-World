@@ -9,7 +9,11 @@ public class SpellMenuItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     [SerializeField] protected SpellComponentType componentType;
 
+    [SerializeField] AudioClip onDrag;
+
     public SpellComponentType ComponentType { get { return componentType; } }
+
+    // ===== | Methods | =====
 
     // Switches parent and hides image so it can snap to a new slot
     public void OnBeginDrag(PointerEventData eventData)
@@ -18,6 +22,8 @@ public class SpellMenuItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         image.raycastTarget = false;
+
+        AudioManager.Instance.PlaySound(onDrag, 2.0f);
     }
 
     public void OnDrag(PointerEventData eventData)

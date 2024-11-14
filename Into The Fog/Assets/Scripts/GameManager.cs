@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Elements> savedElementInventory;
     [SerializeField] private List<Forms> savedFormInventory;
 
+    [SerializeField] private int currentLevel;
+
+    // ===== | Properties | =====
+    public int CurrentLevel { get { return currentLevel; } }
+
     public List<Elements> SavedElementInventory 
     { 
         get { return savedElementInventory; } 
@@ -67,6 +72,10 @@ public class GameManager : MonoBehaviour
     {
         return playerSpells[index] != null ? playerSpells[index] : null; 
     }
+
+    public void IncrementCurrentLevel() { currentLevel++; }
+
+    public void ResetLevel() { currentLevel = 0; }
 
     /// <summary>
     /// Nicholas 10/1/2024

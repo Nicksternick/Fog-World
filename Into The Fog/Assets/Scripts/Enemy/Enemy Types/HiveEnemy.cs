@@ -14,6 +14,7 @@ public class HiveEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        EnemyStart();
         spawnCooldown = 0;
     }
 

@@ -7,6 +7,7 @@ public class EnemyController : Enemy
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private AbstractNavigation navigation;
     [SerializeField] private AbstractAttack attack;
+    [SerializeField] private float speedModifier = 0.2f;
 
     // ===== | Methods | =====
     private void Awake()
@@ -14,6 +15,11 @@ public class EnemyController : Enemy
         navigation.Controller = this;
         navigation.EnemyAgent = agent;
         agent.speed += 0.15f;
+    }
+    private void Start()
+    {
+        EnemyStart();
+        agent.speed += (speedModifier * GameManager.Instance.CurrentLevel);
     }
 
     /// <summary>
