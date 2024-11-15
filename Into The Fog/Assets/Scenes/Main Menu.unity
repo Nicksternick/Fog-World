@@ -1037,6 +1037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToSwitchTo: {fileID: 102900000, guid: 780ce9f4398aee8499362953c75e9a9f, type: 3}
+  sceneName: Intro
   sceneButton: {fileID: 1636310026}
 --- !u!1 &1712490792
 GameObject:
@@ -1091,6 +1092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToSwitchTo: {fileID: 102900000, guid: 53139f14d0f90234d9e5bfd33df6d408, type: 3}
+  sceneName: 
   sceneButton: {fileID: 1712490795}
 --- !u!114 &1712490795
 MonoBehaviour:

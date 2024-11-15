@@ -6,20 +6,15 @@ using UnityEngine.AI;
 
 public class BoxPusher : MonoBehaviour
 {
-    // The BoxCollider we are checking for
-    [SerializeField] private BoxCollider boxCollider;
+    private Material objectMaterial; // The material using the shader
 
-    private void Awake()
+    private void Start()
     {
-        boxCollider = GetComponent<BoxCollider>();
+        objectMaterial = GetComponent<MeshRenderer>().material;
     }
-    private void OnCollisionEnter(Collision collision)
+    void Update()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            // Move the player back onto the NavMesh
-            Vector3 closestPoint = NavMesh.SamplePosition(collision.gameObject.transform.position, out NavMeshHit hit, 1.0f, NavMesh.AllAreas) ? hit.position : collision.gameObject.transform.position;
-            collision.gameObject.transform.position = closestPoint; // Teleport the player back to the nearest NavMesh point
-        }
+        // Pass the player's position to the shader as the reference position
+        objectMaterial.SetVector("_ReferencePosition", LevelManager.Instance.PlayerPosition);
     }
 }

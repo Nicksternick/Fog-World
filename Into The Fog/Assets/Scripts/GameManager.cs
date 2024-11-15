@@ -50,17 +50,57 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) &&
-            !Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ChangeScene("Cave Level");
+            currentLevel = 0;
+            ChangeScene("Main Menu");
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) &&
+        if (Input.GetKeyDown(KeyCode.Alpha0) &&
             Input.GetKey(KeyCode.LeftShift))
-        {
-            ChangeScene("SpellCraftingScene");
-        }
+            currentLevel = 0;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) &&
+            Input.GetKey(KeyCode.LeftShift))
+            currentLevel = 1;
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) &&
+            Input.GetKey(KeyCode.LeftShift))
+            currentLevel = 2;
+
+        if (Input.GetKeyDown(KeyCode.Alpha3) &&
+            Input.GetKey(KeyCode.LeftShift))
+            currentLevel = 3;
+
+        if (Input.GetKeyDown(KeyCode.Alpha4) &&
+            Input.GetKey(KeyCode.LeftShift))
+            currentLevel = 4;
+
+        if (Input.GetKeyDown(KeyCode.Alpha5) &&
+            Input.GetKey(KeyCode.LeftShift))
+            currentLevel = 5;
+
+        if (Input.GetKeyDown(KeyCode.Alpha6) &&
+            Input.GetKey(KeyCode.LeftShift))
+            currentLevel = 6;
+
+        if (Input.GetKeyDown(KeyCode.Alpha7) &&
+            Input.GetKey(KeyCode.LeftShift))
+            currentLevel = 7;
+
+        if (Input.GetKeyDown(KeyCode.Alpha8) &&
+            Input.GetKey(KeyCode.LeftShift))
+            currentLevel = 8;
+
+        if (Input.GetKeyDown(KeyCode.Alpha9) &&
+            Input.GetKey(KeyCode.LeftShift))
+            currentLevel = 9;
+
+        //if (Input.GetKeyDown(KeyCode.Escape) &&
+        //    Input.GetKey(KeyCode.LeftShift))
+        //{
+        //    ChangeScene("SpellCraftingScene");
+        //}
     }
 
     public void SetPlayerSpell(Spell spell, int index)

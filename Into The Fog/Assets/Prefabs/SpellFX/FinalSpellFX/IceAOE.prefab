@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -3331588977908130033}
   - component: {fileID: 434048741694091880}
   - component: {fileID: 8546234843404425688}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: IceAOE
   m_TagString: Untagged
   m_Icon: {fileID: 0}

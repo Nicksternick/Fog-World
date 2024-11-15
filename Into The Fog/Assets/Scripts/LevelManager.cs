@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    // ===== | Variables | =====
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private FogPlayer player;
     [SerializeField] private Vector3 playerSpawnLocation;
@@ -19,6 +20,13 @@ public class LevelManager : MonoBehaviour
 
     public List<GameObject> ImportantEnemies { get { return enemyManager.importantList; } }
 
+    // ===== | Properties | =====
+    public Vector3 PlayerPosition
+    {
+        get { return player.transform.position; }
+    }
+
+    // ===== | Methods | =====
     // Start is called before the first frame update
     void Awake()
     {
@@ -28,6 +36,16 @@ public class LevelManager : MonoBehaviour
         }
 
         spawnPlayer();
+
+        int extraHives = 0;
+
+        if (GameManager.Instance.CurrentLevel >= 3)
+            extraHives++;
+
+        if (GameManager.Instance.CurrentLevel >= 6)
+            extraHives++;
+
+        enemyManager.HiveNum += extraHives;
     }
 
     private void Start()
@@ -71,6 +89,15 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.IncrementCurrentLevel();
             SceneManager.LoadScene("YouWin");
         }
+
+        string hiveCount = "";
+
+        for (int i = 0; i < enemyManager.importantList.Count; ++i)
+        {
+            hiveCount += "<sprite index=0> ";
+        }
+
+        UIManager.Instance.HiveCount.text = hiveCount;
     }
 
     private void OnEnable()

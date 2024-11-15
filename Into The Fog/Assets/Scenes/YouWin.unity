@@ -1168,7 +1168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6da9158d9d6d343b74c263fa506a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToSwitchTo: {fileID: 102900000, guid: 3c2663b7b5c588d43856be22f6805625, type: 3}
+  sceneToSwitchTo: {fileID: 102900000, guid: 6c019a6e5bd58a74d96998514e411f4f, type: 3}
+  sceneName: FinalLevel
   sceneButton: {fileID: 1233377929}
 --- !u!114 &1233377933
 MonoBehaviour:
@@ -1317,6 +1318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToSwitchTo: {fileID: 102900000, guid: d00f3384a86079d42b4d81af31904e15, type: 3}
+  sceneName: Main Menu
   sceneButton: {fileID: 1636310026}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

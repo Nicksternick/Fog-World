@@ -84,12 +84,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   health: 500
+  healthModifier: 5
   healthBar: {fileID: 373000099041273866}
   takeDamageCooldown: 0
   isImportant: 0
   agent: {fileID: 8624020490602003632}
   navigation: {fileID: 5885991179089761379}
   attack: {fileID: 1997897936530266939}
+  speedModifier: 0.05
 --- !u!195 &8624020490602003632
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -218,6 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  damageModifier: 1
   attackCooldown: 3
   knockBackForce: 60
   onEnemyHit: {fileID: 8300000, guid: f5af7e89101d427448b4c63fef7747bc, type: 3}

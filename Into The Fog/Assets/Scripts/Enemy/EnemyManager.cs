@@ -18,7 +18,9 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject[] enemySpawners;
     [SerializeField] private GameObject hiveSpawners;
     [SerializeField] TextMeshProUGUI enemiesLeftText;
-    [SerializeField] private float hiveNum;
+    [SerializeField] private int hiveNum;
+
+    public int HiveNum { get { return hiveNum; } set { hiveNum = value; } }
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +39,7 @@ public class EnemyManager : MonoBehaviour
             }
         }
 
-        enemiesLeftText.text = "Hives Left: " + importantList.Count;
+        //enemiesLeftText.text = "Hives Left: " + importantList.Count;
     }
 
     /// <summary>

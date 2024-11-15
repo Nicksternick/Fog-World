@@ -145,6 +145,11 @@ public class FogPlayer : MonoBehaviour
         {
             SceneManager.LoadScene("GameOver");
         }
+        else if (Health < UIManager.Instance.HealthBar.MaxValue)
+        {
+            health += 1 * Time.deltaTime;
+            UIManager.Instance.HealthBar.SetHealth(health);
+        }
     }
 
     private void FixedUpdate()

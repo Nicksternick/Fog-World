@@ -242,6 +242,10 @@ public class ProjectileManager : MonoBehaviour
         ball.transform.rotation = caller.transform.rotation;
         ball.Caller = caller;
 
+        Vector3 yFix = ball.transform.position;
+        yFix.y = ball.transform.localScale.y;
+
+        ball.transform.position = yFix;
 
         // Initialize with the data
         ball.Initialize(ballDuration, new ProjectileData(ballDamage, 1.0f, 5.0f, false, element));
@@ -269,6 +273,10 @@ public class ProjectileManager : MonoBehaviour
         laser.transform.position += new Vector3(0,.25f,0);
         laser.transform.rotation = caller.transform.rotation;
         laser.Caller = caller;
+
+        Vector3 yFix = laser.transform.position;
+        yFix.y = 1;
+        laser.transform.position = yFix;
 
         // Initialize with the data
         laser.Initialize(laserDuration, new ProjectileData(laserDamage, 1.0f, 0.0f, false, element));

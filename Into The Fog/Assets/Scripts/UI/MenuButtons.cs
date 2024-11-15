@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class MenuButtons : MonoBehaviour
 {
     [SerializeField] Object sceneToSwitchTo;
+    [SerializeField] string sceneName;
     public Button sceneButton;
 
     void Start()
@@ -17,6 +18,6 @@ public class MenuButtons : MonoBehaviour
 
     void SwitchScene()
     {
-        SceneManager.LoadScene(sceneToSwitchTo.name);
+        SceneManager.LoadScene(sceneName);
     }
 }
