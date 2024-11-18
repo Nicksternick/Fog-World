@@ -35,7 +35,7 @@ public class Laser : Projectile
         {
             //Debug.Log("Hit Enemy!");
             Enemy enemyController = other.gameObject.GetComponent<Enemy>();
-            enemyController.TakeDamage(data.Damage);
+            enemyController.TakeDamage(data.Damage * (data.Element == Elements.Fire ? 1.5f : 1f));
         }
 
         // Resize the laser if it hits a wall

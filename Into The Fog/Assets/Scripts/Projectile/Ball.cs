@@ -29,7 +29,7 @@ public class Ball : Projectile
         {
             //Debug.Log("Hit Enemy!");
             Enemy enemyController = collision.gameObject.GetComponent<Enemy>();
-            enemyController.TakeDamage(data.Damage);
+            enemyController.TakeDamage(data.Damage * (data.Element == Elements.Fire ? 1.5f : 1f));
 
             // Return to object pool
             if (pool != null)
