@@ -31,7 +31,7 @@ public class AoE : Projectile
             Enemy enemyController = other.GetComponent<Enemy>();
             if (enemyController != null)
             {
-                enemyController.TakeDamage(data.Damage);
+                enemyController.TakeDamage(data.Damage * (data.Element == Elements.Fire ? 1.5f : 1f));
             }
         }
     }
