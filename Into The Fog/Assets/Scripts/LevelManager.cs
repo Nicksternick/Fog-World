@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private Material[] rockMaterials;
     [SerializeField] private Material[] floorMaterials;
+    [SerializeField] private string winScene;
 
     public static LevelManager Instance;
 
@@ -87,7 +88,7 @@ public class LevelManager : MonoBehaviour
         if (enemyManager.importantList.Count <= 0)
         {
             GameManager.Instance.IncrementCurrentLevel();
-            SceneManager.LoadScene("YouWin");
+            SceneManager.LoadScene(winScene);
         }
 
         string hiveCount = "";

@@ -478,6 +478,7 @@ MonoBehaviour:
   enemyManager: {fileID: 1111726586}
   rockMaterials: []
   floorMaterials: []
+  winScene: Main Menu
 --- !u!1001 &533477746
 PrefabInstance:
   m_ObjectHideFlags: 0
