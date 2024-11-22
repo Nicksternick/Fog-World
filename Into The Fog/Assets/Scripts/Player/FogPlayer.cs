@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +23,7 @@ public class FogPlayer : MonoBehaviour
     // ----- | Inputs from PlayerInput | -----
     [SerializeField] private PlayerInput input;
     private InputAction move;
+    private InputAction look;
 
     [Header("Camera")]
     // ----- | Camera SubObjects | -----
@@ -58,6 +58,8 @@ public class FogPlayer : MonoBehaviour
 
     public static event Action<FogPlayer> playerDamageEvent;
 
+    [SerializeField] private GameObject controllerAimArrow;
+
     // ===== | Properties | =====
     public float Health
     {
@@ -68,6 +70,7 @@ public class FogPlayer : MonoBehaviour
     private void Awake()
     {
         move = input.actions.FindAction("Move");
+        look = input.actions.FindAction("Look");
         //dashTimer = gameObject.AddComponent<Timer>();
     }
 
@@ -93,6 +96,11 @@ public class FogPlayer : MonoBehaviour
         UIManager.Instance.Spell3.SetMaxCooldown(spell3.Cooldown);
         spell3Countdown = spell3.Cooldown;
         UIManager.Instance.HealthBar.SetMaxHealth(health);
+
+        input.onControlsChanged += (PlayerInput input) =>
+        {
+            controllerAimArrow.gameObject.SetActive(input.currentControlScheme.Equals("Gamepad"));
+        };
     }
 
     private void Update()
@@ -380,21 +388,48 @@ public class FogPlayer : MonoBehaviour
         float distance;
 
         // Get a ray based on the mouses current position
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        // Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
 
-        // Check the to see if there is a point that the mouse hit
-        if (plane.Raycast(ray, out distance))
+        if (input.currentControlScheme == "Keyboard Mouse")
         {
-            // Get that point
-            Vector3 mousePosition = ray.GetPoint(distance);
+            Ray ray = playerCamera.ScreenPointToRay(look.ReadValue<Vector2>());
 
-            // Make the player look at it, then reset it's x and z rotation
-            playerModel.transform.LookAt(mousePosition, Vector3.up);
-            Quaternion rotation = playerModel.transform.rotation;
-            rotation.x = 0;
-            rotation.z = 0;
-            playerModel.transform.rotation = rotation;
+            // Check the to see if there is a point that the mouse hit
+            if (plane.Raycast(ray, out distance))
+            {
+                // Get that point
+                Vector3 mousePosition = ray.GetPoint(distance);
+
+                // Make the player look at it, then reset it's x and z rotation
+                playerModel.transform.LookAt(mousePosition, Vector3.up);
+                Quaternion rotation = playerModel.transform.rotation;
+                rotation.x = 0;
+                rotation.z = 0;
+                playerModel.transform.rotation = rotation;
+            }
         }
+        else
+        {
+            Vector3 rotation = look.ReadValue<Vector2>().normalized;
+
+            if (rotation == Vector3.zero)
+            {
+                controllerAimArrow.gameObject.SetActive(false);
+                return;
+            }
+
+            controllerAimArrow.gameObject.SetActive(true);
+
+            Vector3 cameraRight = playerCamera.transform.right;
+            Vector3 cameraForward = Vector3.ProjectOnPlane(playerCamera.transform.forward, Vector3.up).normalized;
+
+            Vector3 playerRotation = cameraRight * rotation.x + cameraForward * rotation.y;
+            Quaternion newQuat = Quaternion.LookRotation(playerRotation, Vector3.up);
+
+            playerModel.transform.rotation = Quaternion.RotateTowards(playerModel.transform.rotation, newQuat, 30);
+        }
+
+        
     }
 
     public void TakeDamage(float amount)

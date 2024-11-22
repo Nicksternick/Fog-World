@@ -333,7 +333,7 @@ public class ProjectileManager : MonoBehaviour
 
         spawnPosition.y = 0.0f;
 
-        aoe.transform.position = mousePosition;
+        aoe.transform.position = caller.transform.position;
         aoe.transform.rotation = caller.transform.rotation;
         aoe.Caller = caller;
 
