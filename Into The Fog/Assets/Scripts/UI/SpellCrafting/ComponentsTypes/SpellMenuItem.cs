@@ -9,8 +9,6 @@ public class SpellMenuItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     [SerializeField] protected SpellComponentType componentType;
 
-    [SerializeField] AudioClip onDrag;
-
     public SpellComponentType ComponentType { get { return componentType; } }
 
     // ===== | Methods | =====
@@ -23,7 +21,7 @@ public class SpellMenuItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetAsLastSibling();
         image.raycastTarget = false;
 
-        AudioManager.Instance.PlaySound(onDrag, 2.0f);
+        AudioManager.Instance.PlaySound("On Component Click", 2.0f);
     }
 
     public void OnDrag(PointerEventData eventData)
