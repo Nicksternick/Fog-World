@@ -47,9 +47,6 @@ public class FogPlayer : MonoBehaviour
     private Spell spell2;
     private Spell spell3;
 
-    [SerializeField] private AudioClip castSpell;
-    [SerializeField] private AudioClip failSpell;
-
     [SerializeField] private Animator animator;
 
     private float spell1Countdown = 3.0f;
@@ -310,13 +307,13 @@ public class FogPlayer : MonoBehaviour
                     spell1Countdown = 0.0f;
                     spell1.CastSpell(playerModel.gameObject);
 
-                    AudioManager.Instance.PlaySound(castSpell, 0.6f);
+                    AudioManager.Instance.PlaySound("Cast Spell", 0.6f);
 
                     animator.SetTrigger("SpellCasted");
                 }
                 else
                 {
-                    AudioManager.Instance.PlaySound(failSpell, 0.6f);
+                    AudioManager.Instance.PlaySound("Fail Spell", 0.6f);
                 }
             }
         }
@@ -333,13 +330,13 @@ public class FogPlayer : MonoBehaviour
                     spell2Countdown = 0.0f;
                     spell2.CastSpell(playerModel.gameObject);
 
-                    AudioManager.Instance.PlaySound(castSpell, 0.6f);
+                    AudioManager.Instance.PlaySound("CastSpell", 0.6f);
 
                     animator.SetTrigger("SpellCasted");
                 }
                 else
                 {
-                    AudioManager.Instance.PlaySound(failSpell, 0.6f);
+                    AudioManager.Instance.PlaySound("Fail Spell", 0.6f);
                 }
             }
         }
@@ -356,13 +353,13 @@ public class FogPlayer : MonoBehaviour
                     spell3Countdown = 0.0f;
                     spell3.CastSpell(playerModel.gameObject);
 
-                    AudioManager.Instance.PlaySound(castSpell, 0.6f);
+                    AudioManager.Instance.PlaySound("Cast Spell", 0.6f);
 
                     animator.SetTrigger("SpellCasted");
                 }
                 else
                 {
-                    AudioManager.Instance.PlaySound(failSpell, 0.6f);
+                    AudioManager.Instance.PlaySound("Fail Spell", 0.6f);
                 }
             }
         }

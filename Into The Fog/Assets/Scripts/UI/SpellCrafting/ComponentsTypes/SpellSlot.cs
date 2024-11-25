@@ -14,8 +14,6 @@ public class SpellSlot : MonoBehaviour, IDropHandler
     [SerializeField] protected SpellComponentType componentType;
     [SerializeField] protected SpellMenuItem item;
 
-    [SerializeField] AudioClip onDrop;
-
     // ===== | Properties | =====
     public bool HasChild { get { return transform.childCount != 0; } }
 
@@ -43,7 +41,7 @@ public class SpellSlot : MonoBehaviour, IDropHandler
                 item.parentAfterDrag = transform;
             }
 
-            AudioManager.Instance.PlaySound(onDrop, 0.8f);
+            AudioManager.Instance.PlaySound("On Drop", 0.8f);
         }
     }
 

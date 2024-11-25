@@ -14,8 +14,6 @@ public class MeleeAttack : AbstractAttack
     [SerializeField] private float attackCooldown = 2;
     [SerializeField] private float knockBackForce;
 
-    [SerializeField] private AudioClip onEnemyHit;
-
     // ===== | Methods | =====
     // Start is called before the first frame update
     void Start()
@@ -56,7 +54,7 @@ public class MeleeAttack : AbstractAttack
             //CalculatePushForce(knockBackForce, player.transform.position - transform.parent.position)
             player.TakeDamage(damage);
 
-            AudioManager.Instance.PlaySound(onEnemyHit);
+            AudioManager.Instance.PlaySound("Big Hit");
         }
     }
 
