@@ -4,6 +4,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.SceneManagement;
 
 public enum UIState
 { 
@@ -196,6 +197,8 @@ public class SpellCraftManager : MonoBehaviour
         SaveInventory();
 
         Debug.LogWarning("Transition to Game");
+        Cursor.visible = true;
+        SceneManager.LoadScene("FinalLevel");
     }
 
 }

@@ -46,12 +46,14 @@ public class FogPlayer : MonoBehaviour
     private Spell spell1;
     private Spell spell2;
     private Spell spell3;
+    private Spell spell4;
 
     [SerializeField] private Animator animator;
 
     private float spell1Countdown = 3.0f;
     private float spell2Countdown = 3.0f;
     private float spell3Countdown = 3.0f;
+    private float spell4Countdown = 3.0f;
 
     public static event Action<FogPlayer> playerDamageEvent;
 
@@ -79,19 +81,45 @@ public class FogPlayer : MonoBehaviour
         spell1 = GameManager.Instance.GetPlayerSpell(0);
         spell2 = GameManager.Instance.GetPlayerSpell(1);
         spell3 = GameManager.Instance.GetPlayerSpell(2);
+        spell4 = GameManager.Instance.GetPlayerSpell(3);
 
         if (spell1 == null)
-            spell1 = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 0.4f);
+            UIManager.Instance.Spell1.gameObject.SetActive(false);
+        else
+        {
+            UIManager.Instance.Spell1.SetMaxCooldown(spell1.Cooldown);
+            spell1Countdown = spell1.Cooldown;
+        }
+
 
         if (spell2 == null)
-            spell2 = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 0.4f);
+            UIManager.Instance.Spell2.gameObject.SetActive(false);
+        else
+        {
+            UIManager.Instance.Spell2.SetMaxCooldown(spell2.Cooldown);
+            spell2Countdown = spell2.Cooldown;
+        }
 
-        UIManager.Instance.Spell1.SetMaxCooldown(spell1.Cooldown);
-        spell1Countdown = spell1.Cooldown;
-        UIManager.Instance.Spell2.SetMaxCooldown(spell2.Cooldown);
-        spell2Countdown = spell2.Cooldown;
-        UIManager.Instance.Spell3.SetMaxCooldown(spell3.Cooldown);
-        spell3Countdown = spell3.Cooldown;
+        if (spell3 == null)
+            UIManager.Instance.Spell3.gameObject.SetActive(false);
+        else
+        {
+            UIManager.Instance.Spell3.SetMaxCooldown(spell3.Cooldown);
+            spell3Countdown = spell3.Cooldown;
+        }
+
+        if (spell4 == null)
+            UIManager.Instance.Spell4.gameObject.SetActive(false);
+        else
+        {
+            UIManager.Instance.Spell4.SetMaxCooldown(spell4.Cooldown);
+            spell4Countdown = spell4.Cooldown;
+        }
+
+        
+        
+        
+        
         UIManager.Instance.HealthBar.SetMaxHealth(health);
 
         input.onControlsChanged += (PlayerInput input) =>
@@ -133,6 +161,15 @@ public class FogPlayer : MonoBehaviour
             {
                 spell3Countdown += Time.deltaTime;
                 UIManager.Instance.Spell3.SetCooldown(spell3Countdown);
+            }
+        }
+
+        if (spell4 != null)
+        {
+            if (spell4Countdown < spell4.Cooldown)
+            {
+                spell4Countdown += Time.deltaTime;
+                UIManager.Instance.Spell4.SetCooldown(spell4Countdown);
             }
         }
 
@@ -360,6 +397,29 @@ public class FogPlayer : MonoBehaviour
                 {
                     spell3Countdown = 0.0f;
                     spell3.CastSpell(playerModel.gameObject);
+
+                    AudioManager.Instance.PlaySound("Cast Spell", 0.6f);
+
+                    animator.SetTrigger("SpellCasted");
+                }
+                else
+                {
+                    AudioManager.Instance.PlaySound("Fail Spell", 0.6f);
+                }
+            }
+        }
+    }
+
+    public void CastSpell4(InputAction.CallbackContext callback)
+    {
+        if (callback.performed)
+        {
+            if (spell4 != null)
+            {
+                if (spell4Countdown >= spell4.Cooldown)
+                {
+                    spell4Countdown = 0.0f;
+                    spell4.CastSpell(playerModel.gameObject);
 
                     AudioManager.Instance.PlaySound("Cast Spell", 0.6f);
 

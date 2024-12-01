@@ -18,6 +18,6 @@ public class MenuButtons : MonoBehaviour
 
     void SwitchScene()
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneToSwitchTo.name);
     }
 }

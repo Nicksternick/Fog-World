@@ -753,6 +753,17 @@
                 },
                 {
                     "name": "",
+                    "id": "17cb0025-0b1e-4ae7-b2b9-ea2fa222149d",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "22762c59-a692-4328-b3f6-65711aef625e",
                     "path": "<Mouse>/scroll",
                     "interactions": "",

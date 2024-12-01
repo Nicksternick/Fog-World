@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private FogIconSpell spell1;
     [SerializeField] private FogIconSpell spell2;
     [SerializeField] private FogIconSpell spell3;
+    [SerializeField] private FogIconSpell spell4;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI hiveCount;
 
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour
     public FogIconSpell Spell1 { get { return spell1; } }
     public FogIconSpell Spell2 { get { return spell2; } }
     public FogIconSpell Spell3 { get { return spell3; } }
+    public FogIconSpell Spell4 { get { return spell4; } }
 
     // ===== | Methods | =====
     private void Awake()
@@ -37,6 +39,6 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        levelText.text = $"Level: {GameManager.Instance.CurrentLevel}";
+        levelText.text = $"Level: {GameManager.Instance.CurrentLevel + 1}";
     }
 }

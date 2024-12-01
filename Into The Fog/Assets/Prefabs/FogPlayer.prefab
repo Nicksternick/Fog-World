@@ -64,8 +64,6 @@ MonoBehaviour:
   mapCamera: {fileID: 6620038726626976966}
   playerRigidBody: {fileID: 7652867981283466845}
   playerModel: {fileID: 7339939906933075725}
-  castSpell: {fileID: 8300000, guid: 5043899f8d72bb44b957759cc22793ff, type: 3}
-  failSpell: {fileID: 8300000, guid: 5c782f0c418d0cb41923c6c5e9e50e78, type: 3}
   animator: {fileID: 3527862990984513377}
   controllerAimArrow: {fileID: 4138921039468186206}
 --- !u!114 &4471029826668248026
@@ -167,9 +165,61 @@ MonoBehaviour:
     m_ActionId: 68456671-03fd-4147-8239-73a11057ecb1
     m_ActionName: FogPlayer/Look[/XInputControllerWindows/rightStick,/Mouse/position]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 895945568556180447}
+        m_TargetAssemblyTypeName: FogPlayer, Assembly-CSharp
+        m_MethodName: CastSpell4
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 189dee74-e7f8-4e2f-b227-3854b86d2742
     m_ActionName: FogPlayer/Spell4[/Keyboard/e,/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 981289ba-375f-40f5-ad6b-a60c4693e85c
+    m_ActionName: UI/Navigate[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ff407a05-9954-4f56-ae84-01d653dfc840
+    m_ActionName: UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c1485e94-c988-439b-84d0-8e201a5fb4fd
+    m_ActionName: UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fe178508-a70e-467e-a0ea-98865d1dd2d9
+    m_ActionName: UI/Point[/Mouse/position,/Pen/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cfe5cfb3-4ca0-4ffe-a6c9-f86262754c78
+    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6186f729-a52a-4fe5-b3cc-3d19434640a0
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9c9964f7-81f8-4272-8c06-da44d33b2d26
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c2e0ab9b-5d82-482f-abbb-59e7a91113af
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ebcf9542-673f-40ab-96ee-bee00acef7a6
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bb99a2e6-6e09-497e-89ed-3002448b7059
+    m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FogPlayer
