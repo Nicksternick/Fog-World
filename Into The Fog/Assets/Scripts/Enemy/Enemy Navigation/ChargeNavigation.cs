@@ -9,8 +9,6 @@ public class ChargeNavigation : AbstractNavigation
     private const float chaseDistance = 50;
     private float wanderTime = timer;
 
-    [SerializeField] private AudioClip chargeSound;
-
     // ===== | Charge Variables | =====
     private float sightConeRadius = 60;
     private float chargeWaitTime;
@@ -70,7 +68,7 @@ public class ChargeNavigation : AbstractNavigation
                         EnemyAgent.speed = 30;
                         enemyState = EnemyState.Charge;
 
-                        AudioManager.Instance.PlaySound(chargeSound);
+                        AudioManager.Instance.PlaySound("Charger Warning");
                     }
                     break;
                 case EnemyState.Cooldown:
