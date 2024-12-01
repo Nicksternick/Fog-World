@@ -1,13 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public enum SpellComponentType
-{
-    None = -1,
-    Element,
-    Shape
-}
-
 public class SpellSlot : MonoBehaviour, IDropHandler
 {
     // ===== | Variables | =====
