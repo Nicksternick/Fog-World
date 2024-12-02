@@ -54,7 +54,7 @@ public class MeleeAttack : AbstractAttack
             //CalculatePushForce(knockBackForce, player.transform.position - transform.parent.position)
             player.TakeDamage(damage);
 
-            AudioManager.Instance.PlaySound("Big Hit");
+            AudioManager.Instance.PlaySound("Big Hit", true);
         }
     }
 

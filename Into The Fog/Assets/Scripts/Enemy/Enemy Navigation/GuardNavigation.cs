@@ -53,6 +53,11 @@ public class GuardNavigation : AbstractNavigation
         enemyState = EnemySate.Wandering;
     }
 
+    private void OnDisable()
+    {
+        AudioManager.Instance.PlaySound("Guard Death", true);
+    }
+
     public override void Move()
     {
         if (Controller.Target != null)

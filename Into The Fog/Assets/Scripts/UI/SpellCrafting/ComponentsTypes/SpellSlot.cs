@@ -41,7 +41,7 @@ public class SpellSlot : MonoBehaviour, IDropHandler
                 item.parentAfterDrag = transform;
             }
 
-            AudioManager.Instance.PlaySound("On Drop", 0.8f);
+            AudioManager.Instance.PlaySound("On Drop", true, 0.8f);
         }
     }
 
