@@ -24,6 +24,12 @@ public class ChargeNavigation : AbstractNavigation
     }
 
     // ===== | Methods | =====
+
+    private void OnDisable()
+    {
+        AudioManager.Instance.PlaySound("Charger Death", true);   
+    }
+
     public override void Move()
     {
         if (Controller.Target != null)
@@ -68,7 +74,7 @@ public class ChargeNavigation : AbstractNavigation
                         EnemyAgent.speed = 30;
                         enemyState = EnemyState.Charge;
 
-                        AudioManager.Instance.PlaySound("Charger Warning");
+                        AudioManager.Instance.PlaySound("Charger Warning", true);
                     }
                     break;
                 case EnemyState.Cooldown:

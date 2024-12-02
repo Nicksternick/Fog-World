@@ -21,7 +21,7 @@ public class SpellMenuItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetAsLastSibling();
         image.raycastTarget = false;
 
-        AudioManager.Instance.PlaySound("On Component Click", 2.0f);
+        AudioManager.Instance.PlaySound("On Component Click", true, 2.0f);
     }
 
     public void OnDrag(PointerEventData eventData)
