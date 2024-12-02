@@ -421,13 +421,13 @@ public class FogPlayer : MonoBehaviour
                     spell4Countdown = 0.0f;
                     spell4.CastSpell(playerModel.gameObject);
 
-                    AudioManager.Instance.PlaySound("Cast Spell", 0.6f);
+                    AudioManager.Instance.PlaySound("Cast Spell", true, 0.6f);
 
                     animator.SetTrigger("SpellCasted");
                 }
                 else
                 {
-                    AudioManager.Instance.PlaySound("Fail Spell", 0.6f);
+                    AudioManager.Instance.PlaySound("Fail Spell", true, 0.6f);
                 }
             }
         }
