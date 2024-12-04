@@ -34,15 +34,15 @@ public class LevelManager : MonoBehaviour
 
         spawnPlayer();
 
-        int extraHives = 0;
+        //int extraHives = 0;
 
-        if (GameManager.Instance.CurrentLevel >= 3)
-            extraHives++;
+        //if (GameManager.Instance.CurrentLevel >= 3)
+        //    extraHives++;
 
-        if (GameManager.Instance.CurrentLevel >= 6)
-            extraHives++;
+        //if (GameManager.Instance.CurrentLevel >= 6)
+        //    extraHives++;
 
-        enemyManager.HiveNum += extraHives;
+        enemyManager.HiveNum = GameManager.Instance.CurrentLevel + 1;
     }
 
     private void Start()
@@ -94,7 +94,7 @@ public class LevelManager : MonoBehaviour
             hiveCount += "<sprite index=0> ";
         }
 
-        UIManager.Instance.HiveCount.text = hiveCount;
+        UIManager.Instance.HiveCount.text = "Hives: " + hiveCount;
     }
 
     private void OnEnable()

@@ -654,11 +654,33 @@
                 },
                 {
                     "name": "",
-                    "id": "5beb1198-b207-459b-b5cf-6ed1a0b8575d",
-                    "path": "*/{Submit}",
+                    "id": "dff49f73-e316-4b1d-b6f0-2735e0bc61f2",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76db92b9-6435-406c-ac4f-e2a3b2a1d251",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1535dcd4-d915-44a0-ae35-84cb216ae553",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -753,8 +775,8 @@
                 },
                 {
                     "name": "",
-                    "id": "17cb0025-0b1e-4ae7-b2b9-ea2fa222149d",
-                    "path": "<Gamepad>/dpad/left",
+                    "id": "57935f23-9f93-4658-adfe-848a1bcc1a2b",
+                    "path": "<XInputController>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
