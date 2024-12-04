@@ -26,7 +26,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Size: 1
+    - _Size: 2
     - _Smoothness: 0.5
     m_Colors:
     - _BaseColor: {r: 0.29559743, g: 0.28731897, b: 0.2593449, a: 1}
