@@ -157492,6 +157492,7 @@ MonoBehaviour:
   enemyManager: {fileID: 861042571}
   rockMaterials: []
   floorMaterials: []
+  winScene: YouWin
 --- !u!1001 &1993552364
 PrefabInstance:
   m_ObjectHideFlags: 0
