@@ -61,6 +61,7 @@ public class SpellComponentSlot : MonoBehaviour, IPointerEnterHandler, IPointerE
                 componentText.text = spell.Name;
             }
         }
+        AudioManager.Instance.PlaySound("On Drop", true, 0.8f);
     }
 
     public void OnPointerEnter(PointerEventData pointerEventData)

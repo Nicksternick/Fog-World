@@ -252,6 +252,7 @@ public class FogPlayer : MonoBehaviour
     /// </summary>
     private void DashMove()
     {
+        AudioManager.Instance.PlaySound("Dash", true);
         Vector3 rayOrigin = transform.position;
         rayOrigin.y = transform.localScale.y / 2;
 
@@ -352,13 +353,13 @@ public class FogPlayer : MonoBehaviour
                     spell1Countdown = 0.0f;
                     spell1.CastSpell(playerModel.gameObject);
 
-                    AudioManager.Instance.PlaySound("Cast Spell", true, 0.6f);
+                    AudioManager.Instance.PlaySpellSound(spell1);
 
                     animator.SetTrigger("SpellCasted");
                 }
                 else
                 {
-                    AudioManager.Instance.PlaySound("Fail Spell", true, 0.6f);
+                    AudioManager.Instance.PlaySound("Spell Fail", true, 0.6f);
                 }
             }
         }
@@ -375,13 +376,13 @@ public class FogPlayer : MonoBehaviour
                     spell2Countdown = 0.0f;
                     spell2.CastSpell(playerModel.gameObject);
 
-                    AudioManager.Instance.PlaySound("CastSpell", true, 0.6f);
+                    AudioManager.Instance.PlaySpellSound(spell2);
 
                     animator.SetTrigger("SpellCasted");
                 }
                 else
                 {
-                    AudioManager.Instance.PlaySound("Fail Spell", true, 0.6f);
+                    AudioManager.Instance.PlaySound("Spell Fail", true, 0.6f);
                 }
             }
         }
@@ -398,13 +399,13 @@ public class FogPlayer : MonoBehaviour
                     spell3Countdown = 0.0f;
                     spell3.CastSpell(playerModel.gameObject);
 
-                    AudioManager.Instance.PlaySound("Cast Spell", true, 0.6f);
+                    AudioManager.Instance.PlaySpellSound(spell3);
 
                     animator.SetTrigger("SpellCasted");
                 }
                 else
                 {
-                    AudioManager.Instance.PlaySound("Fail Spell", true, 0.6f);
+                    AudioManager.Instance.PlaySound("Spell Fail", true, 0.6f);
                 }
             }
         }
@@ -421,13 +422,13 @@ public class FogPlayer : MonoBehaviour
                     spell4Countdown = 0.0f;
                     spell4.CastSpell(playerModel.gameObject);
 
-                    AudioManager.Instance.PlaySound("Cast Spell", true, 0.6f);
+                    AudioManager.Instance.PlaySpellSound(spell4);
 
                     animator.SetTrigger("SpellCasted");
                 }
                 else
                 {
-                    AudioManager.Instance.PlaySound("Fail Spell", true, 0.6f);
+                    AudioManager.Instance.PlaySound("Spell Fail", true, 0.6f);
                 }
             }
         }
@@ -495,5 +496,6 @@ public class FogPlayer : MonoBehaviour
         health -= amount;
         UIManager.Instance.HealthBar.SetHealth(health);
         playerDamageEvent(this);
+        AudioManager.Instance.PlaySound("Regular Hit", true);
     }
 }

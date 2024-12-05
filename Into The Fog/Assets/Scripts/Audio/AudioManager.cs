@@ -38,15 +38,14 @@ public class AudioManager : MonoBehaviour
 
 
 
-    public void PlaySound(string soundName, bool varPitch, float volume = 1.0f)
+    public void PlaySound(string soundName, bool varPitch, float volume = 0.8f)
     {
         if (!currentlyPlayingSounds.Contains(soundName))
         {
             if (varPitch)
             {
-                audioSource.pitch = Random.Range(0.85f, 1.15f);
+                audioSource.pitch = Random.Range(0.9f, 1.1f);
                 PlaySound(soundName, volume);
-                audioSource.pitch = 1.0f;
             }
             else
             {
@@ -55,9 +54,8 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void PlaySound(string soundName, float volume = 1.0f)
+    private void PlaySound(string soundName, float volume = 0.8f)
     {
-        audioSource.volume = volume;
 
         if (soundDictionary.ContainsKey(soundName))
         {
@@ -71,7 +69,20 @@ public class AudioManager : MonoBehaviour
         {
             Debug.LogWarning($"Sound '{soundName}' not found");
         }
-        audioSource.volume = 1.0f;
+    }
+
+    public void PlaySpellSound(Spell spell)
+    {
+        switch (spell.Element) 
+        {
+            case Elements.Fire:
+                PlaySound("Fire Spell");
+                break;
+
+            case Elements.Ice:
+                PlaySound("Ice Spell");
+                break;
+        }
     }
 
     private IEnumerator RemoveFromCurrentlyPlaying(string soundName, float delay)

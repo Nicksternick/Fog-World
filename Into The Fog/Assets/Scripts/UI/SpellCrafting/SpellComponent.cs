@@ -53,6 +53,7 @@ public class SpellComponent : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         outerBorder.raycastTarget = false;
 
         SpellCraftManager.Instance.ObjectSelected = true;
+        AudioManager.Instance.PlaySound("On Component Click", true);
     }
 
     public void OnDrag(PointerEventData eventData)
