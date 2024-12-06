@@ -25,6 +25,7 @@ public class SpellCraftManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI warningBox;
     [SerializeField] private GameObject[] spellComponents;
     [SerializeField] private SpellInventory spellInventory;
+    [SerializeField] private TextMeshProUGUI grabGlyph;
 
     // ===== | Properties | =====
     public GameObject[] SpellComponents
@@ -81,10 +82,12 @@ public class SpellCraftManager : MonoBehaviour
         if (playerInput.currentControlScheme == "Controller")
         {
             state = UIState.Controller;
+            grabGlyph.text = "<sprite index=12>";
         }
         else
         {
             state = UIState.KeyboardMouse;
+            grabGlyph.text = "<sprite index=4>";
         }
     }
 

@@ -8,8 +8,14 @@ public class FogIconSpell : MonoBehaviour
     // ===== | Variables | =====
     [SerializeField] private TextMeshProUGUI spellStatus;
     [SerializeField] private HealthBar statusBar;
+    [SerializeField] private TextMeshProUGUI glyph;
 
     // ===== | Variables | =====
+    public void SetControlGlyph(int index)
+    {
+        glyph.text = $"<sprite index={index}>";
+    }
+
     public void SetMaxCooldown(float maxCooldown)
     {
         statusBar.SetMaxHealth(maxCooldown);

@@ -46,7 +46,6 @@ public class SpellComponent : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log(nameof(OnBeginDrag));
         isSelected = true;
         outerBorder.color = Color.yellow;
 
@@ -66,7 +65,6 @@ public class SpellComponent : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log(nameof(OnEndDrag));
         isSelected = false;
         outerBorder.color = baseColor;
 

@@ -70,6 +70,10 @@ public class EnemyManager : MonoBehaviour
                     {
                         j--;
                     }
+
+                    // Nick Code
+                    if (chosen.Count == enemySpawners[i].GetComponent<EnemySpawner>().spawnPositions.Length)
+                        break;
                 }
             }
             else

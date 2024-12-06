@@ -70,7 +70,13 @@ public class FogPlayer : MonoBehaviour
     {
         move = input.actions.FindAction("Move");
         look = input.actions.FindAction("Look");
+        
         //dashTimer = gameObject.AddComponent<Timer>();
+    }
+
+    private void OnEnable()
+    {
+        
     }
 
     void Start()
@@ -115,12 +121,12 @@ public class FogPlayer : MonoBehaviour
             UIManager.Instance.Spell4.SetMaxCooldown(spell4.Cooldown);
             spell4Countdown = spell4.Cooldown;
         }
-
-        
-        
-        
         
         UIManager.Instance.HealthBar.SetMaxHealth(health);
+        
+        UIManager.Instance.SetupUIInputEvents(input);
+
+        input.SwitchCurrentControlScheme("Controller");
 
         input.onControlsChanged += (PlayerInput input) =>
         {
@@ -130,6 +136,8 @@ public class FogPlayer : MonoBehaviour
 
     private void Update()
     {
+        UIManager.Instance.DeviceChange(input);
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             mapCamera.gameObject.SetActive(!mapCamera.gameObject.activeSelf);
