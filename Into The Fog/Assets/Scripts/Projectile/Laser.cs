@@ -7,40 +7,39 @@ public class Laser : Projectile
     private GenericPool<Laser> pool;
     private float originalLength;
 
+    /// <summary>
+    /// Jay 11/5/24
+    /// Initialization of the projectile 
+    /// </summary>
+    /// <param name="timeUntilDestroy"> When to despawn </param>
+    /// <param name="data"> Projectile Stats </param>
     public override void Initialize(float timeUntilDestroy, ProjectileData data)
     {
         this.timeUntilDestroy = timeUntilDestroy;
         this.data = data;
 
+        // Make sure the laser is facing the right direction
         Quaternion rotation = Quaternion.LookRotation(caller.transform.forward);
         transform.rotation = rotation * Quaternion.Euler(90, 0, 0);
 
         despawnAfterTimeCoroutine = StartCoroutine(DespawnAfterTime());
+
+        // Keep track of the laser's orginal length
         originalLength = transform.localScale.y;
     }
 
-    private void OnDisable()
+    protected override void OnCollisionEnter(Collision other)
     {
-        // Stop the coroutine if it's running
-        if (despawnAfterTimeCoroutine != null)
+        base.OnCollisionEnter(other);
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            StopCoroutine(despawnAfterTimeCoroutine);
-            despawnAfterTimeCoroutine = null;
+            //Debug.Log("Hit Enemy!");
+            Enemy enemyController = other.gameObject.GetComponent<Enemy>();
+            enemyController.TakeDamage(data.Damage * (data.Element == Elements.Fire ? 1.5f : 1f));
         }
-    }
 
-    protected override void OnCollisionEnter(Collision collision)
-    {
-        base.OnCollisionEnter(collision);
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("Hit Enemy!");
-            Enemy enemyController = collision.gameObject.GetComponent<Enemy>();
-            enemyController.TakeDamage(25);
-
-            
-        }
-        if (collision.gameObject.layer == 6)
+        // Resize the laser if it hits a wall
+        if (other.gameObject.layer == 6)
         {
             float offset = 0.5f;
             Vector3 rayStartPosition = caller.transform.position + caller.transform.forward * offset;
@@ -52,6 +51,7 @@ public class Laser : Projectile
 
             foreach (RaycastHit hit in hits)
             {
+                // Make sure that the raycast of the laser hitbox itself is not being used 
                 if (hit.collider.gameObject != gameObject)
                 {
                     newLength = hit.distance;

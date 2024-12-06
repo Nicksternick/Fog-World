@@ -9,6 +9,7 @@ using TMPro;
 public class MenuButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Object sceneToSwitchTo;
+    [SerializeField] string sceneName;
     public Button sceneButton;
     public TMP_Text buttonText;
 

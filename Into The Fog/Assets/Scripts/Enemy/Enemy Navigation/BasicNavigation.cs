@@ -28,6 +28,12 @@ public class BasicNavigation : AbstractNavigation
 
 
     // ===== | Methods | =====
+
+    private void OnDisable()
+    {
+        AudioManager.Instance.PlaySound("Worm Death", true);
+    }
+
     public override void Move()
     {
         if (Controller.Target != null)

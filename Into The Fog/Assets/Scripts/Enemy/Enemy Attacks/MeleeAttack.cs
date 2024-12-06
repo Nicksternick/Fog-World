@@ -6,6 +6,8 @@ public class MeleeAttack : AbstractAttack
 {
     // ===== | Variables | =====
     [SerializeField] private float damage;
+    [SerializeField] private float damageModifier = 2;
+
     private float damageCooldown;
     private bool canAttack;
 
@@ -16,6 +18,7 @@ public class MeleeAttack : AbstractAttack
     // Start is called before the first frame update
     void Start()
     {
+        damage += damageModifier * GameManager.Instance.CurrentLevel;
         damageCooldown = attackCooldown;
         canAttack = true;
     }
@@ -50,6 +53,8 @@ public class MeleeAttack : AbstractAttack
             rb.AddForce((player.transform.position - transform.parent.position).normalized * knockBackForce, ForceMode.Impulse);
             //CalculatePushForce(knockBackForce, player.transform.position - transform.parent.position)
             player.TakeDamage(damage);
+
+            AudioManager.Instance.PlaySound("Big Hit", true);
         }
     }
 

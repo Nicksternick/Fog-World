@@ -24,6 +24,9 @@ public abstract class Projectile : MonoBehaviour
     public Quaternion Rotation => (Quaternion)rotation;   
     public ProjectileData Data => data;
 
+    /// <summary>
+    /// The game object that spawned this
+    /// </summary>
     public GameObject Caller
     {
          get{ return caller; }
@@ -35,6 +38,25 @@ public abstract class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    /// <summary>
+    /// Jay 11/5/24
+    /// Stop the coroutine if this is disabled
+    /// </summary>
+    protected void OnDisable()
+    {
+        // Stop the coroutine if it's running
+        if (despawnAfterTimeCoroutine != null)
+        {
+            StopCoroutine(despawnAfterTimeCoroutine);
+            despawnAfterTimeCoroutine = null;
+        }
+    }
+
+    /// <summary>
+    /// Jay 11/5/2024
+    /// Apply a vector in the direction that the caller is facing with
+    /// the projectile's speed stat
+    /// </summary>
     public virtual void SetVelocity()
     {
         if (caller != null)
@@ -44,35 +66,61 @@ public abstract class Projectile : MonoBehaviour
         }
     }
 
-    public void ChangeColor(UnityEngine.Color color)
-    {
-        Renderer renderer = this.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            renderer.material.color = color;
-        }
-    }
-
+    /// <summary>
+    /// Jay 11/5/2024
+    /// *** Note due to how pooling is set up most projectile forms
+    /// will have an override of this is similar code because the 
+    /// related object pool can only be referenced in each individual
+    /// child class
+    /// 
+    /// Used when a solid projectile hits anything
+    /// </summary>
+    /// <param name="collision"> The collsion object created </param>
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        Debuff enemyDebuff = collision.gameObject.GetComponent<Debuff>();
-        if (enemyDebuff != null)
+        if(data.Element != Elements.Fire)
         {
-            // Apply the debuff with the specified element type
-            enemyDebuff.TriggerDebuff(data.Element);
+            // Get the enemy's debuff script
+            Debuff enemyDebuff = collision.gameObject.GetComponent<Debuff>();
+
+            if (enemyDebuff != null)
+            {
+                // Apply the debuff with the specified element type
+                enemyDebuff.TriggerDebuff(data.Element);
+            }
         }
     }
 
+    /// <summary>
+    /// Jay 11/5/2024
+    /// *** Note due to how pooling is set up most projectile forms
+    /// will have an override of this is similar code because the 
+    /// related object pool can only be referenced in each individual
+    /// child class
+    /// 
+    /// Used when a trigger projectile hits anything
+    /// </summary>
+    /// <param name="collision"> The collsion object created </param>
     protected virtual void OnTriggerEnter(Collider other)
     {
-        Debuff enemyDebuff = other.gameObject.GetComponent<Debuff>();
-        if (enemyDebuff != null)
+        if (data.Element != Elements.Fire)
         {
-            // Apply the debuff with the specified element type
-            enemyDebuff.TriggerDebuff(data.Element);
+            // Get the enemey's debuff script
+            Debuff enemyDebuff = other.gameObject.GetComponent<Debuff>();
+
+            if (enemyDebuff != null)
+            {
+                // Apply the debuff with the specified element type
+                enemyDebuff.TriggerDebuff(data.Element);
+            }
         }
+
     }
 
+    /// <summary>
+    /// Despawns the projectile after a set time
+    /// </summary>
+    /// <returns> The result for the coroutine </returns>
     protected virtual IEnumerator DespawnAfterTime()
     {
         float elapsedTime = 0f;
@@ -87,6 +135,9 @@ public abstract class Projectile : MonoBehaviour
         DespawnProjectile();
     }
 
+    /// <summary>
+    /// Update For moving projectiles
+    /// </summary>
     private void Update()
     {
         transform.position += rb.velocity * Time.deltaTime;

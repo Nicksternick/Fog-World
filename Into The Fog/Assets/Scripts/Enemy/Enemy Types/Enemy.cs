@@ -12,6 +12,7 @@ public abstract class Enemy : MonoBehaviour
     // ===== | Variables | =====
     [SerializeField] protected Transform target;
     [SerializeField] protected float health;
+    [SerializeField] private float healthModifier = 10;
     [SerializeField] protected HealthBar healthBar;
     [SerializeField] protected float takeDamageCooldown;
     [SerializeField] public bool isImportant;
@@ -31,12 +32,21 @@ public abstract class Enemy : MonoBehaviour
     // ===== | Methods | =====
     private void Awake()
     {
-        onDeath = new UnityEvent();
-        lastDamaged = 0;
+        
     }
 
     private void Start()
     {
+
+    }
+
+    protected virtual void EnemyStart()
+    {
+        onDeath = new UnityEvent();
+        lastDamaged = 0;
+        
+        health += healthModifier * GameManager.Instance.CurrentLevel;
+
         if (healthBar != null)
             healthBar.SetMaxHealth(health);
         else

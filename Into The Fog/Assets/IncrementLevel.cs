@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class IncrementLevel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Increment()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameManager.Instance.IncrementCurrentLevel();
     }
 }

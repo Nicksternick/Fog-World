@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3889691771670335807}
   - component: {fileID: 8576738210743557996}
-  - component: {fileID: 7839449980613268727}
   - component: {fileID: 2498934964312400858}
   - component: {fileID: 1781759497154825772}
   - component: {fileID: 8624020490602003632}
+  - component: {fileID: 7067601801391329485}
   m_Layer: 0
   m_Name: LargeEnemy
   m_TagString: Enemy
@@ -49,48 +49,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5300122117470067798}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7839449980613268727
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5300122117470067798}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: fbfa48ba12144a540a7636854220b3ee, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &2498934964312400858
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -126,12 +84,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   health: 500
+  healthModifier: 5
   healthBar: {fileID: 373000099041273866}
   takeDamageCooldown: 0
   isImportant: 0
   agent: {fileID: 8624020490602003632}
   navigation: {fileID: 5885991179089761379}
   attack: {fileID: 1997897936530266939}
+  speedModifier: 0.05
 --- !u!195 &8624020490602003632
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -154,6 +114,20 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7067601801391329485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300122117470067798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a15ec37f554028a43bcac6033b16a597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iceSlowFactor: 0.5
+  debuffDuration: 3
 --- !u!1 &7829264309338205671
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 4
+  chargeSound: {fileID: 8300000, guid: d4b7bfa2fa73fd84eaf95f164548317b, type: 3}
 --- !u!1 &7846113145627362911
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,8 +220,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  damageModifier: 1
   attackCooldown: 3
   knockBackForce: 60
+  onEnemyHit: {fileID: 8300000, guid: f5af7e89101d427448b4c63fef7747bc, type: 3}
 --- !u!135 &1263578639313593425
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -425,6 +402,16 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5451f19ecf36a9e4ebf8eadc97e0d117,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5451f19ecf36a9e4ebf8eadc97e0d117,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fbfa48ba12144a540a7636854220b3ee, type: 2}
     - target: {fileID: 919132149155446097, guid: 5451f19ecf36a9e4ebf8eadc97e0d117,
         type: 3}
       propertyPath: m_Name

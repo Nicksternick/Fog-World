@@ -18,13 +18,25 @@ public class Debuff : MonoBehaviour
     void Start()
     {
         enemyAgent = GetComponent<NavMeshAgent>();
-        enemyRenderer = GetComponent<Renderer>();
+        enemyRenderer = GetComponentInChildren<Renderer>();
 
         if (enemyAgent != null)
             originalSpeed = enemyAgent.speed;
 
         if (enemyRenderer != null)
             originalColor = enemyRenderer.material.color;
+
+        //Debug.Log(enemyRenderer.material.name);
+    }
+
+    private void OnDisable()
+    {
+        // Stop the coroutine if it's running
+        foreach (Coroutine coroutine in activeDebuffs.Values)
+        {
+            if (coroutine != null) StopCoroutine(coroutine);
+        }
+        activeDebuffs.Clear();
     }
 
     public void TriggerDebuff(Elements elementType)

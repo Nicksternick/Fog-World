@@ -51,8 +51,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Laser, 3.0f);
-        iceLaser = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.AoE, 3.0f);
+        fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 3.0f);
+        iceLaser = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 3.0f);
     }
 
     void Update()

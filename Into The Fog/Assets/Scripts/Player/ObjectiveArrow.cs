@@ -9,23 +9,30 @@ public class ObjectiveArrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (GameObject objective in LevelManager.Instance.ImportantEnemies)
+        if (LevelManager.Instance.ImportantEnemies.Count != 0)
         {
-            if (currentObjective == null)
+            foreach (GameObject objective in LevelManager.Instance.ImportantEnemies)
             {
-                currentObjective = objective;
-            }
-            else
-            {
-                float distanceToCurrentObjective = Vector3.Distance(transform.position, currentObjective.transform.position);
-                float distanceToNewObjective = Vector3.Distance(transform.position, objective.transform.position);
-                if (distanceToNewObjective < distanceToCurrentObjective)
+                if (objective == null)
+                    continue;
+
+                if (currentObjective == null)
                 {
                     currentObjective = objective;
                 }
+                else
+                {
+                    float distanceToCurrentObjective = Vector3.Distance(transform.position, currentObjective.transform.position);
+                    float distanceToNewObjective = Vector3.Distance(transform.position, objective.transform.position);
+                    if (distanceToNewObjective < distanceToCurrentObjective)
+                    {
+                        currentObjective = objective;
+                    }
+                }
             }
-        }
 
-        transform.LookAt(currentObjective.transform.position);
+            if (currentObjective != null)
+                transform.LookAt(currentObjective.transform.position);
+        }
     }
 }

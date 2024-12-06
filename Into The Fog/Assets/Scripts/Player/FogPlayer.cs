@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +23,7 @@ public class FogPlayer : MonoBehaviour
     // ----- | Inputs from PlayerInput | -----
     [SerializeField] private PlayerInput input;
     private InputAction move;
+    private InputAction look;
 
     [Header("Camera")]
     // ----- | Camera SubObjects | -----
@@ -43,13 +43,21 @@ public class FogPlayer : MonoBehaviour
     private bool canDash = true;
     private float dashTimer;
 
-    [SerializeField] private Spell fireBall;
-    [SerializeField] private Spell iceBall;
+    private Spell spell1;
+    private Spell spell2;
+    private Spell spell3;
+    private Spell spell4;
 
-    private float primarySpellCountdown = 3.0f;
-    private float secondarySpellCountdown = 3.0f;
+    [SerializeField] private Animator animator;
+
+    private float spell1Countdown = 3.0f;
+    private float spell2Countdown = 3.0f;
+    private float spell3Countdown = 3.0f;
+    private float spell4Countdown = 3.0f;
 
     public static event Action<FogPlayer> playerDamageEvent;
+
+    [SerializeField] private GameObject controllerAimArrow;
 
     // ===== | Properties | =====
     public float Health
@@ -61,7 +69,14 @@ public class FogPlayer : MonoBehaviour
     private void Awake()
     {
         move = input.actions.FindAction("Move");
+        look = input.actions.FindAction("Look");
+        
         //dashTimer = gameObject.AddComponent<Timer>();
+    }
+
+    private void OnEnable()
+    {
+        
     }
 
     void Start()
@@ -69,22 +84,60 @@ public class FogPlayer : MonoBehaviour
         UIManager.Instance.StaminaBar.SetMaxHealth(dashCooldown);
         UIManager.Instance.StaminaBar.SetHealth(dashCooldown);
 
-        fireBall = GameManager.Instance.GetPlayerSpell(0);
-        iceBall = GameManager.Instance.GetPlayerSpell(1);
+        spell1 = GameManager.Instance.GetPlayerSpell(0);
+        spell2 = GameManager.Instance.GetPlayerSpell(1);
+        spell3 = GameManager.Instance.GetPlayerSpell(2);
+        spell4 = GameManager.Instance.GetPlayerSpell(3);
 
-        if (fireBall == null)
-            fireBall = SpellCrafter.Instance.CraftSpell(Elements.Fire, Forms.Ball, 0.4f);
+        if (spell1 == null)
+            UIManager.Instance.Spell1.gameObject.SetActive(false);
+        else
+        {
+            UIManager.Instance.Spell1.SetMaxCooldown(spell1.Cooldown);
+            spell1Countdown = spell1.Cooldown;
+        }
 
-        if (iceBall == null)
-            iceBall = SpellCrafter.Instance.CraftSpell(Elements.Ice, Forms.Ball, 0.4f);
 
-        UIManager.Instance.Spell1.SetMaxCooldown(fireBall.Cooldown);
-        UIManager.Instance.Spell2.SetMaxCooldown(iceBall.Cooldown);
+        if (spell2 == null)
+            UIManager.Instance.Spell2.gameObject.SetActive(false);
+        else
+        {
+            UIManager.Instance.Spell2.SetMaxCooldown(spell2.Cooldown);
+            spell2Countdown = spell2.Cooldown;
+        }
+
+        if (spell3 == null)
+            UIManager.Instance.Spell3.gameObject.SetActive(false);
+        else
+        {
+            UIManager.Instance.Spell3.SetMaxCooldown(spell3.Cooldown);
+            spell3Countdown = spell3.Cooldown;
+        }
+
+        if (spell4 == null)
+            UIManager.Instance.Spell4.gameObject.SetActive(false);
+        else
+        {
+            UIManager.Instance.Spell4.SetMaxCooldown(spell4.Cooldown);
+            spell4Countdown = spell4.Cooldown;
+        }
+        
         UIManager.Instance.HealthBar.SetMaxHealth(health);
+        
+        UIManager.Instance.SetupUIInputEvents(input);
+
+        input.SwitchCurrentControlScheme("Controller");
+
+        input.onControlsChanged += (PlayerInput input) =>
+        {
+            controllerAimArrow.gameObject.SetActive(input.currentControlScheme.Equals("Gamepad"));
+        };
     }
 
     private void Update()
     {
+        UIManager.Instance.DeviceChange(input);
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             mapCamera.gameObject.SetActive(!mapCamera.gameObject.activeSelf);
@@ -92,21 +145,39 @@ public class FogPlayer : MonoBehaviour
 
         LookAtMouse();
 
-        if (fireBall != null)
+        if (spell1 != null)
         {
-            if (primarySpellCountdown < fireBall.Cooldown)
+            if (spell1Countdown < spell1.Cooldown)
             {
-                primarySpellCountdown += Time.deltaTime;
-                UIManager.Instance.Spell1.SetCooldown(primarySpellCountdown);
+                spell1Countdown += Time.deltaTime;
+                UIManager.Instance.Spell1.SetCooldown(spell1Countdown);
             }
         }
 
-        if (iceBall != null)
+        if (spell2 != null)
         {
-            if (secondarySpellCountdown < iceBall.Cooldown)
+            if (spell2Countdown < spell2.Cooldown)
             {
-                secondarySpellCountdown += Time.deltaTime;
-                UIManager.Instance.Spell2.SetCooldown(secondarySpellCountdown);
+                spell2Countdown += Time.deltaTime;
+                UIManager.Instance.Spell2.SetCooldown(spell2Countdown);
+            }
+        }
+
+        if (spell3 != null)
+        {
+            if (spell3Countdown < spell3.Cooldown)
+            {
+                spell3Countdown += Time.deltaTime;
+                UIManager.Instance.Spell3.SetCooldown(spell3Countdown);
+            }
+        }
+
+        if (spell4 != null)
+        {
+            if (spell4Countdown < spell4.Cooldown)
+            {
+                spell4Countdown += Time.deltaTime;
+                UIManager.Instance.Spell4.SetCooldown(spell4Countdown);
             }
         }
 
@@ -123,6 +194,11 @@ public class FogPlayer : MonoBehaviour
         if (Health <= 0)
         {
             SceneManager.LoadScene("GameOver");
+        }
+        else if (Health < UIManager.Instance.HealthBar.MaxValue)
+        {
+            health += 1 * Time.deltaTime;
+            UIManager.Instance.HealthBar.SetHealth(health);
         }
     }
 
@@ -163,6 +239,15 @@ public class FogPlayer : MonoBehaviour
 
             // Combine the input with camera orientation to create movement direction
             moveDirection = (cameraRight * readValue.x + cameraForward * readValue.y).normalized;
+
+            if (readValue == Vector2.zero)
+            {
+                animator.SetBool("IsMoving", false);
+            }
+            else
+            {
+                animator.SetBool("IsMoving", true);
+            }
         }
 
         // Move the player based on the movement speed
@@ -224,6 +309,8 @@ public class FogPlayer : MonoBehaviour
 
             dashTimer = 0;
 
+            animator.SetBool("IsSprinting", true);
+
             // Setup the timer to stop dashing when the time is over
             //dashTimer.SetMaxTime(dashTime);
             //dashTimer.OnCountDownEnd.RemoveAllListeners();
@@ -251,6 +338,8 @@ public class FogPlayer : MonoBehaviour
 
         dashTimer = 0;
 
+        animator.SetBool("IsSprinting", false);
+
         // Set up the timer to call EndDashCooldown
         //dashTimer.SetMaxTime(dashCooldown);
         //dashTimer.OnCountDownEnd.RemoveAllListeners();
@@ -264,12 +353,20 @@ public class FogPlayer : MonoBehaviour
     {
         if (callback.performed)
         {
-            if (fireBall != null)
+            if (spell1 != null)
             {
-                if (primarySpellCountdown >= fireBall.Cooldown)
+                if (spell1Countdown >= spell1.Cooldown)
                 {
-                    primarySpellCountdown = 0.0f;
-                    fireBall.CastSpell(playerModel.gameObject);
+                    spell1Countdown = 0.0f;
+                    spell1.CastSpell(playerModel.gameObject);
+
+                    AudioManager.Instance.PlaySound("Cast Spell", true, 0.6f);
+
+                    animator.SetTrigger("SpellCasted");
+                }
+                else
+                {
+                    AudioManager.Instance.PlaySound("Fail Spell", true, 0.6f);
                 }
             }
         }
@@ -279,12 +376,66 @@ public class FogPlayer : MonoBehaviour
     {
         if (callback.performed)
         {
-            if (iceBall != null)
+            if (spell2 != null)
             {
-                if (secondarySpellCountdown > iceBall.Cooldown)
+                if (spell2Countdown >= spell2.Cooldown)
                 {
-                    secondarySpellCountdown = 0.0f;
-                    iceBall.CastSpell(playerModel.gameObject);
+                    spell2Countdown = 0.0f;
+                    spell2.CastSpell(playerModel.gameObject);
+
+                    AudioManager.Instance.PlaySound("CastSpell", true, 0.6f);
+
+                    animator.SetTrigger("SpellCasted");
+                }
+                else
+                {
+                    AudioManager.Instance.PlaySound("Fail Spell", true, 0.6f);
+                }
+            }
+        }
+    }
+
+    public void CastSpell3(InputAction.CallbackContext callback)
+    {
+        if (callback.performed)
+        {
+            if (spell3 != null)
+            {
+                if (spell3Countdown >= spell3.Cooldown)
+                {
+                    spell3Countdown = 0.0f;
+                    spell3.CastSpell(playerModel.gameObject);
+
+                    AudioManager.Instance.PlaySound("Cast Spell", true, 0.6f);
+
+                    animator.SetTrigger("SpellCasted");
+                }
+                else
+                {
+                    AudioManager.Instance.PlaySound("Fail Spell", true, 0.6f);
+                }
+            }
+        }
+    }
+
+    public void CastSpell4(InputAction.CallbackContext callback)
+    {
+        if (callback.performed)
+        {
+            if (spell4 != null)
+            {
+                if (spell4Countdown >= spell4.Cooldown)
+                {
+                    spell4Countdown = 0.0f;
+                    spell4.CastSpell(playerModel.gameObject);
+
+                    AudioManager.Instance.PlaySound("Cast Spell", true, 0.6f);
+
+                    animator.SetTrigger("SpellCasted");
+                }
+                else
+                {
+                    AudioManager.Instance.PlaySound("Fail Spell", true, 0.6f);
                 }
             }
         }
@@ -302,25 +453,53 @@ public class FogPlayer : MonoBehaviour
         float distance;
 
         // Get a ray based on the mouses current position
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        // Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
 
-        // Check the to see if there is a point that the mouse hit
-        if (plane.Raycast(ray, out distance))
+        if (input.currentControlScheme == "Keyboard Mouse")
         {
-            // Get that point
-            Vector3 mousePosition = ray.GetPoint(distance);
+            Ray ray = playerCamera.ScreenPointToRay(look.ReadValue<Vector2>());
 
-            // Make the player look at it, then reset it's x and z rotation
-            playerModel.transform.LookAt(mousePosition, Vector3.up);
-            Quaternion rotation = playerModel.transform.rotation;
-            rotation.x = 0;
-            rotation.z = 0;
-            playerModel.transform.rotation = rotation;
+            // Check the to see if there is a point that the mouse hit
+            if (plane.Raycast(ray, out distance))
+            {
+                // Get that point
+                Vector3 mousePosition = ray.GetPoint(distance);
+
+                // Make the player look at it, then reset it's x and z rotation
+                playerModel.transform.LookAt(mousePosition, Vector3.up);
+                Quaternion rotation = playerModel.transform.rotation;
+                rotation.x = 0;
+                rotation.z = 0;
+                playerModel.transform.rotation = rotation;
+            }
         }
+        else
+        {
+            Vector3 rotation = look.ReadValue<Vector2>().normalized;
+
+            if (rotation == Vector3.zero)
+            {
+                controllerAimArrow.gameObject.SetActive(false);
+                return;
+            }
+
+            controllerAimArrow.gameObject.SetActive(true);
+
+            Vector3 cameraRight = playerCamera.transform.right;
+            Vector3 cameraForward = Vector3.ProjectOnPlane(playerCamera.transform.forward, Vector3.up).normalized;
+
+            Vector3 playerRotation = cameraRight * rotation.x + cameraForward * rotation.y;
+            Quaternion newQuat = Quaternion.LookRotation(playerRotation, Vector3.up);
+
+            playerModel.transform.rotation = Quaternion.RotateTowards(playerModel.transform.rotation, newQuat, 30);
+        }
+
+        
     }
 
     public void TakeDamage(float amount)
     {
+        animator.SetTrigger("DamageTaken");
         health -= amount;
         UIManager.Instance.HealthBar.SetHealth(health);
         playerDamageEvent(this);

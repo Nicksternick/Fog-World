@@ -170,10 +170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1280, y: 720}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -510,7 +510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 669834346}
   - component: {fileID: 669834345}
-  - component: {fileID: 669834344}
+  - component: {fileID: 669834347}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -518,26 +518,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &669834344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 669834343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &669834345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,7 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1233377927}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &669834346
@@ -568,6 +548,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &669834347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669834343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: f4e7227ef58b7f94aa76ef5e90c96ce0,
+    type: 3}
+  m_PointAction: {fileID: -1373936391048363805, guid: f4e7227ef58b7f94aa76ef5e90c96ce0,
+    type: 3}
+  m_MoveAction: {fileID: -8146745638054470346, guid: f4e7227ef58b7f94aa76ef5e90c96ce0,
+    type: 3}
+  m_SubmitAction: {fileID: -6313110190775115136, guid: f4e7227ef58b7f94aa76ef5e90c96ce0,
+    type: 3}
+  m_CancelAction: {fileID: -5423716062224272841, guid: f4e7227ef58b7f94aa76ef5e90c96ce0,
+    type: 3}
+  m_LeftClickAction: {fileID: 5005129313924586031, guid: f4e7227ef58b7f94aa76ef5e90c96ce0,
+    type: 3}
+  m_MiddleClickAction: {fileID: 5419046304878168787, guid: f4e7227ef58b7f94aa76ef5e90c96ce0,
+    type: 3}
+  m_RightClickAction: {fileID: 9105782842396947567, guid: f4e7227ef58b7f94aa76ef5e90c96ce0,
+    type: 3}
+  m_ScrollWheelAction: {fileID: -6952635964414867564, guid: f4e7227ef58b7f94aa76ef5e90c96ce0,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: -2822695156638365013, guid: f4e7227ef58b7f94aa76ef5e90c96ce0,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 2950261124610607125, guid: f4e7227ef58b7f94aa76ef5e90c96ce0,
+    type: 3}
+  m_DeselectOnBackgroundClick: 0
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!1 &946793199
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +764,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CROSS THE FOG
+  m_text: Prepare Spells
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 62a4c3784bf620a44b00c2ce8803d532, type: 2}
   m_sharedMaterial: {fileID: -1127649386968542060, guid: 62a4c3784bf620a44b00c2ce8803d532,
@@ -885,7 +906,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.8235294, g: 0.34117648, b: 0.8509804, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -955,7 +976,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6da9158d9d6d343b74c263fa506a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToSwitchTo: {fileID: 102900000, guid: 3c2663b7b5c588d43856be22f6805625, type: 3}
+  sceneToSwitchTo: {fileID: 102900000, guid: 53139f14d0f90234d9e5bfd33df6d408, type: 3}
+  sceneName: FinalLevel
   sceneButton: {fileID: 1233377929}
   buttonText: {fileID: 1094868095}
 --- !u!1660057539 &9223372036854775807
