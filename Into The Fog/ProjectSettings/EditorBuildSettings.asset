@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: d00f3384a86079d42b4d81af31904e15
   - enabled: 1
+    path: Assets/Scenes/PreGameScenes/SpellCraftingScene.unity
+    guid: 53139f14d0f90234d9e5bfd33df6d408
+  - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 4df4eb329f965a64da571cbf5674762c
   - enabled: 1
@@ -20,9 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/YouWin.unity
     guid: 7bb9fa5bb8397e645a767d0d87510f7a
-  - enabled: 1
-    path: Assets/Scenes/PreGameScenes/SpellCraftingScene.unity
-    guid: 53139f14d0f90234d9e5bfd33df6d408
   - enabled: 1
     path: Assets/Scenes/OnboardingLevel.unity
     guid: 95759898465876b4cac2615f0ba774ff

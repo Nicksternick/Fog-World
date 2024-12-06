@@ -222,7 +222,6 @@ MonoBehaviour:
   damageModifier: 2
   attackCooldown: 0.5
   knockBackForce: 10
-  onEnemyHit: {fileID: 8300000, guid: 5f4032317e522884097e0b38b84aab46, type: 3}
 --- !u!135 &1263578639313593425
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -395,7 +394,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: fbfa48ba12144a540a7636854220b3ee, type: 2}
+      objectReference: {fileID: 2100000, guid: 1176cd31067a86d41a3a24d38a032dd4, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 5d20485e813c10f47a62dfd67ad347d9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3925668205985266290, guid: a615b837d84573145a865db83adc3369,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 5d20485e813c10f47a62dfd67ad347d9,
         type: 3}
       propertyPath: m_Name

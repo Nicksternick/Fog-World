@@ -8,6 +8,15 @@ TagManager:
   - Ball
   - WallContainer
   - Floor
+  - Rock1
+  - Rock2
+  - Boulder1
+  - Boulder2
+  - Spike1
+  - Spike2
+  - Tree1
+  - Tree2
+  - TreeContainer
   layers:
   - Default
   - TransparentFX

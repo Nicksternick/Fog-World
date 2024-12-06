@@ -10,7 +10,25 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Vector3 playerSpawnLocation;
     [SerializeField] private EnemyManager enemyManager;
 
-    [SerializeField] private Material[] rockMaterials;
+    [SerializeField] private Material[] rock1Materials;
+    [SerializeField] private Material[] rock2Materials;
+    [SerializeField] private Material[] boulder1Materials;
+    [SerializeField] private Material[] boulder2Materials;
+    [SerializeField] private Material[] spike1Materials;
+    [SerializeField] private Material[] spike2Materials;
+
+    [SerializeField] private Material[] tree1Materials;
+    [SerializeField] private Material[] tree2Materials;
+
+    private int rock1Selection;
+    private int rock2Selection;
+    private int boulder1Selection;
+    private int boulder2Selection;
+    private int spike1Selection;
+    private int spike2Selection;
+    private int tree1Selection;
+    private int tree2Selection;
+
     [SerializeField] private Material[] floorMaterials;
     [SerializeField] private string winScene;
 
@@ -35,36 +53,77 @@ public class LevelManager : MonoBehaviour
 
         spawnPlayer();
 
-        //int extraHives = 0;
-
-        //if (GameManager.Instance.CurrentLevel >= 3)
-        //    extraHives++;
-
-        //if (GameManager.Instance.CurrentLevel >= 6)
-        //    extraHives++;
-
         enemyManager.HiveNum = GameManager.Instance.CurrentLevel + 1;
     }
 
     private void Start()
     {
-        if (rockMaterials != null)
+        GameObject wallContainer = GameObject.FindGameObjectWithTag("WallContainer");
+        if (wallContainer != null)
         {
-            GameObject wallContainer = GameObject.FindGameObjectWithTag("WallContainer");
-            if (wallContainer != null)
+            rock1Selection = Random.Range(0,3);
+            rock2Selection = Random.Range(0, 3);
+            boulder1Selection = Random.Range(0, 3);
+            boulder2Selection = Random.Range(0, 3);
+            spike1Selection = Random.Range(0, 3);
+            spike2Selection = Random.Range(0, 3);
+
+            MeshRenderer[] walls = wallContainer.GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer wall in walls)
             {
-                MeshRenderer[] walls = wallContainer.GetComponentsInChildren<MeshRenderer>();
-                Material rockMaterial = rockMaterials[Random.Range(0, rockMaterials.Length)];
-                foreach (MeshRenderer wall in walls)
+                if (wall != null)
                 {
-                    if (wall != null)
+                    switch (wall.tag)
                     {
-                        wall.material = rockMaterial;
+                        case "Rock1":
+                            wall.material = rock1Materials[rock1Selection];
+                            break;
+                        case "Rock2":
+                            wall.material = rock2Materials[rock2Selection];
+                            break;
+                        case "Boulder1":
+                            wall.material = boulder1Materials[boulder1Selection];
+                            break;
+                        case "Boulder2":
+                            wall.material = boulder2Materials[boulder2Selection];
+                            break;
+                        case "Spike1":
+                            wall.material = spike1Materials[spike1Selection];
+                            break;
+                        case "Spike2":
+                            wall.material = spike2Materials[spike2Selection];
+                            break;
                     }
                 }
             }
         }
-        
+
+        GameObject treeContainer = GameObject.FindGameObjectWithTag("TreeContainer");
+        if (treeContainer != null)
+        {
+            tree1Selection = Random.Range(0, 3);
+            tree2Selection = Random.Range(0, 3);
+
+            MeshRenderer[] trees = treeContainer.GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer tree in trees)
+            {
+                if (tree != null)
+                {
+                    switch (tree.tag)
+                    {
+                        case "Tree1":
+                            Debug.Log(tree1Selection);
+                            tree.material = tree1Materials[tree1Selection];
+                            break;
+                        case "Tree2":
+                            Debug.Log(tree2Selection);
+                            tree.material = tree2Materials[tree2Selection];
+                            break;
+                    }
+                }
+            }
+        }
+
         if (floorMaterials != null)
             Invoke(nameof(GenerateFloorMaterial), 0.5f);
     }
@@ -84,7 +143,11 @@ public class LevelManager : MonoBehaviour
     {
         if (enemyManager.importantList.Count <= 0)
         {
-            GameManager.Instance.IncrementCurrentLevel();
+            if (SceneManager.GetActiveScene().name == "FinalLevel")
+            {
+                GameManager.Instance.IncrementCurrentLevel();
+                GameManager.Instance.AddRandomToComponentToInventory();
+            }
             SceneManager.LoadScene(winScene);
         }
 

@@ -1,17 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
-using TMPro;
 
-public class MenuButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class MenuButtons : MonoBehaviour
 {
     [SerializeField] Object sceneToSwitchTo;
-    [SerializeField] string sceneName;
+    [SerializeField] private string sceneName;
     public Button sceneButton;
-    public TMP_Text buttonText;
 
     void Start()
     {
@@ -21,16 +16,6 @@ public class MenuButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     void SwitchScene()
     {
-        SceneManager.LoadScene(sceneToSwitchTo.name);
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        buttonText.color = new Color(130f / 255f, 106f / 255f, 0);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        buttonText.color = new Color(179f / 255f, 179f / 255f, 179f / 255f);
+        SceneManager.LoadScene(sceneName);
     }
 }

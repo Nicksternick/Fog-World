@@ -14,7 +14,6 @@ public class SpellComponentSlot : MonoBehaviour, IPointerEnterHandler, IPointerE
 {
     // ===== | Variables | =====
     [SerializeField] protected SpellComponentType componentType;
-    [SerializeField] private bool selectionOverSlot;
     [SerializeField] private Image backdrop;
     [SerializeField] private TextMeshProUGUI componentText;
     private Color baseColor;
@@ -72,7 +71,6 @@ public class SpellComponentSlot : MonoBehaviour, IPointerEnterHandler, IPointerE
             {
                 if (pointerEventData.pointerDrag.GetComponent<SpellComponent>().Type == componentType)
                 {
-                    selectionOverSlot = true;
                     backdrop.color = Color.white;
                 }
             }
@@ -81,7 +79,6 @@ public class SpellComponentSlot : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerExit(PointerEventData pointerEventData)
     {
-        selectionOverSlot = false;
         backdrop.color = baseColor;
     }
 }

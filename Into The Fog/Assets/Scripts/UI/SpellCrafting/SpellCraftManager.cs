@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
@@ -26,6 +25,7 @@ public class SpellCraftManager : MonoBehaviour
     [SerializeField] private GameObject[] spellComponents;
     [SerializeField] private SpellInventory spellInventory;
     [SerializeField] private TextMeshProUGUI grabGlyph;
+    [SerializeField] private Canvas loadingCanvas;
 
     // ===== | Properties | =====
     public GameObject[] SpellComponents
@@ -201,6 +201,7 @@ public class SpellCraftManager : MonoBehaviour
 
         Debug.LogWarning("Transition to Game");
         Cursor.visible = true;
+        loadingCanvas.gameObject.SetActive(true);
         SceneManager.LoadScene("FinalLevel");
     }
 

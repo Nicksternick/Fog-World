@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff12949596c88b4ca089bd291c446a5, type: 3}
   m_Name: D_Spell1
   m_EditorClassIdentifier: 
-  element: 1
+  element: 0
   form: 0
   cooldown: 0.4
