@@ -49,4 +49,37 @@ MonoBehaviour:
   player: {fileID: 0}
   playerSpawnLocation: {x: -60, y: 1, z: -40}
   enemyManager: {fileID: 0}
-  healthBar: {fileID: 0}
+  rock1Materials:
+  - {fileID: 2100000, guid: 8080a9b9bca7d894798cbae9d7ec2679, type: 2}
+  - {fileID: 2100000, guid: b41f97c6eee4d404ea34d908e25ceb96, type: 2}
+  - {fileID: 2100000, guid: 7ddd6b94a528dbf4cae42abf109bf483, type: 2}
+  rock2Materials:
+  - {fileID: 2100000, guid: 1e843c8a226ad5049a5658a7faaaedc9, type: 2}
+  - {fileID: 2100000, guid: e1353a20b047e1e4ca19052b61a87d61, type: 2}
+  - {fileID: 2100000, guid: 4fa1b0d46b8b67544aac22129fe7b0c1, type: 2}
+  boulder1Materials:
+  - {fileID: 2100000, guid: 7c114641ef77bc14c97940dd4aaee423, type: 2}
+  - {fileID: 2100000, guid: ac4cfe7a6caf65548b41760841780f66, type: 2}
+  - {fileID: 2100000, guid: c6f9d281b3e532646a8a7327702b2f7c, type: 2}
+  boulder2Materials:
+  - {fileID: 2100000, guid: 93f724292ad1727428333be392bfbbe5, type: 2}
+  - {fileID: 2100000, guid: 10ae2e82c8b2fa54ea573e5b0089ab97, type: 2}
+  - {fileID: 2100000, guid: 2a32cd6ebf66641428d8ad7a935b0f33, type: 2}
+  spike1Materials:
+  - {fileID: 2100000, guid: f4f16ea22e1ab3f41a89304c39c4d7c3, type: 2}
+  - {fileID: 2100000, guid: b413dda79590ce04a970e6ca2c0460f5, type: 2}
+  - {fileID: 2100000, guid: 96a0367f67cf9564b907d5b27c41f5f5, type: 2}
+  spike2Materials:
+  - {fileID: 2100000, guid: 9324cc78bc8c24a4fb2b73d34f327d03, type: 2}
+  - {fileID: 2100000, guid: 388f62ce47d075e4f80259f90a5ff293, type: 2}
+  - {fileID: 2100000, guid: 6d9ef6af86bd1db4f920a5e56f76c499, type: 2}
+  tree1Materials:
+  - {fileID: 2100000, guid: 7eb93f40a28de7a428c132a5ecf43377, type: 2}
+  - {fileID: 2100000, guid: bac2fc0738e26ee44aaf96f50fdb772b, type: 2}
+  - {fileID: 2100000, guid: 39f074cea2a1bc4428ee5732c51b4666, type: 2}
+  tree2Materials:
+  - {fileID: 2100000, guid: d12585c5cc4ecc043b07ee77eb89216a, type: 2}
+  - {fileID: 2100000, guid: bb2ca913ba02ef84597c3ae28d3cec11, type: 2}
+  - {fileID: 2100000, guid: 579229378ee77c84584b26ca7785ee1b, type: 2}
+  floorMaterials: []
+  winScene: 

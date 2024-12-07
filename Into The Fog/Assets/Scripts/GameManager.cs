@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) &&
             Input.GetKey(KeyCode.LeftShift))
         {
-            currentLevel = 0;
+            ResetGame();
             ChangeScene("Main Menu");
         }
     }

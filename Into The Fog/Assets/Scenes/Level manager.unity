@@ -197,6 +197,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9389e102e8f3d04408f7326abe7e37a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSpells: []
+  savedElementInventory: 
+  savedFormInventory: 
+  currentLevel: 0
+  defaultSpell: {fileID: 0}
 --- !u!1 &26416018
 GameObject:
   m_ObjectHideFlags: 0
@@ -4027,8 +4032,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af9b5e1963492b5458bf3807f2805731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 4233192450650962482, guid: 092d8e65b1be4ce41a83f862bddd4b4a,
-    type: 3}
+  projectilePrefabs:
+    ballPrefabs:
+      elementPrefabs: []
+    laserPrefabs:
+      elementPrefabs: []
+    aoePrefabs:
+      elementPrefabs: []
+  ballDamage: 25
+  ballDuration: 5
+  laserDamage: 25
+  laserDuration: 0.4
+  AoeDamage: 25
+  AoeDuration: 3
 --- !u!1 &1105333749
 GameObject:
   m_ObjectHideFlags: 0
@@ -5086,6 +5102,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8bf63fb9d2ad3f4b8543a518f974e69, type: 3}
+--- !u!114 &1262262213 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8109814221557458506, guid: c8bf63fb9d2ad3f4b8543a518f974e69,
+    type: 3}
+  m_PrefabInstance: {fileID: 1262262212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d552f90a6157ae94b97791f456c4501a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1267929074
 GameObject:
   m_ObjectHideFlags: 0
@@ -7324,7 +7352,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.33333334
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: d105c8ec097ae594398ba8005ebd88cf, type: 2}
   m_BuildHeightMesh: 1
@@ -8342,12 +8370,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 499135810}
   m_LocalEulerAnglesHint: {x: 0, y: 14.222, z: 0}
---- !u!1 &2102768681 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7062274217238649689, guid: c8bf63fb9d2ad3f4b8543a518f974e69,
-    type: 3}
-  m_PrefabInstance: {fileID: 1262262212}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2129663335
 GameObject:
   m_ObjectHideFlags: 0
@@ -8561,6 +8583,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4157980377382951501, guid: 65c805fa7407c324597212edb455369b,
         type: 3}
+      propertyPath: winScene
+      value: YouWin
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157980377382951501, guid: 65c805fa7407c324597212edb455369b,
+        type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1878009121}
@@ -8568,7 +8595,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyManager
       value: 
-      objectReference: {fileID: 2102768681}
+      objectReference: {fileID: 1262262213}
     - target: {fileID: 4883584200477413465, guid: 65c805fa7407c324597212edb455369b,
         type: 3}
       propertyPath: m_LocalPosition.x

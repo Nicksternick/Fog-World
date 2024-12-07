@@ -147,6 +147,7 @@ public class LevelManager : MonoBehaviour
             {
                 GameManager.Instance.IncrementCurrentLevel();
                 GameManager.Instance.AddRandomToComponentToInventory();
+                GameManager.Instance.AddRandomToComponentToInventory();
             }
             SceneManager.LoadScene(winScene);
         }
