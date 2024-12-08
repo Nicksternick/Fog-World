@@ -77,7 +77,7 @@ public class SpellCraftManager : MonoBehaviour
     private void DeviceChange(PlayerInput input)
     {
         virtualMouse.gameObject.SetActive(playerInput.currentControlScheme == "Controller");
-        Cursor.visible = playerInput.currentControlScheme != "Controller";
+        //Cursor.visible = playerInput.currentControlScheme != "Controller";
 
         if (playerInput.currentControlScheme == "Controller")
         {

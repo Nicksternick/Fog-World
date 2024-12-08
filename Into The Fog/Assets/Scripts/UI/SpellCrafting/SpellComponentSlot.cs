@@ -50,6 +50,9 @@ public class SpellComponentSlot : MonoBehaviour, IPointerEnterHandler, IPointerE
     }
     public void OnDrop(PointerEventData eventData)
     {
+        if (gameObject.transform.childCount != 0)
+            return;
+
         if (eventData.pointerDrag.GetComponent<SpellComponent>())
         {
             if (eventData.pointerDrag.GetComponent<SpellComponent>().Type == componentType)
@@ -65,6 +68,9 @@ public class SpellComponentSlot : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
+        if (gameObject.transform.childCount != 0)
+            return;
+
         if (SpellCraftManager.Instance.ObjectSelected)
         {
             if (pointerEventData.pointerDrag.GetComponent<SpellComponent>())

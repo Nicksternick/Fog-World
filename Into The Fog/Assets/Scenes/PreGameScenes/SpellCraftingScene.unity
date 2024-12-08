@@ -5520,7 +5520,7 @@ PrefabInstance:
     - target: {fileID: 6250614317106204089, guid: 9195f3b6b33559a408159ceede3c2d70,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8108710315398745469, guid: 9195f3b6b33559a408159ceede3c2d70,
         type: 3}
@@ -5535,8 +5535,23 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 8108710315398745469, guid: 9195f3b6b33559a408159ceede3c2d70,
         type: 3}
+      propertyPath: savedFormInventory.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108710315398745469, guid: 9195f3b6b33559a408159ceede3c2d70,
+        type: 3}
       propertyPath: currentFormInventory.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108710315398745469, guid: 9195f3b6b33559a408159ceede3c2d70,
+        type: 3}
+      propertyPath: savedElementInventory.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108710315398745469, guid: 9195f3b6b33559a408159ceede3c2d70,
+        type: 3}
+      propertyPath: savedFormInventory.Array.data[0]
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8108710315398745469, guid: 9195f3b6b33559a408159ceede3c2d70,
         type: 3}
@@ -5552,6 +5567,11 @@ PrefabInstance:
         type: 3}
       propertyPath: currentFormInventory.Array.data[2]
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108710315398745469, guid: 9195f3b6b33559a408159ceede3c2d70,
+        type: 3}
+      propertyPath: savedElementInventory.Array.data[0]
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8108710315398745469, guid: 9195f3b6b33559a408159ceede3c2d70,
         type: 3}
